@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="50dp">
+
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/btnKakao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카카오톡으로 시작하기"
+            android:background="#ffcc00"
+            />
+
+        <Button
+            android:id="@+id/btnNaver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="네이버로 시작하기"
+            android:layout_marginTop="10dp"
+            android:background="#33cc00"/>
+
+        <Button
+            android:id="@+id/btnFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="페이스북으로 시작하기"
+            android:background="#336699"/>
+    </LinearLayout>
+
+</LinearLayout>

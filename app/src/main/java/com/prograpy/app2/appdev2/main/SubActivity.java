@@ -14,6 +14,7 @@ import android.view.View;
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chat.ChatActivity;
 import com.prograpy.app2.appdev2.chat.InfoFragment;
+import com.prograpy.app2.appdev2.setting.SetFragment;
 
 /**
  * Created by samsung on 2018-03-23.
@@ -87,7 +88,7 @@ public class SubActivity extends AppCompatActivity{
                     fragment = InfoFragment.newInstance();
                     break;
                 case 2:
-                    fragment = InfoFragment.newInstance();
+                    fragment = SetFragment.newInstance();
                     break;
             }
             return fragment;

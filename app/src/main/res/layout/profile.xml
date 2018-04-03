@@ -189,12 +189,12 @@
 
 
     <Button
+        android:id="@+id/join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/text_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="
-        10dp"
+        android:layout_marginBottom="10dp"
         android:text="회원가입" />
 </RelativeLayout>
 
