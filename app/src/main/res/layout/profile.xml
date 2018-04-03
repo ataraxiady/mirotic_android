@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:keepScreenOn="true">
+
+    <TextView
+        android:id="@+id/text_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="프로필 사진"
+        android:layout_margin="5dp"
+        android:textColor="@android:color/background_dark" />
+
+    <LinearLayout
+        android:id="@+id/linear_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/left_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <ImageView
+            android:id="@+id/center_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+
+        <ImageView
+            android:id="@+id/right_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp"
+            app:srcCompat="@android:color/darker_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_image"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="닉네임 : "
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="입 력"
+            android:inputType="textPersonName"
+            android:textColorLink="@android:color/darker_gray" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:text="중복확인"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_name"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_margin="10dp"
+            android:text="성별  : "
+            android:textColor="@android:color/black" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:text="남성"
+                />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:text="여성"
+                />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_from"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_sex"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="거주지역 : "
+            android:textColor="@android:color/black" />
+
+        <Spinner
+            android:id="@+id/from_spinner1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="2" />
+        <Spinner
+            android:id="@+id/from_spinner2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_hobby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@id/linear_from"
+            android:text="취미선택 "
+
+            android:textColor="@android:color/black" />
+    <LinearLayout
+        android:id="@+id/linear_hobby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_hobby"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/hobby_spinner1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3" />
+        <Spinner
+            android:id="@+id/hobby_spinner2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3" />
+
+        <Spinner
+            android:id="@+id/hobby_spinner3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3"/>
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="
+        10dp"
+        android:text="회원가입" />
+</RelativeLayout>
+
