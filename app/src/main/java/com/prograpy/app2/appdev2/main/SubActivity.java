@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chat.ChatActivity;
@@ -25,6 +26,13 @@ public class SubActivity extends AppCompatActivity{
     private ViewPagerAdapter adapter;
     private FloatingActionButton floatingActionButton;
     private Intent intent;
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(SubActivity.this, "헹", Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +93,7 @@ public class SubActivity extends AppCompatActivity{
                     break;
                 case 1:
                     fragment = InfoFragment.newInstance();
+                    ((InfoFragment)fragment).listener(listener);
                     break;
                 case 2:
                     fragment = SetFragment.newInstance();
