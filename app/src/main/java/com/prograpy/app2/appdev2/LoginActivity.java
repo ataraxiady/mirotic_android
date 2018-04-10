@@ -8,9 +8,11 @@ import android.widget.Button;
 
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button kakao;
+    private Button naver;
+    private Button facebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +21,33 @@ public class LoginActivity extends AppCompatActivity {
 
 
         kakao = (Button) findViewById(R.id.btnKakao);
-        kakao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
-                startActivity(i);
-            }
-        });
+        naver = (Button) findViewById(R.id.btnNaver);
+        facebook = (Button) findViewById(R.id.btnFacebook);
+
+
+        kakao.setOnClickListener(this);
+        naver.setOnClickListener(this);
+        facebook.setOnClickListener(this);
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnKakao:
+                Intent k = new Intent(LoginActivity.this, ProfileActivity.class);
+                startActivity(k);
+                break;
+            case  R.id.btnNaver:
+                Intent n = new Intent(LoginActivity.this, ProfileActivity.class);
+                startActivity(n);
+                break;
+            case  R.id.btnFacebook:
+                Intent f = new Intent(LoginActivity.this, ProfileActivity.class);
+                startActivity(f);
+                break;
+        }
+
     }
 }
