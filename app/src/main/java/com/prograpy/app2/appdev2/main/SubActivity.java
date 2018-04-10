@@ -13,7 +13,6 @@ import android.view.View;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chat.ChatActivity;
-import com.prograpy.app2.appdev2.chat.InfoFragment;
 import com.prograpy.app2.appdev2.setting.SetFragment;
 
 /**

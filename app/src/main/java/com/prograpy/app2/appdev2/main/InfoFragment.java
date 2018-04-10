@@ -1,4 +1,4 @@
-package com.prograpy.app2.appdev2.chat;
+package com.prograpy.app2.appdev2.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

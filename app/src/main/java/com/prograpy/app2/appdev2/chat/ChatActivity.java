@@ -1,7 +1,10 @@
 package com.prograpy.app2.appdev2.chat;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.prograpy.app2.appdev2.R;
 
@@ -10,10 +13,31 @@ import com.prograpy.app2.appdev2.R;
  */
 
 public class ChatActivity extends AppCompatActivity{
+
+    private RecyclerView chatRecyclerView;
+    private ChatRecyclerViewAdapter chatRecyclerViewAdapter;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        chatRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        chatRecyclerViewAdapter = new ChatRecyclerViewAdapter();
+
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        chatRecyclerView.setLayoutManager(linearLayoutManager);
+        chatRecyclerView.setAdapter(chatRecyclerViewAdapter);
+
     }
+
+
+
+
 
 }
