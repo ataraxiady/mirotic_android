@@ -11,14 +11,16 @@
         android:id="@+id/text_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:text="프로필 사진"
-        android:layout_margin="5dp"
         android:textColor="@android:color/background_dark" />
 
     <LinearLayout
         android:id="@+id/linear_image"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -97,24 +99,29 @@
             android:textColor="@android:color/black" />
 
         <RadioGroup
+            android:id="@+id/gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
 
-            >
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <RadioButton
+                android:id="@+id/man"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_margin="10dp"
-                android:text="남성"
-                />
+                android:text="남성" />
+
             <RadioButton
+                android:id="@+id/woman"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_margin="10dp"
-                android:text="여성"
-                />
+                android:text="여성" />
 
         </RadioGroup>
 
@@ -137,58 +144,138 @@
             android:textColor="@android:color/black" />
 
         <Spinner
-            android:id="@+id/from_spinner1"
+            android:id="@+id/from_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="2" />
+            android:layout_weight="3"
+            android:textAlignment="center" />
+
         <Spinner
-            android:id="@+id/from_spinner2"
+            android:id="@+id/from_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="2" />
+            android:layout_weight="3"
+            android:textAlignment="center" />
+        <Spinner
+            android:id="@+id/from_sub2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3"
+            android:textAlignment="center" />
 
     </LinearLayout>
-
+<RelativeLayout
+    android:layout_below="@id/linear_from"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
         <TextView
             android:id="@+id/text_hobby"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_below="@id/linear_from"
             android:text="취미선택 "
-
             android:textColor="@android:color/black" />
+
     <LinearLayout
-        android:id="@+id/linear_hobby"
-        android:layout_width="match_parent"
+        android:id="@+id/linear_hobby1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_hobby"
+        android:layout_margin="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_hobby"
         android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/text_hobby1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_margin="10dp"
+            android:text="1 순위" />
         <Spinner
-            android:id="@+id/hobby_spinner1"
+            android:id="@+id/hobby_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_weight="3" />
+            android:layout_weight="3"
+            android:textAlignment="center" />
+
         <Spinner
-            android:id="@+id/hobby_spinner2"
+            android:id="@+id/hobby_first_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="3" />
 
-        <Spinner
-            android:id="@+id/hobby_spinner3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_hobby2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linear_hobby1"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/text_hobby2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_margin="10dp"
+            android:text="2 순위" />
+        <Spinner
+            android:id="@+id/hobby_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3"
+            android:textAlignment="center" />
 
+        <Spinner
+            android:id="@+id/hobby_second_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_hobby3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linear_hobby2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_hobby3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_margin="10dp"
+            android:text="3 순위" />
+        <Spinner
+            android:id="@+id/hobby_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3"
+            android:textAlignment="center" />
+
+        <Spinner
+            android:id="@+id/hobby_third_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3" />
+
+    </LinearLayout>
+</RelativeLayout>
     <Button
         android:id="@+id/join"
         android:layout_width="wrap_content"
@@ -197,5 +284,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:text="회원가입" />
+
+
 </RelativeLayout>
 
