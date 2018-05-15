@@ -25,6 +25,8 @@
 
         <activity android:name=".main.SubActivity"/>
 
+        <activity android:name=".setting.SetActivity"/>
+
     </application>
 
 </manifest>
