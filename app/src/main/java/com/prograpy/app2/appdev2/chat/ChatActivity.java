@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.prograpy.app2.appdev2.R;
 
@@ -35,6 +36,13 @@ public class ChatActivity extends AppCompatActivity{
         chatRecyclerView.setAdapter(chatRecyclerViewAdapter);
 
     }
+
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
 
 
 

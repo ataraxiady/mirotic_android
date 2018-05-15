@@ -102,4 +102,6 @@ public class ChatRecyclerViewAdapter  extends RecyclerView.Adapter<ChatRecyclerV
         }
         public void setText(String text){textView.setText(text);}
     }
+
+
 }
