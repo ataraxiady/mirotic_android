@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +29,8 @@ public class SubActivity extends AppCompatActivity{
     private ViewPagerAdapter adapter;
     private FloatingActionButton floatingActionButton;
     private Intent intent;
-    ImageButton imageButtonUser;
-    ImageButton imageButtonSettings;
+    ImageView imageButtonUser;
+    ImageView imageButtonSettings;
     Button dislikeButton;
     Button likeButton;
     int index=0;
@@ -48,7 +49,7 @@ public class SubActivity extends AppCompatActivity{
         setContentView(R.layout.activity_sub);
 
 
-        imageButtonUser = (ImageButton)findViewById(R.id.imgbtn_user);
+        imageButtonUser = (ImageView)findViewById(R.id.imgbtn_user);
         imageButtonUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +58,7 @@ public class SubActivity extends AppCompatActivity{
             }
         });
 
-        imageButtonSettings = (ImageButton)findViewById(R.id.imgbtn_settings);
+        imageButtonSettings = (ImageView)findViewById(R.id.imgbtn_settings);
         imageButtonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
