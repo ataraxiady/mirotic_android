@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chat.ChatActivity;
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
-import com.prograpy.app2.appdev2.setting.SetActivity;
+import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 
 /**
  * Created by samsung on 2018-03-23.
