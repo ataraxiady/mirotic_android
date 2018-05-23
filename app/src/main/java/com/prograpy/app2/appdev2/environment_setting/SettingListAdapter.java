@@ -24,6 +24,7 @@ public class SettingListAdapter extends BaseAdapter {
     // listitem.xml과 연결
     TextView setting_textview;
     ImageView setting_image;
+    ImageView setting_image2;
 
     public SettingListAdapter(Context context, ArrayList<List_item>list_itemArrayList){
         this.context = context;
@@ -53,10 +54,12 @@ public class SettingListAdapter extends BaseAdapter {
         {
             convertView = LayoutInflater.from(context).inflate(R.layout.environment_listitem,null);
             setting_textview = (TextView)convertView.findViewById(R.id.setting_textview);
-            setting_image = (ImageView)convertView.findViewById(R.id.setting_image);
+            setting_image = (ImageView)convertView.findViewById(R.id.setting_imagelogo);
+            setting_image2 = (ImageView)convertView.findViewById(R.id.setting_imagenext);
         }
         setting_textview.setText(list_itemArrayList.get(position).getSetting_text());
         setting_image.setImageResource(list_itemArrayList.get(position).getSetting_image());
+        setting_image2.setImageResource(list_itemArrayList.get(position).getSetting_image());
         return convertView;
     }
 }

@@ -26,9 +26,11 @@ public class SetActivity extends AppCompatActivity {
 
         list_itemArrayList = new ArrayList<List_item>();
 
-        list_itemArrayList.add(new List_item(R.mipmap.ic_launcher,"버전정보"));
-        list_itemArrayList.add(new List_item(R.mipmap.ic_launcher,"이용약관"));
-        list_itemArrayList.add(new List_item(R.mipmap.ic_launcher,"Q / A"));
+        list_itemArrayList.add(new List_item(R.mipmap.ic_launcher,"버전정보",R.mipmap.ic_launcher));
+        list_itemArrayList.add(new List_item(R.mipmap.ic_launcher,"이용약관",R.mipmap.ic_launcher));
+        list_itemArrayList.add(new List_item(R.mipmap.ic_launcher,"Q / A",R.mipmap.ic_launcher));
+        list_itemArrayList.add(new List_item(R.mipmap.ic_launcher,"기타",R.mipmap.ic_launcher));
+        list_itemArrayList.add(new List_item(R.mipmap.ic_launcher,"고객센터/도움말",R.mipmap.ic_launcher));
 
         settingListAdapter = new SettingListAdapter(SetActivity.this,list_itemArrayList);
         listView.setAdapter(settingListAdapter);

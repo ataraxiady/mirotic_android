@@ -6,17 +6,24 @@
 
 
     <ImageView
-        android:id="@+id/setting_image"
+        android:id="@+id/setting_imagelogo"
         android:layout_width="10dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_weight="1"
         app:srcCompat="@android:drawable/btn_star" />
 
     <TextView
         android:id="@+id/setting_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_weight="3"
+        android:text="TextView"
+        android:textAlignment="textStart" />
+
+    <ImageView
+        android:id="@+id/setting_imagenext"
+        android:layout_width="10dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:textAlignment="center"
-        android:text="TextView" />
+        app:srcCompat="@android:drawable/btn_star" />
 </LinearLayout>

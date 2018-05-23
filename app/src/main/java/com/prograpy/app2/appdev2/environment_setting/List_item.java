@@ -6,7 +6,9 @@ package com.prograpy.app2.appdev2.environment_setting;
 
 public class List_item {
     private int setting_image;
+    private int setting_image2;
     private String setting_text;
+
 
     public int getSetting_image() {
         return setting_image;
@@ -24,10 +26,15 @@ public class List_item {
         this.setting_text = setting_text;
     }
 
-    public List_item(int setting_image, String setting_text)
+    public List_item(int setting_image, String setting_text, int setting_image2)
     {
         this.setting_image = setting_image;
         this.setting_text = setting_text;
+        this.setting_image2 = setting_image2;
+    }
+    public int getSetting_image2(){return setting_image2;}
 
+    public void setSetting_image2(int setting_image2) {
+        this.setting_image2 = setting_image2;
     }
 }
