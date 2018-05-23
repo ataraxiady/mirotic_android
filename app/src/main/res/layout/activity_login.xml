@@ -12,37 +12,17 @@
         android:layout_width="220dp"
         android:layout_height="220dp"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:src="@drawable/logo" />
 
-    <LinearLayout
+
+    <Button
+        android:id="@+id/btnKakao"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp">
+        android:layout_height="wrap_content"
+        android:background="#ffcc00"
+        android:text="카카오톡으로 시작하기"
+        android:layout_marginTop="70dp"/>
 
-        <Button
-            android:id="@+id/btnKakao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="카카오톡으로 시작하기"
-            android:background="#ffcc00"
-            />
-
-        <Button
-            android:id="@+id/btnNaver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="네이버로 시작하기"
-            android:layout_marginTop="10dp"
-            android:background="#33cc00"/>
-
-        <Button
-            android:id="@+id/btnFacebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="페이스북으로 시작하기"
-            android:background="#336699"/>
-    </LinearLayout>
 
 </LinearLayout>
