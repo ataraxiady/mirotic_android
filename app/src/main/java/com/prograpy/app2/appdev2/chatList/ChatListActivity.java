@@ -1,4 +1,4 @@
-package com.prograpy.app2.appdev2.chat;
+package com.prograpy.app2.appdev2.chatList;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,10 +13,10 @@ import com.prograpy.app2.appdev2.R;
  * Created by samsung on 2018-04-01.
  */
 
-public class ChatActivity extends AppCompatActivity{
+public class ChatListActivity extends AppCompatActivity{
 
     private RecyclerView chatRecyclerView;
-    private ChatRecyclerViewAdapter chatRecyclerViewAdapter;
+    private ChatListRecyclerViewAdapter chatRecyclerViewAdapter;
 
 
     @Override
@@ -25,7 +25,7 @@ public class ChatActivity extends AppCompatActivity{
         setContentView(R.layout.activity_chat);
 
         chatRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-        chatRecyclerViewAdapter = new ChatRecyclerViewAdapter();
+        chatRecyclerViewAdapter = new ChatListRecyclerViewAdapter();
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

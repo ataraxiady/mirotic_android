@@ -10,13 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.chat.ChatActivity;
+import com.prograpy.app2.appdev2.chatList.ChatListActivity;
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 
@@ -113,7 +112,7 @@ public class SubActivity extends AppCompatActivity{
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(),ChatActivity.class);
+                intent = new Intent(getApplicationContext(),ChatListActivity.class);
                 startActivity(intent);
             }
         });

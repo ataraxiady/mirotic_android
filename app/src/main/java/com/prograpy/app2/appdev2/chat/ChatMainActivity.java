@@ -1,4 +1,4 @@
-package com.prograpy.app2.appdev2.chatting;
+package com.prograpy.app2.appdev2.chat;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

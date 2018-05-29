@@ -1,4 +1,4 @@
-package com.prograpy.app2.appdev2.chat;
+package com.prograpy.app2.appdev2.chatList;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,16 +12,16 @@ import com.prograpy.app2.appdev2.R;
  * Created by samsung on 2018-04-04.
  */
 
-public class ChatRecyclerViewAdapter  extends RecyclerView.Adapter<ChatRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder>{
+public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder>{
 
     @Override
-    public ChatRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerviewholder_chat, parent,false);
-        return new ChatRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder(view);
+        return new ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ChatRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder holder, int position) {
         switch (position){
             case 0:
 

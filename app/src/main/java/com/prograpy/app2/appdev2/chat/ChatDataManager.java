@@ -1,4 +1,4 @@
-package com.prograpy.app2.appdev2.chatting;
+package com.prograpy.app2.appdev2.chat;
 
 import java.util.ArrayList;
 
