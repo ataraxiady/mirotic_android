@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chat.ChatActivity;
+import com.prograpy.app2.appdev2.profile.MyPage;
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 
@@ -27,7 +30,9 @@ import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 public class SubActivity extends AppCompatActivity{
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
-    private FloatingActionButton floatingActionButton;
+    private FloatingActionButton floatingActionButton,floatingActionButton2,floatingActionButton3;
+    private  boolean isOpen = false;
+    private Animation fab_open, fab_close,fabRClockwise, fabRanticlockWise;
     private Intent intent;
     ImageView imageButtonUser;
     ImageView imageButtonSettings;
@@ -53,7 +58,7 @@ public class SubActivity extends AppCompatActivity{
         imageButtonUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                intent = new Intent(getApplicationContext(), MyPage.class);
                 startActivity(intent);
             }
         });
@@ -108,9 +113,39 @@ public class SubActivity extends AppCompatActivity{
 
         viewPager.setAdapter(adapter);
 
-        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        // 플로팅버튼
+
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        fabRClockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clockwise);
+        fabRanticlockWise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlockwise);
+
+        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
+        floatingActionButton2 = (FloatingActionButton)findViewById(R.id.fab2);
+        floatingActionButton3 = (FloatingActionButton)findViewById(R.id.fab3);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                        if (isOpen) {
+                            floatingActionButton2.startAnimation(fab_close);
+                            floatingActionButton3.startAnimation(fab_close);
+                            floatingActionButton.startAnimation(fabRanticlockWise);
+                            floatingActionButton2.setClickable(false);
+                            floatingActionButton3.setClickable(false);
+                            isOpen = false;
+                        } else {
+                            floatingActionButton2.startAnimation(fab_open);
+                            floatingActionButton3.startAnimation(fab_open);
+                            floatingActionButton.startAnimation(fabRClockwise);
+                            floatingActionButton2.setClickable(true);
+                            floatingActionButton3.setClickable(true);
+                            isOpen = true;
+                        }
+            }
+        });
+
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(getApplicationContext(),ChatActivity.class);
