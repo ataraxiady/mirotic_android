@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.prograpy.app2.appdev2.R;
@@ -12,17 +13,28 @@ import com.prograpy.app2.appdev2.R;
  * Created by samsung on 2018-04-04.
  */
 
-public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder>{
+public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder> {
+
+    private View.OnClickListener clickListener;
+
 
     @Override
     public ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerviewholder_chat, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerviewholder_chat, parent, false);
         return new ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder(view);
+    }
+
+
+    public void setItemClickListener(View.OnClickListener clickListener){
+        this.clickListener = clickListener;
     }
 
     @Override
     public void onBindViewHolder(ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder holder, int position) {
-        switch (position){
+
+        holder.setItemClickListener(clickListener);
+
+        switch (position) {
             case 0:
 
                 holder.setText("첫번째 채팅");
@@ -94,13 +106,24 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     public class ChatRecyclerViewAdapterViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textView;
+        private LinearLayout parentView;
 
         public ChatRecyclerViewAdapterViewHolder(View itemView) {
             super(itemView);
 
-            textView = (TextView)itemView.findViewById(R.id.viewholder_text);
+            textView = (TextView) itemView.findViewById(R.id.viewholder_text);
+            parentView = (LinearLayout) itemView.findViewById(R.id.viewholder_parent);
+
         }
-        public void setText(String text){textView.setText(text);}
+
+        public void setText(String text) {
+            textView.setText(text);
+        }
+
+        public void setItemClickListener(View.OnClickListener clickListener){
+            parentView.setOnClickListener(clickListener);
+        }
+
     }
 
 

@@ -22,7 +22,8 @@
         <activity android:name=".profile.ProfileActivity"/>
         <activity android:name=".main.SubActivity"/>
         <activity android:name=".environment_setting.SetActivity"/>
-        <activity android:name=".profile.MyPage"></activity>
+        <activity android:name=".profile.MyPage"/>
+        <activity android:name=".chat.ChatMainActivity"/>
 
     </application>
 
