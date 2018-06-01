@@ -18,9 +18,8 @@ import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chatList.ChatListActivity;
-import com.prograpy.app2.appdev2.profile.MyPage;
-import com.prograpy.app2.appdev2.profile.ProfileActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
+import com.prograpy.app2.appdev2.profile.MyPage;
 
 /**
  * Created by samsung on 2018-03-23.
@@ -111,6 +110,24 @@ public class SubActivity extends AppCompatActivity{
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(adapter);
+//        viewPager.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                switch (motionEvent.getAction()){
+//                    case MotionEvent.ACTION_MOVE:
+//                            viewPager.onTouchEvent(motionEvent);
+//                            break;
+//                }
+//                return true;
+//            }
+//        });
+
+
+
+
+
+
+
 
 
         // 플로팅버튼
