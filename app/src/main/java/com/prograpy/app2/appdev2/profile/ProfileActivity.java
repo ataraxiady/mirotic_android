@@ -16,11 +16,20 @@ import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.main.SubActivity;
 
 public class ProfileActivity extends AppCompatActivity {
+    // ㅁ 조건
+    // 1. 닉네임되야한다
+    // 2. 중복체크가 확인
+    // 3. 성별이 빈값이 아닐때
+
+
     private Button join;                    // 회원가입 버튼
     private Button nickname;                // 중복확인
     private EditText editText;              // 닉네임 입력 칸
     private RadioGroup genderradio;          // 성별 남자 radiobtn
     private RadioButton man_btn, woman_btn; // 성별 여자 radiobtn
+    String Gender = "";
+    String nick = "";
+    boolean namechecked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +45,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(man_btn.isChecked()){
-                    String Gender = "남자";
-                }else{
-                    String Gender = "여자";
+                    Gender = "남자";
+                }
+            }
+        });
+        woman_btn.setOnClickListener(new RadioButton.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(woman_btn.isChecked()){
+                    Gender = "여자";
                 }
             }
         });
@@ -50,21 +65,40 @@ public class ProfileActivity extends AppCompatActivity {
         // 닉네임 중복화인 리스너
         nickname.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                final String nick = editText.getText().toString();
+                nick = editText.getText().toString();
                 if (nick.equals("")) {
                     Toast.makeText(ProfileActivity.this, "값을 입력하세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ProfileActivity.this, "사용 가능한 닉네임입니다.", Toast.LENGTH_SHORT).show();
+                    // 중복확인이 됬는지 안됬는지 확인
                 }
             }
         });
 
-        // 회원가입 버튼으로 인한 메인화면으로의 화면전환
+        /*
+           회원가입 버튼으로 인한 메인화면으로의 화면전환
+           중복환인 및 성별 체크 여부 확인
+        */
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ProfileActivity.this, SubActivity.class);
-                startActivity(i);
+                nick = editText.getText().toString();
+                if (!nick.equals("")) {
+                    namechecked = true;    // 중복확인이 됬는지 안됬는지 확인
+                }
+                if(!Gender.equals("") && !nick.equals("") && namechecked == true ) {
+                    Intent i = new Intent(ProfileActivity.this, SubActivity.class);
+                    startActivity(i);
+                }else if(Gender.equals("") || namechecked == false || nick.equals("")){
+                    if(Gender == "") {
+                        Toast.makeText(ProfileActivity.this, "성별을 선택하세요.", Toast.LENGTH_SHORT).show();
+                    }else if(namechecked == false){
+                        Toast.makeText(ProfileActivity.this, "중복확인을 하세요.", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(ProfileActivity.this, "닉네임을 입력 하세요.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                namechecked = false;
             }
         });
 
