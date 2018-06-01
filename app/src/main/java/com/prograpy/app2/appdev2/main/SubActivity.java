@@ -26,7 +26,7 @@ import com.prograpy.app2.appdev2.profile.MyPage;
  */
 
 public class SubActivity extends AppCompatActivity{
-    private ViewPager viewPager;
+    private MainCustomViewPager viewPager;
     private ViewPagerAdapter adapter;
     private FloatingActionButton floatingActionButton,floatingActionButton2,floatingActionButton3;
     private  boolean isOpen = false;
@@ -105,7 +105,7 @@ public class SubActivity extends AppCompatActivity{
             }
         });
 
-        viewPager = (ViewPager)findViewById(R.id.main_pager);
+        viewPager = (MainCustomViewPager)findViewById(R.id.main_pager);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
