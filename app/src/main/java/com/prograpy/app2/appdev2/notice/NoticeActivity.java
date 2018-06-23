@@ -29,7 +29,7 @@ public class NoticeActivity extends AppCompatActivity{
 
         adapter = new MyNoticeAdapter(this,R.layout.list_notice,myNoticeDataArrayList);
 
-        listView = findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+        //listView = findViewById(R.id.listView);
+        //listView.setAdapter(adapter);
     }
 }

@@ -28,10 +28,8 @@
         android:id="@+id/noticeTextView"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/noticeImageView"
-        android:layout_marginBottom="17dp"
-        android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/noticeImageView"
+        android:layout_alignBottom="@+id/noticeAcceptBtn"
+        android:layout_toStartOf="@+id/noticeAcceptBtn"
         android:text="강호동님께서 좋아요를 눌렀습니다.대화를 시작하시겠습니까? " />
 
     <Button

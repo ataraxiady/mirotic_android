@@ -19,6 +19,8 @@ public class MyPage extends AppCompatActivity {
         setContentView(R.layout.mypage);
         ImageView imageView = (ImageView)findViewById(R.id.imageView);
 
+        // 프로필 이미지 원형모양으로 변경
+
         imageView.setBackground(new ShapeDrawable(new OvalShape()));
         if(Build.VERSION.SDK_INT >= 21){
             imageView.setClipToOutline(true);
