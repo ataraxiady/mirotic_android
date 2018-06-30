@@ -2,6 +2,7 @@ package com.prograpy.app2.appdev2.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +36,16 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+
+        Button ImageAdd = (Button)findViewById(R.id.imageAdd);
+        ImageAdd.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivity(intent);
+            }
+        });
 
         // 성별 선택 radio 버튼
         man_btn = (RadioButton) findViewById(R.id.man);
@@ -101,6 +112,9 @@ public class ProfileActivity extends AppCompatActivity {
                 namechecked = false;
             }
         });
+
+
+
 
         // 사는지역 spinner
         final ArrayAdapter<CharSequence> from_main;

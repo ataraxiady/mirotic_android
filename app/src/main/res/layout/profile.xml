@@ -11,8 +11,6 @@
         android:id="@+id/text_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="프로필 사진"
@@ -48,12 +46,25 @@
             android:layout_margin="5dp"
             app:srcCompat="@android:color/darker_gray" />
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/linear_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_image">
 
+        <Button
+            android:id="@+id/imageAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="사진 설정" />
+
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/linear_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear_image"
+        android:layout_below="@id/linear_button"
         android:orientation="horizontal">
 
         <TextView
@@ -185,7 +196,9 @@
         android:id="@+id/linear_hobby1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/text_hobby"
         android:orientation="horizontal">
@@ -195,29 +208,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_margin="10dp"
             android:text="1 순위" />
         <Spinner
             android:id="@+id/hobby_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3"
+            android:layout_marginLeft="10dp"
             android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/hobby_first_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3" />
+             />
 
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear_hobby2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linear_hobby1"
         android:orientation="horizontal">
@@ -227,31 +239,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_margin="10dp"
             android:text="2 순위" />
         <Spinner
             android:id="@+id/hobby_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3"
+            android:layout_marginLeft="10dp"
             android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/hobby_second_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3" />
+            />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linear_hobby3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linear_hobby2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <TextView
@@ -259,22 +271,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_margin="10dp"
             android:text="3 순위" />
         <Spinner
             android:id="@+id/hobby_third"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3"
+            android:layout_marginLeft="10dp"
             android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/hobby_third_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3" />
+            />
 
     </LinearLayout>
 </RelativeLayout>
