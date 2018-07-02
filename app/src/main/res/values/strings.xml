@@ -57,17 +57,20 @@
     </string-array>
 
     <string-array name="spinner_hobby">
-        <item>선택하시오</item>
+        <item>대분류</item>
         <item>운동</item>
         <item>음악</item>
         <item>영화</item>
     </string-array>
     <string-array name="spinner_hobby_sport">
+        <item>수영</item>
+        <item>골프</item>
         <item>축구</item>
         <item>농구</item>
         <item>배드민턴</item>
         <item>테니스</item>
-        <item>수영</item>
+        <item>탁구</item>
+        <item>스키/보드</item>
     </string-array>
     <string-array name="spinner_hobby_music">
         <item>힙합</item>
@@ -75,6 +78,8 @@
         <item>인디</item>
         <item>팝송</item>
         <item>클래식</item>
+        <item>가요</item>
+        <item>EDM</item>
     </string-array>
     <string-array name="spinner_hobby_movie">
         <item>공포</item>
@@ -82,8 +87,18 @@
         <item>로맨스</item>
         <item>히어로물</item>
         <item>애니메이션</item>
+        <item>코미디</item>
+        <item>판타지</item>
+        <item>SF</item>
+        <item>다큐멘터리</item>
+        <item>미스터리</item>
+        <item>범죄</item>
     </string-array>
     <string-array name="spinner_hobby_empty">
-        <item>항목을 고르시오.</item>
+        <item>소분류</item>
     </string-array>
+
+
+
+    <string name="failed_server_connect">서버 통신에 실패했습니다. 잠시 후 다시 이용해주세요.</string>
 </resources>
