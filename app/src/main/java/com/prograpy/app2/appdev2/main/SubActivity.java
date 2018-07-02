@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -110,24 +109,6 @@ public class SubActivity extends AppCompatActivity{
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(adapter);
-//        viewPager.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                switch (motionEvent.getAction()){
-//                    case MotionEvent.ACTION_MOVE:
-//                            viewPager.onTouchEvent(motionEvent);
-//                            break;
-//                }
-//                return true;
-//            }
-//        });
-
-
-
-
-
-
-
 
 
         // 플로팅버튼

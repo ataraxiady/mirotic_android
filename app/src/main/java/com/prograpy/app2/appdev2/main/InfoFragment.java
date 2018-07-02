@@ -24,14 +24,6 @@ public class InfoFragment extends Fragment{
         return view;
     }
 
-//    public static InfoFragment newInstance(string imagurl, string profile){
-//        Bundle bundle = new Bundle();
-//
-//        InfoFragment one = new InfoFragment();
-//        one.setArguments(bundle);
-//
-//        return one;
-//    }
 
     public static InfoFragment newInstance(){
         Bundle bundle = new Bundle();

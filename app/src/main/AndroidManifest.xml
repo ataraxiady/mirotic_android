@@ -24,7 +24,7 @@
         <activity android:name=".environment_setting.SetActivity"/>
         <activity android:name=".profile.MyPage"/>
         <activity android:name=".chat.ChatMainActivity"/>
-
+        <!--<activity android:name=".LoginActivity"/>-->
     </application>
 
 </manifest>
