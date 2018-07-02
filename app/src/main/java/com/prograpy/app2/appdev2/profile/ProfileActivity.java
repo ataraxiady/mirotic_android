@@ -26,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button join;                    // 회원가입 버튼
     private Button nickname;                // 중복확인
     private EditText editText;              // 닉네임 입력 칸
-    private RadioGroup genderradio;          // 성별 남자 radiobtn
+    private RadioGroup genderradio;         // 성별 남자 radiobtn
     private RadioButton man_btn, woman_btn; // 성별 여자 radiobtn
     String Gender = "";
     String nick = "";
@@ -50,7 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
         // 성별 선택 radio 버튼
         man_btn = (RadioButton) findViewById(R.id.man);
         woman_btn = (RadioButton) findViewById(R.id.woman);
-        genderradio = (RadioGroup) findViewById(R.id.gender);
 
         man_btn.setOnClickListener(new RadioButton.OnClickListener(){
             @Override
@@ -113,9 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
-
-
+        
         // 사는지역 spinner
         final ArrayAdapter<CharSequence> from_main;
 
