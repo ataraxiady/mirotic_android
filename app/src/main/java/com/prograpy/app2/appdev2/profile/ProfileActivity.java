@@ -1,6 +1,5 @@
 package com.prograpy.app2.appdev2.profile;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.main.SubActivity;
 
 public class ProfileActivity extends AppCompatActivity {
     // ㅁ 조건
@@ -31,6 +30,8 @@ public class ProfileActivity extends AppCompatActivity {
     String Gender = "";
     String nick = "";
     boolean namechecked = false;
+    private String url = "http://13.209.78.126:8080";
+    private String path = "/appDev2/addUserInfo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         join = (Button) findViewById(R.id.join);
+
         nickname = (Button) findViewById(R.id.nickname_btn);
         editText = (EditText) findViewById(R.id.nameText);
         // 닉네임 중복화인 리스너
@@ -110,6 +112,11 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 }
                 namechecked = false;
+
+
+
+//                Intent i = new Intent(ProfileActivity.this, SubActivity.class);
+//                startActivity(i);
             }
         });
 

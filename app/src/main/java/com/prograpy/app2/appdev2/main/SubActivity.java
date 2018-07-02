@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -18,9 +17,8 @@ import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chatList.ChatListActivity;
-import com.prograpy.app2.appdev2.profile.MyPage;
-import com.prograpy.app2.appdev2.profile.ProfileActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
+import com.prograpy.app2.appdev2.profile.MyPage;
 
 /**
  * Created by samsung on 2018-03-23.
