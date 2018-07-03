@@ -1,74 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:keepScreenOn="true"
-    android:orientation="vertical">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:keepScreenOn="true"
+                android:background="@drawable/background"
+                android:orientation="vertical">
 
-
-
-    <TextView
-        android:id="@+id/text_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="프로필 사진"
-        android:textColor="@android:color/background_dark" />
-
-    <LinearLayout
-        android:id="@+id/linear_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/left_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            app:srcCompat="@android:color/darker_gray" />
-
-        <ImageView
-            android:id="@+id/center_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            app:srcCompat="@android:color/darker_gray" />
-
-
-        <ImageView
-            android:id="@+id/right_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
-            app:srcCompat="@android:color/darker_gray" />
-    </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/linear_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_image">
-
-        <Button
-            android:id="@+id/imageAdd"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            android:shadowColor="#000000"
-            android:shadowDx="0"
-            android:text="사진 추가"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:textColor="#000000"
-            android:background="@drawable/buttonshape"
-
-            />
-<ScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
@@ -127,95 +67,19 @@
 
                 <Button
                     android:id="@+id/imageAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
-                    android:text="사진 설정"/>
+                    android:shadowColor="#000000"
+                    android:shadowDx="0"
+                    android:text="사진 추가"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"
+                    android:textColor="#000000"
+                    android:background="@drawable/buttonshape"
+                    />
 
-        <Spinner
-            android:id="@+id/from_sub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3"
-            android:textAlignment="center" />
-
-        <Spinner
-            android:id="@+id/from_sub2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="3"
-            android:textAlignment="center" />
-
-    </LinearLayout>
-<RelativeLayout
-    android:layout_below="@id/linear_from"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
-        <TextView
-            android:id="@+id/text_hobby"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="취미선택 "
-            android:textColor="@android:color/black" />
-
-    <LinearLayout
-        android:id="@+id/linear_hobby1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/text_hobby"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/text_hobby1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="1 순위" />
-        <Spinner
-            android:id="@+id/hobby_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textAlignment="center" />
-
-        <Spinner
-            android:id="@+id/hobby_first_sub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-             />
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear_hobby2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linear_hobby1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/text_hobby2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="2 순위" />
-        <Spinner
-            android:id="@+id/hobby_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textAlignment="center" />
-</RelativeLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/linear_name"
