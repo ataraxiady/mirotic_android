@@ -1,14 +1,22 @@
 package com.prograpy.app2.appdev2.profile;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -20,6 +28,8 @@ import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.JoinResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
+
+import java.io.ByteArrayOutputStream;
 
 public class ProfileActivity extends AppCompatActivity {
     // ㅁ 조건
@@ -45,11 +55,28 @@ public class ProfileActivity extends AppCompatActivity {
     private String sh_number_2 = "";
     private String sh_number_3 = "";
 
+    private ImageView center_image;
+
+    private String picData = "";
+
+    // 앨범 선택 플래그 값
+    public static final int PICK_ALBUM = 102;
+
+
     private NetworkProgressDialog networkProgressDialog;
 
     private ArrayAdapter<CharSequence> from_main, hobby_first, hobby_second, hobby_third;
-    private Spinner spinner_from, spinner_sub, spinner_sub2, spinner_hobby1, spinner_hobby2, spinner_hobby_second1, spinner_hobby_second2,
-            spinner_hobby_third1, spinner_hobby_third2;
+    private Spinner spinner_from;
+    private Spinner spinner_sub;
+    private Spinner spinner_sub2;
+    private Spinner spinner_hobby1;
+    private Spinner spinner_hobby2;
+    private Spinner spinner_hobby_second1;
+    private Spinner spinner_hobby_second2;
+    private Spinner spinner_hobby_third1;
+
+
+    private Spinner spinner_hobby_third2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +87,15 @@ public class ProfileActivity extends AppCompatActivity {
         ImageAdd.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View view)
             {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivity(intent);
+
+                doTakeAlbumAction();
+
             }
+
         });
+
+
+        center_image = (ImageView)findViewById(R.id.center_image);
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
@@ -190,7 +221,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 // execute 함수를 호출하는 순간 task의 내용들이 실행된다
                 // execute 함수 안에 넘겨주는 파라미터 값들은 doinBackground에서 strings.... 에 들어가는 내용들
-                joinTask.execute(ApiValue.API_JOIN, nick, gender, "0", "주소지", "이미지",
+                joinTask.execute(ApiValue.API_JOIN, nick, gender, "0", "주소지", picData,
                         bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2, sh_number_3, "kakao");
 
             }
@@ -359,6 +390,176 @@ public class ProfileActivity extends AppCompatActivity {
         }
     };
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+
+            case PICK_ALBUM: // 사진 앨범에서 선택
+
+                if (data == null) {
+                    break;
+
+                } else {
+                    Uri imageUri = data.getData();
+
+                    try {
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                        options.inJustDecodeBounds = true;
+                        BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri), null, options);
+
+                        if(center_image.getWidth() > 0 || center_image.getHeight() > 0){
+                            options.inSampleSize = calculateInSampleSize(options, center_image.getWidth(), center_image.getHeight());
+                        }
+
+                        options.inJustDecodeBounds = false;
+                        options.inPurgeable = true;
+
+                        Bitmap photo = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri), null, options);
+
+                        photo = rotate(new ExifInterface(getRealPathFromURI(imageUri)), photo, 100);
+
+                        center_image.setImageBitmap(photo);
+
+                        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+                        photo.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOS);
+
+                        byte[] byteArray = byteArrayOS.toByteArray();   //바이트로 변환
+                        picData = Base64.encodeToString(byteArray, 0);  //스트링으로 변환
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        Toast.makeText(ProfileActivity.this, "다른 사진을 선택 해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                break;
+
+
+        }
+
+    }
+
+    /**
+     * 앨범에서 이미지 가져오기
+     */
+    private void doTakeAlbumAction()
+    {
+        // 앨범 호출
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        startActivityForResult(intent, PICK_ALBUM);
+    }
+
+
+    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 2;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            while ((halfHeight / inSampleSize) > reqHeight && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+        return inSampleSize;
+    }
+
+    private Bitmap rotate(ExifInterface ei, Bitmap bitmap, int quality)
+    {
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream);
+
+        // 이미지 정보 객체에서 회전에 대한 정보를 추출
+        int exifOrientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        // 해당 정보를 기반으로 int 회전각 수치를 추출
+        int exifDegree = exifOrientationToDegrees(exifOrientation);
+
+        if (exifDegree != 0 && bitmap != null)
+        {
+            Matrix m = new Matrix();
+
+            // 회전각을 적용 시키고 일단은 해당 사진 크기의 절반 정도 크기로 줄인다
+            m.setRotate(exifDegree, bitmap.getWidth(), bitmap.getHeight());
+
+            try
+            {
+                // 회전 !
+                Bitmap converted = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
+
+                if (bitmap != converted)
+                {
+                    bitmap.recycle();
+                    bitmap = converted;
+                }
+            }
+            catch (OutOfMemoryError ex)
+            {
+                // 메모리가 부족하여 회전을 시키지 못할 경우 그냥 원본을 반환.
+                ex.printStackTrace();
+            }
+        }
+        return bitmap;
+    }
+
+    private int exifOrientationToDegrees(int exifOrientation)
+    {
+        if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90)
+        {
+            return 90;
+        }
+        else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180)
+        {
+            return 180;
+        }
+        else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270)
+        {
+            return 270;
+        }
+        return 0;
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {column};
+
+        try
+        {
+            // url에 _data 컬럼 데이터를 전체 가져온다
+            cursor = getContentResolver().query(contentUri, projection, null, null, null);
+
+            //커서를 처음으로 이동시키고
+            if (cursor != null && cursor.moveToFirst())
+            {
+                // 지정한 컬럼 인덱스 가져온 뒤
+                final int index = cursor.getColumnIndexOrThrow(column);
+                // 해당하는 정보를 string으로 반환
+                return cursor.getString(index);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
 
 }
 
