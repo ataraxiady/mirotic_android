@@ -164,29 +164,13 @@
                     android:text="거주지역 : "
                     android:textColor="@android:color/black"/>
 
-                <Spinner
+                <EditText
                     android:id="@+id/from_main"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="3"
-                    android:textAlignment="center"/>
-
-                <Spinner
-                    android:id="@+id/from_sub"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="3"
-                    android:textAlignment="center"/>
-
-                <Spinner
-                    android:id="@+id/from_sub2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="3"
-                    android:textAlignment="center"/>
+                    android:layout_height="40dp"
+                    android:hint="거주지역은 동까지 입력하시오."
+                    />
 
             </LinearLayout>
 
