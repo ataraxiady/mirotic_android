@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Gallery;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -21,12 +22,17 @@ import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.JoinResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
 
+import android.util.Log;
+
 public class ProfileActivity extends AppCompatActivity {
     // ㅁ 조건
     // 1. 닉네임되야한다
     // 2. 중복체크가 확인
     // 3. 성별이 빈값이 아닐때
 
+
+    private final int CAMERA_CODE = 1111;
+    private final int GALLERY_CODE = 1112;
 
     private Button join;                    // 회원가입 버튼
     private Button nickname;                // 중복확인
@@ -56,10 +62,12 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
 
-        Button ImageAdd = (Button)findViewById(R.id.imageAdd);
-        ImageAdd.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View view)
-            {
+        /*
+            갤러리 접속해 이미지 불러오기
+         */
+        Button ImageAdd = (Button) findViewById(R.id.imageAdd);
+        ImageAdd.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 startActivity(intent);
@@ -72,18 +80,18 @@ public class ProfileActivity extends AppCompatActivity {
         man_btn = (RadioButton) findViewById(R.id.man);
         woman_btn = (RadioButton) findViewById(R.id.woman);
 
-        man_btn.setOnClickListener(new RadioButton.OnClickListener(){
+        man_btn.setOnClickListener(new RadioButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(man_btn.isChecked()){
+                if (man_btn.isChecked()) {
                     gender = "남자";
                 }
             }
         });
-        woman_btn.setOnClickListener(new RadioButton.OnClickListener(){
+        woman_btn.setOnClickListener(new RadioButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(woman_btn.isChecked()){
+                if (woman_btn.isChecked()) {
                     gender = "여자";
                 }
             }
@@ -120,27 +128,27 @@ public class ProfileActivity extends AppCompatActivity {
                 nick = editText.getText().toString();
 
                 // String은 == 으로 비교하지말고 .equals 로 비교할것
-                if(gender.equals("")) {
+                if (gender.equals("")) {
                     Toast.makeText(ProfileActivity.this, "성별을 선택하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-        
-        // 사는지역 spinner
-        final ArrayAdapter<CharSequence> from_main;
 
-                if(!namechecked){
+                // 사는지역 spinner
+                final ArrayAdapter<CharSequence> from_main;
+
+                if (!namechecked) {
                     Toast.makeText(ProfileActivity.this, "중복확인을 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(nick.equals("")){
+                if (nick.equals("")) {
                     Toast.makeText(ProfileActivity.this, "닉네임을 입력 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(bh_number_1.equals("") || bh_number_2.equals("") || bh_number_3.equals("") ||
-                        sh_number_1.equals("") || sh_number_2.equals("") || sh_number_3.equals("") ){
+                if (bh_number_1.equals("") || bh_number_2.equals("") || bh_number_3.equals("") ||
+                        sh_number_1.equals("") || sh_number_2.equals("") || sh_number_3.equals("")) {
                     Toast.makeText(ProfileActivity.this, "취미를 모두 선택 해주세요.", Toast.LENGTH_SHORT).show();
                     return;
 
@@ -197,59 +205,57 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-        spinner_from = (Spinner)findViewById(R.id.from_main);
-        spinner_sub = (Spinner)findViewById(R.id.from_sub);
-        spinner_sub2 = (Spinner)findViewById(R.id.from_sub2);
+        spinner_from = (Spinner) findViewById(R.id.from_main);
+        spinner_sub = (Spinner) findViewById(R.id.from_sub);
+        spinner_sub2 = (Spinner) findViewById(R.id.from_sub2);
         from_main = ArrayAdapter.createFromResource(this, R.array.spinner_from, R.layout.support_simple_spinner_dropdown_item);
         spinner_from.setAdapter(from_main);
         spinner_from.setOnItemSelectedListener(spinnerSelectListener);
 
-        spinner_hobby1 = (Spinner)findViewById(R.id.hobby_first);
-        spinner_hobby2 = (Spinner)findViewById(R.id.hobby_first_sub);
+        spinner_hobby1 = (Spinner) findViewById(R.id.hobby_first);
+        spinner_hobby2 = (Spinner) findViewById(R.id.hobby_first_sub);
         hobby_first = ArrayAdapter.createFromResource(this, R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
         spinner_hobby1.setAdapter(hobby_first);
         spinner_hobby1.setOnItemSelectedListener(spinnerSelectListener);
 
-        spinner_hobby_second1 = (Spinner)findViewById(R.id.hobby_second);
-        spinner_hobby_second2 = (Spinner)findViewById(R.id.hobby_second_sub);
+        spinner_hobby_second1 = (Spinner) findViewById(R.id.hobby_second);
+        spinner_hobby_second2 = (Spinner) findViewById(R.id.hobby_second_sub);
         hobby_second = ArrayAdapter.createFromResource(this, R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
         spinner_hobby_second1.setAdapter(hobby_second);
         spinner_hobby_second1.setOnItemSelectedListener(spinnerSelectListener);
 
         // 나중에 수정 * hobby_third => hobby_first로 통일시키기
-        spinner_hobby_third1 = (Spinner)findViewById(R.id.hobby_third);
-        spinner_hobby_third2 = (Spinner)findViewById(R.id.hobby_third_sub);
-        hobby_third = ArrayAdapter.createFromResource(this, R.array.spinner_hobby,R.layout.support_simple_spinner_dropdown_item);
+        spinner_hobby_third1 = (Spinner) findViewById(R.id.hobby_third);
+        spinner_hobby_third2 = (Spinner) findViewById(R.id.hobby_third_sub);
+        hobby_third = ArrayAdapter.createFromResource(this, R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
         spinner_hobby_third1.setAdapter(hobby_third);
         spinner_hobby_third1.setOnItemSelectedListener(spinnerSelectListener);
     }
-
-
 
 
     private AdapterView.OnItemSelectedListener spinnerSelectListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-            switch (adapterView.getId()){
+            switch (adapterView.getId()) {
 
                 case R.id.from_main:
 
                     ArrayAdapter<CharSequence> from_sub = null;
                     ArrayAdapter<CharSequence> from_sub2 = null;
 
-                    if(from_main.getItem(i).equals("서울특별시")) {
-                        from_sub = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_seoul,android.R.layout.simple_spinner_dropdown_item);
-                        from_sub2 = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_seoul_sub,android.R.layout.simple_spinner_dropdown_item);
+                    if (from_main.getItem(i).equals("서울특별시")) {
+                        from_sub = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_seoul, android.R.layout.simple_spinner_dropdown_item);
+                        from_sub2 = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_seoul_sub, android.R.layout.simple_spinner_dropdown_item);
 
-                    }else if(from_main.getItem(i).equals("충청북도")) {
-                        from_sub = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_ChungBuck,android.R.layout.simple_spinner_dropdown_item);
-                        from_sub2 = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_cheongu,android.R.layout.simple_spinner_dropdown_item);
+                    } else if (from_main.getItem(i).equals("충청북도")) {
+                        from_sub = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_ChungBuck, android.R.layout.simple_spinner_dropdown_item);
+                        from_sub2 = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_cheongu, android.R.layout.simple_spinner_dropdown_item);
                     }
-                    if(from_sub != null)
+                    if (from_sub != null)
                         spinner_sub.setAdapter(from_sub);
 
-                    if(from_sub2 != null)
+                    if (from_sub2 != null)
                         spinner_sub2.setAdapter(from_sub2);
 
                     break;
@@ -258,24 +264,24 @@ public class ProfileActivity extends AppCompatActivity {
                 case R.id.hobby_first:
                     ArrayAdapter<CharSequence> hobby_first_adapter = null;
 
-                    if(hobby_first.getItem(i).equals("대분류")){
-                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_hobby_empty,android.R.layout.simple_spinner_dropdown_item);
+                    if (hobby_first.getItem(i).equals("대분류")) {
+                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, android.R.layout.simple_spinner_dropdown_item);
 
-                    } else if(hobby_first.getItem(i).equals("운동")){
+                    } else if (hobby_first.getItem(i).equals("운동")) {
                         bh_number_1 = "0";
-                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_hobby_sport,android.R.layout.simple_spinner_dropdown_item);
+                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, android.R.layout.simple_spinner_dropdown_item);
 
-                    }else if(hobby_first.getItem(i).equals("음악")) {
+                    } else if (hobby_first.getItem(i).equals("음악")) {
                         bh_number_1 = "1";
-                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_hobby_music,android.R.layout.simple_spinner_dropdown_item);
+                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, android.R.layout.simple_spinner_dropdown_item);
 
-                    }else if(hobby_first.getItem(i).equals("영화")) {
+                    } else if (hobby_first.getItem(i).equals("영화")) {
                         bh_number_1 = "2";
-                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_hobby_movie,android.R.layout.simple_spinner_dropdown_item);
+                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, android.R.layout.simple_spinner_dropdown_item);
 
                     }
 
-                    if(hobby_first_adapter != null){
+                    if (hobby_first_adapter != null) {
                         spinner_hobby2.setAdapter(hobby_first_adapter);
                         spinner_hobby2.setOnItemSelectedListener(spinnerSelectListener);
                     }
@@ -285,23 +291,23 @@ public class ProfileActivity extends AppCompatActivity {
                 case R.id.hobby_second:
                     ArrayAdapter<CharSequence> hobby_second_adapter = null;
 
-                    if(hobby_second.getItem(i).equals("대분류")){
-                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(),R.array.spinner_hobby_empty,R.layout.support_simple_spinner_dropdown_item);
+                    if (hobby_second.getItem(i).equals("대분류")) {
+                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, R.layout.support_simple_spinner_dropdown_item);
 
-                    }else if(hobby_second.getItem(i).equals("운동")){
+                    } else if (hobby_second.getItem(i).equals("운동")) {
                         bh_number_2 = "0";
-                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport,R.layout.support_simple_spinner_dropdown_item);
+                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, R.layout.support_simple_spinner_dropdown_item);
 
-                    }else if(hobby_second.getItem(i).equals("음악")){
+                    } else if (hobby_second.getItem(i).equals("음악")) {
                         bh_number_2 = "1";
-                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music,R.layout.support_simple_spinner_dropdown_item);
+                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, R.layout.support_simple_spinner_dropdown_item);
 
-                    }else if(hobby_second.getItem(i).equals("영화")){
+                    } else if (hobby_second.getItem(i).equals("영화")) {
                         bh_number_2 = "2";
-                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie,R.layout.support_simple_spinner_dropdown_item);
+                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, R.layout.support_simple_spinner_dropdown_item);
                     }
 
-                    if(hobby_second_adapter != null){
+                    if (hobby_second_adapter != null) {
                         spinner_hobby_second2.setAdapter(hobby_second_adapter);
                         spinner_hobby_second2.setOnItemSelectedListener(spinnerSelectListener);
                     }
@@ -313,30 +319,29 @@ public class ProfileActivity extends AppCompatActivity {
 
                     ArrayAdapter<CharSequence> hobby_third_adapter = null;
 
-                    if(hobby_third.getItem(i).equals("대분류")){
+                    if (hobby_third.getItem(i).equals("대분류")) {
                         hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, R.layout.support_simple_spinner_dropdown_item);
 
-                    }else if(hobby_third.getItem(i).equals("운동")){
+                    } else if (hobby_third.getItem(i).equals("운동")) {
                         bh_number_3 = "0";
                         hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, R.layout.support_simple_spinner_dropdown_item);
 
-                    }else if(hobby_third.getItem(i).equals("음악")){
+                    } else if (hobby_third.getItem(i).equals("음악")) {
                         bh_number_3 = "1";
                         hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, R.layout.support_simple_spinner_dropdown_item);
 
-                    }else if(hobby_third.getItem(i).equals("영화")){
+                    } else if (hobby_third.getItem(i).equals("영화")) {
                         bh_number_3 = "2";
                         hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, R.layout.support_simple_spinner_dropdown_item);
 
                     }
 
-                    if(hobby_third_adapter != null){
+                    if (hobby_third_adapter != null) {
                         spinner_hobby_third2.setAdapter(hobby_third_adapter);
                         spinner_hobby_third2.setOnItemSelectedListener(spinnerSelectListener);
                     }
 
                     break;
-
 
 
                 case R.id.hobby_first_sub:
@@ -353,6 +358,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
         }
+
         @Override
         public void onNothingSelected(AdapterView<?> adapterView) {
 
