@@ -18,7 +18,10 @@ import android.widget.Toast;
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chatList.ChatListActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
+import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.LikeDislikeResult;
 import com.prograpy.app2.appdev2.profile.MyPage;
+import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
 
 /**
  * Created by samsung on 2018-03-23.
@@ -73,33 +76,86 @@ public class SubActivity extends AppCompatActivity{
         dislikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                index++;
+                LikeDislikeButtonTask likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
+                    @Override
+                    public void onSuccesTask(LikeDislikeResult result) {
 
-                if (adapter.getCount() > index){
-                    viewPager.setCurrentItem(index);}
-                else {
-                   Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
-                   viewPager.setVisibility(View.GONE);
-                   textView = (TextView)findViewById(R.id.textView);
-                   textView.setVisibility(View.VISIBLE);
-                }
+                        if(result != null) {
+                            if (result.isSuccess()) {
+                                index++;
+
+                                if (adapter.getCount() > index){
+                                    viewPager.setCurrentItem(index);}
+                                else {
+                                    Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
+                                    viewPager.setVisibility(View.GONE);
+                                    textView = (TextView)findViewById(R.id.textView);
+                                    textView.setVisibility(View.VISIBLE);
+                                }
+                            } else {
+                                Toast.makeText(SubActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailTask() {
+                        Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelTask() {
+                        Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //서버에게 '싫어요'한 사람 전송해야함.
+                likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"F");
             }
         });
+
         likeButton = (Button) findViewById(R.id.btn_like);
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                index++;
+                LikeDislikeButtonTask likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
+                    @Override
+                    public void onSuccesTask(LikeDislikeResult result) {
 
-                if (adapter.getCount() > index){
-                    viewPager.setCurrentItem(index);}
-                    //서버연동 시 추가
-                else {
-                    Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
-                    viewPager.setVisibility(View.GONE);
-                    textView = (TextView)findViewById(R.id.textView);
-                    textView.setVisibility(View.VISIBLE);
-                }
+                        if(result != null) {
+                            if (result.isSuccess()) {
+                                index++;
+
+                                if (adapter.getCount() > index){
+                                    viewPager.setCurrentItem(index);}
+                                //서버연동 시 추가
+                                else {
+                                    Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
+                                    viewPager.setVisibility(View.GONE);
+                                    textView = (TextView)findViewById(R.id.textView);
+                                    textView.setVisibility(View.VISIBLE);
+                                }
+                            } else {
+                                Toast.makeText(SubActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailTask() {
+                        Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelTask() {
+                        Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //서버에게 '좋아요'한 사람 전송. '좋아요'를 받은사람에게 알림이 가게 해야함.
+                likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"T");
 
             }
         });

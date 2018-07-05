@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"/>
         <activity android:name=".chatList.ChatListActivity"/>
         <activity android:name=".profile.ProfileActivity"/>
         <activity android:name=".main.SubActivity"/>
