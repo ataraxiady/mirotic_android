@@ -7,10 +7,15 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.prograpy.app2.appdev2.R;
 
 public class MyPage extends AppCompatActivity {
+
+    private TextView name, area;
+    private Spinner First_main, First_sub, Second_main, Second_sub, Third_main, Third_sub;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -25,5 +30,6 @@ public class MyPage extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= 21){
             imageView.setClipToOutline(true);
         }
+
     }
 }

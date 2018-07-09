@@ -5,10 +5,14 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -74,15 +78,16 @@ public class ProfileActivity extends AppCompatActivity {
     private Spinner spinner_hobby_second1;
     private Spinner spinner_hobby_second2;
     private Spinner spinner_hobby_third1;
-
-
-
     private Spinner spinner_hobby_third2;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+
 
         /*
             갤러리 접속해 이미지 불러오기
@@ -108,6 +113,10 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         center_image = (ImageView) findViewById(R.id.center_image);
+        center_image.setBackground(new ShapeDrawable(new OvalShape()));
+        if(Build.VERSION.SDK_INT >= 21){
+            center_image.setClipToOutline(true);
+        }
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
@@ -247,7 +256,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         /*
-            거주지역 및 취미를 받아들여옴
+            취미를 받아들여옴
          */
         from = (EditText) findViewById(R.id.from_main);
 
