@@ -5,10 +5,14 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -42,12 +46,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Button join;                    // 회원가입 버튼
     private Button nickname;                // 중복확인
-    private EditText editText;              // 닉네임 입력 칸
+    private EditText from;              // 닉네임 입력 칸
     private RadioGroup genderradio;         // 성별 남자 radiobtn
     private RadioButton man_btn, woman_btn; // 성별 여자 radiobtn
     private String gender = "";
     private String nick = "";
     private String area = "";
+    private EditText editText;
     boolean namechecked = false;
 
     private String bh_number_1 = "";
@@ -68,22 +73,21 @@ public class ProfileActivity extends AppCompatActivity {
     private NetworkProgressDialog networkProgressDialog;
 
     private ArrayAdapter<CharSequence> from_main, hobby_first, hobby_second, hobby_third;
-    private Spinner spinner_from;
-    private Spinner spinner_sub;
-    private Spinner spinner_sub2;
     private Spinner spinner_hobby1;
     private Spinner spinner_hobby2;
     private Spinner spinner_hobby_second1;
     private Spinner spinner_hobby_second2;
     private Spinner spinner_hobby_third1;
-
-
     private Spinner spinner_hobby_third2;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+
 
         /*
             갤러리 접속해 이미지 불러오기
@@ -109,6 +113,10 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         center_image = (ImageView) findViewById(R.id.center_image);
+        center_image.setBackground(new ShapeDrawable(new OvalShape()));
+        if(Build.VERSION.SDK_INT >= 21){
+            center_image.setClipToOutline(true);
+        }
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
@@ -161,7 +169,8 @@ public class ProfileActivity extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nick = editText.getText().toString();
+                nick = editText.getText().toString();  // 버튼 클릭 시  edittext에서 정보 받아들임
+                area = from.getText().toString();
 
                 // String은 == 으로 비교하지말고 .equals 로 비교할것
                 if (gender.equals("")) {
@@ -182,6 +191,12 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast.makeText(ProfileActivity.this, "닉네임을 입력 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if (from.equals("")) {
+                    Toast.makeText(ProfileActivity.this, "거주지역을 입력 하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 if (bh_number_1.equals("") || bh_number_2.equals("") || bh_number_3.equals("") ||
                         sh_number_1.equals("") || sh_number_2.equals("") || sh_number_3.equals("")) {
@@ -234,19 +249,17 @@ public class ProfileActivity extends AppCompatActivity {
 
                 // execute 함수를 호출하는 순간 task의 내용들이 실행된다
                 // execute 함수 안에 넘겨주는 파라미터 값들은 doinBackground에서 strings.... 에 들어가는 내용들
-                joinTask.execute(ApiValue.API_JOIN, nick, gender, "0", "주소지", picData,
+                joinTask.execute(ApiValue.API_JOIN, nick, gender, "0", area, picData,
                         bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2, sh_number_3, "kakao");
 
             }
         });
 
+        /*
+            취미를 받아들여옴
+         */
+        from = (EditText) findViewById(R.id.from_main);
 
-        spinner_from = (Spinner) findViewById(R.id.from_main);
-        spinner_sub = (Spinner) findViewById(R.id.from_sub);
-        spinner_sub2 = (Spinner) findViewById(R.id.from_sub2);
-        from_main = ArrayAdapter.createFromResource(this, R.array.spinner_from, R.layout.support_simple_spinner_dropdown_item);
-        spinner_from.setAdapter(from_main);
-        spinner_from.setOnItemSelectedListener(spinnerSelectListener);
 
         spinner_hobby1 = (Spinner) findViewById(R.id.hobby_first);
         spinner_hobby2 = (Spinner) findViewById(R.id.hobby_first_sub);
@@ -274,28 +287,6 @@ public class ProfileActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
             switch (adapterView.getId()) {
-
-                case R.id.from_main:
-
-                    ArrayAdapter<CharSequence> from_sub = null;
-                    ArrayAdapter<CharSequence> from_sub2 = null;
-
-                    if (from_main.getItem(i).equals("서울특별시")) {
-                        from_sub = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_seoul, android.R.layout.simple_spinner_dropdown_item);
-                        from_sub2 = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_seoul_sub, android.R.layout.simple_spinner_dropdown_item);
-
-                    } else if (from_main.getItem(i).equals("충청북도")) {
-                        from_sub = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_ChungBuck, android.R.layout.simple_spinner_dropdown_item);
-                        from_sub2 = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_cheongu, android.R.layout.simple_spinner_dropdown_item);
-                    }
-                    if (from_sub != null)
-                        spinner_sub.setAdapter(from_sub);
-
-                    if (from_sub2 != null)
-                        spinner_sub2.setAdapter(from_sub2);
-
-                    break;
-
 
                 case R.id.hobby_first:
                     ArrayAdapter<CharSequence> hobby_first_adapter = null;
