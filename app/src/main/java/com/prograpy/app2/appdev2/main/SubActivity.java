@@ -19,8 +19,10 @@ import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chatList.ChatListActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.FragmentResult;
 import com.prograpy.app2.appdev2.network.response.LikeDislikeResult;
 import com.prograpy.app2.appdev2.profile.MyPage;
+import com.prograpy.app2.appdev2.task.FragmentTask;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
 
 /**
@@ -41,6 +43,7 @@ public class SubActivity extends AppCompatActivity{
     int index=0;
     TextView textView;
     LikeDislikeButtonTask likeDislikeButtonTask;
+    FragmentTask fragmentTask;
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -194,18 +197,49 @@ public class SubActivity extends AppCompatActivity{
 
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+        ImageView profileImage;
+        String name;
+        String gender;
+        int age;
+        String area;
+        Fragment fragment;
+
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int position) {
-//            사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
-//            Fragment fragment = InfoFragment.newInstance(사용자의 임지ㅣ);
+        public Fragment getItem(final int position) {
 
-            Fragment fragment = InfoFragment.newInstance();
+            fragmentTask = new FragmentTask(new FragmentTask.FragmentResultHandler() {
+                @Override
+                public void onSuccesTask(FragmentResult result) {
+                    if (result.isSuccess()){
+                        //string을 imageview로 받아야함.
+//                        profileImage = result.getInfoList().get(position).profileImage;
+                        name = result.getInfoList().get(position).name;
+                        gender = result.getInfoList().get(position).gender;
+                        age = result.getInfoList().get(position).age;
+                        area = result.getInfoList().get(position).area;
 
+                        //프래그먼트에 정보주기
+//                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
+                        fragment = InfoFragment.newInstance(name,gender,age,area);
+                    }
 
+                }
+
+                @Override
+                public void onFailTask() {
+                    //실패했다는 이미지 주기.
+
+                }
+
+                @Override
+                public void onCancelTask() {
+
+                }
+            });
             return fragment;
         }
 
