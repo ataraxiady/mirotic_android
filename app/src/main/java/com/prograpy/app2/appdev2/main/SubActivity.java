@@ -19,7 +19,7 @@ import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chatList.ChatListActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
-import com.prograpy.app2.appdev2.network.response.LikeDislikeResult;
+import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
 import com.prograpy.app2.appdev2.profile.MyPage;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
 

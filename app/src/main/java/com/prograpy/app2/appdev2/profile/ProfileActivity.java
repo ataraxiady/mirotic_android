@@ -11,8 +11,6 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -20,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -31,10 +28,8 @@ import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.main.SubActivity;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
-import com.prograpy.app2.appdev2.network.response.JoinResult;
+import com.prograpy.app2.appdev2.network.response.result.JoinResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
-
-import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 

@@ -6,7 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
-import com.prograpy.app2.appdev2.network.response.LikeDislikeResult;
+import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
 
 import java.util.HashMap;
 import java.util.Map;

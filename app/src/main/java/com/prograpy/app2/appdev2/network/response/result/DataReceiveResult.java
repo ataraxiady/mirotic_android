@@ -1,17 +1,12 @@
-package com.prograpy.app2.appdev2.network.response;
+package com.prograpy.app2.appdev2.network.response.result;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
- * 서버에서 전달받은 데이터를 파싱해주는 클래스
- *
+ * Created by User on 2018-07-11.
  */
-public class JoinResult {
 
-    // 서버의 json 데이터중 어떤 키값의 데이터를 파싱시킬 건지 정하는 게
-    // @SerializedName 부분
-
-
+public class DataReceiveResult {
     @SerializedName("success")
     private boolean success = false;
 
@@ -33,4 +28,5 @@ public class JoinResult {
     public void setError(String error) {
         this.error = error;
     }
+
 }
