@@ -6,4 +6,6 @@ public class LikeDislike {
 
     public String dislikeButton = "";
 
+    public String nickname = "";
+
 }
