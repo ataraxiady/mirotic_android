@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
 import com.prograpy.app2.appdev2.network.response.result.DataReceiveResult;
-import com.prograpy.app2.appdev2.network.response.result.JoinResult;
 
 /**
  * Created by User on 2018-07-11.
@@ -41,7 +40,7 @@ public class DataReceiveTask extends AsyncTask<String, Integer, DataReceiveResul
     }
 
     @Override
-    protected void onPostExecute(JoinResult joinResult) {
-        super.onPostExecute(DataReceiveResult);
+    protected void onPostExecute(DataReceiveResult result) {
+        super.onPostExecute(result);
     }
 }

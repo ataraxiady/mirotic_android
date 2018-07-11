@@ -91,7 +91,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="30dp"
         android:visibility="invisible"
-        android:src="@drawable/SignAlarm" />
+        android:src="@drawable/signalarm" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab2"
@@ -100,7 +100,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="30dp"
         android:layout_marginRight="20dp"
-        android:src="@drawable/FloatingMessage"
+        android:src="@drawable/floatingmessage"
         android:visibility="invisible" />
 
         android:src="@android:drawable/ic_dialog_email" />
@@ -112,7 +112,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="30dp"
         android:layout_marginRight="20dp"
-        android:src="@drawable/FloatingBtnMain"
+        android:src="@drawable/floatingbtnmain"
         app:backgroundTint="@android:color/transparent" />
 
 
