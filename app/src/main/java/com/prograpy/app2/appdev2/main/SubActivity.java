@@ -19,8 +19,11 @@ import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chatList.ChatListActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
-import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
+
+import com.prograpy.app2.appdev2.network.response.FragmentResult;
+import com.prograpy.app2.appdev2.network.response.LikeDislikeResult;
 import com.prograpy.app2.appdev2.profile.MyPage;
+import com.prograpy.app2.appdev2.task.FragmentTask;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
 
 /**
@@ -40,6 +43,8 @@ public class SubActivity extends AppCompatActivity{
     Button likeButton;
     int index=0;
     TextView textView;
+    LikeDislikeButtonTask likeDislikeButtonTask;
+    FragmentTask fragmentTask;
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -76,42 +81,34 @@ public class SubActivity extends AppCompatActivity{
         dislikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LikeDislikeButtonTask likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
-                    @Override
-                    public void onSuccesTask(LikeDislikeResult result) {
+                if(index < 5 ){
+                    likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
+                        @Override
+                        public void onSuccesTask(LikeDislikeResult result) {
+                            index++;
+                            viewPager.setCurrentItem(index);
+                            //서버에게 '싫어요'한 사람 전송해야함. 상대방 닉네임 받아오기
+                            likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"F","young");
+                        }
 
-                        if(result != null) {
-                            if (result.isSuccess()) {
-                                index++;
+                        @Override
+                        public void onFailTask() {
+                            Toast.makeText(SubActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
+                        }
 
-                                if (adapter.getCount() > index){
-                                    viewPager.setCurrentItem(index);}
-                                else {
-                                    Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
+                        @Override
+                        public void onCancelTask() {
+
+                        }
+
+                    });
+                }else{
+                    Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
                                     viewPager.setVisibility(View.GONE);
                                     textView = (TextView)findViewById(R.id.textView);
                                     textView.setVisibility(View.VISIBLE);
-                                }
-                            } else {
-                                Toast.makeText(SubActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
-                            }
-                        }else{
-                            Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                }
 
-                    @Override
-                    public void onFailTask() {
-                        Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancelTask() {
-                        Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                //서버에게 '싫어요'한 사람 전송해야함.
-                likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"F");
             }
         });
 
@@ -119,43 +116,34 @@ public class SubActivity extends AppCompatActivity{
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LikeDislikeButtonTask likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
-                    @Override
-                    public void onSuccesTask(LikeDislikeResult result) {
-
-                        if(result != null) {
-                            if (result.isSuccess()) {
-                                index++;
-
-                                if (adapter.getCount() > index){
-                                    viewPager.setCurrentItem(index);}
-                                //서버연동 시 추가
-                                else {
-                                    Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
-                                    viewPager.setVisibility(View.GONE);
-                                    textView = (TextView)findViewById(R.id.textView);
-                                    textView.setVisibility(View.VISIBLE);
-                                }
-                            } else {
-                                Toast.makeText(SubActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
-                            }
-                        }else{
-                            Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
+                if(index < 5 ){
+                    likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
+                        @Override
+                        public void onSuccesTask(LikeDislikeResult result) {
+                            index++;
+                            viewPager.setCurrentItem(index);
+                            //서버에게 '좋아요'한 사람 전송. '좋아요'를 받은사람에게 알림이 가게 해야함.
+                            //상대방 닉네임 받아오기.
+                            likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"T","young");
                         }
-                    }
 
-                    @Override
-                    public void onFailTask() {
-                        Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
-                    }
+                            @Override
+                            public void onFailTask() {
+                                Toast.makeText(SubActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
+                            }
 
-                    @Override
-                    public void onCancelTask() {
-                        Toast.makeText(SubActivity.this, "서버통신실패.기다려주세요.", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onCancelTask() {
+
+                            }
+
+                        });
+                    }else{
+                        Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
+                        viewPager.setVisibility(View.GONE);
+                        textView = (TextView)findViewById(R.id.textView);
+                        textView.setVisibility(View.VISIBLE);
                     }
-                });
-                //서버에게 '좋아요'한 사람 전송. '좋아요'를 받은사람에게 알림이 가게 해야함.
-                likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"T");
 
             }
         });
@@ -210,18 +198,49 @@ public class SubActivity extends AppCompatActivity{
 
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+        ImageView profileImage;
+        String name;
+        String gender;
+        int age;
+        String area;
+        Fragment fragment;
+
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int position) {
-//            사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
-//            Fragment fragment = InfoFragment.newInstance(사용자의 임지ㅣ);
+        public Fragment getItem(final int position) {
 
-            Fragment fragment = InfoFragment.newInstance();
+            fragmentTask = new FragmentTask(new FragmentTask.FragmentResultHandler() {
+                @Override
+                public void onSuccesTask(FragmentResult result) {
+                    if (result.isSuccess()){
+                        //string을 imageview로 받아야함.
+//                        profileImage = result.getInfoList().get(position).profileImage;
+                        name = result.getInfoList().get(position).name;
+                        gender = result.getInfoList().get(position).gender;
+                        age = result.getInfoList().get(position).age;
+                        area = result.getInfoList().get(position).area;
 
+                        //프래그먼트에 정보주기
+//                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
+                        fragment = InfoFragment.newInstance(name,gender,age,area);
+                    }
 
+                }
+
+                @Override
+                public void onFailTask() {
+                    //실패했다는 이미지 주기.
+
+                }
+
+                @Override
+                public void onCancelTask() {
+
+                }
+            });
             return fragment;
         }
 
