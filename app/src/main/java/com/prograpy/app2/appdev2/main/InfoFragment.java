@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prograpy.app2.appdev2.R;
@@ -18,26 +17,46 @@ import com.prograpy.app2.appdev2.R;
 public class InfoFragment extends Fragment{
     private static final String NAME = "name";
     private static final String AGE = "age";
-    ImageView fprofileImage;
+    private static final String GENDER = "gender";
+    private static final String AREA = "area";
+
+
+//    ImageView fprofileImage;
     TextView fname;
     TextView fage;
     TextView fgender;
     TextView farea;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null){
-            fname.setText(getArguments().getString(NAME));
-            fage.setText(getArguments().getInt(AGE));
-        }
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if (getArguments() != null){
+//            fname.setText(getArguments().getString(NAME));
+//            fage.setText("나이 : " +getArguments().getInt(AGE) + " 세");
+//            fgender.setText("성별 : " +getArguments().getString(GENDER));
+//            farea.setText("거주 지역 : " +getArguments().getString(AREA));
+//        }
+//    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info,container,false);
 //        이미지뷰.셋팅이미지(전달받은이미지)
+
+
+        fname = (TextView)view.findViewById(R.id.infoName);
+        fage = (TextView)view.findViewById(R.id.infoAge);
+        fgender = (TextView)view.findViewById(R.id.infoGender);
+        farea = (TextView)view.findViewById(R.id.infoArea);
+
+
+        if (getArguments() != null){
+            fname.setText(getArguments().getString(NAME));
+            fage.setText("나이 : " +getArguments().getInt(AGE) + " 세");
+            fgender.setText("성별 : " +getArguments().getString(GENDER));
+            farea.setText("거주 지역 : " +getArguments().getString(AREA));
+        }
 
         return view;
     }
@@ -48,9 +67,9 @@ public class InfoFragment extends Fragment{
         Bundle bundle = new Bundle();
 
         bundle.putString(NAME,name);
-        bundle.putString(gender,gender);
-        bundle.putInt(String.valueOf(age),age);
-        bundle.putString(area,area);
+        bundle.putString(GENDER,gender);
+        bundle.putInt(AGE,age);
+        bundle.putString(AREA,area);
 
         fragment.setArguments(bundle);
 

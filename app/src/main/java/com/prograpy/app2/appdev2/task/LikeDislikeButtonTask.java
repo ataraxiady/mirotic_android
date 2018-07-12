@@ -29,16 +29,17 @@ public class LikeDislikeButtonTask extends AsyncTask<String, Integer, LikeDislik
     @Override
     protected LikeDislikeResult doInBackground(String... strings) {
         String path = strings[0];
-        String likeDislike = strings[1];
-        String nickname = strings[2];
+        String myId = strings[1];
+        String otherId = strings[2];
+        String isLike = strings[3];
 
         LikeDislikeResult result = null;
 
         Map<String,Object> params = new HashMap<>();
 
-        params.put("likeButton",likeDislike);
-        params.put("dislikeButton",likeDislike);
-        params.put("nickname", nickname);
+        params.put("myId",myId);
+        params.put("otherId",otherId);
+        params.put("isLike", isLike);
 
         HttpRequest request = new HttpRequest();
 
