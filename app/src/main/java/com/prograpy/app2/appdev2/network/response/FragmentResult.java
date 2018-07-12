@@ -10,8 +10,8 @@ public class FragmentResult {
     @SerializedName("success")
     private boolean success = false;
 
-    @SerializedName("error")
-    private String error = "";
+    @SerializedName("msg")
+    private String msg = "";
 
     @SerializedName("infoList")
     private ArrayList<Fragment> infoList = null;
@@ -24,12 +24,12 @@ public class FragmentResult {
         this.success = success;
     }
 
-    public String getError() {
-        return error;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public ArrayList<Fragment> getInfoList() {
