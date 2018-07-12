@@ -44,18 +44,19 @@ public class InfoFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_info,container,false);
 //        이미지뷰.셋팅이미지(전달받은이미지)
 
-        if (getArguments() != null){
-            fname.setText(getArguments().getString(NAME));
-            fage.setText("나이 : " +getArguments().getInt(AGE) + " 세");
-            fgender.setText("성별 : " +getArguments().getString(GENDER));
-            farea.setText("거주 지역 : " +getArguments().getString(AREA));
-        }
 
         fname = (TextView)view.findViewById(R.id.infoName);
         fage = (TextView)view.findViewById(R.id.infoAge);
         fgender = (TextView)view.findViewById(R.id.infoGender);
         farea = (TextView)view.findViewById(R.id.infoArea);
 
+
+        if (getArguments() != null){
+            fname.setText(getArguments().getString(NAME));
+            fage.setText("나이 : " +getArguments().getInt(AGE) + " 세");
+            fgender.setText("성별 : " +getArguments().getString(GENDER));
+            farea.setText("거주 지역 : " +getArguments().getString(AREA));
+        }
 
         return view;
     }

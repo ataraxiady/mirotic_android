@@ -88,7 +88,6 @@ public class SubActivity extends AppCompatActivity{
                             index++;
                             viewPager.setCurrentItem(index);
                             //서버에게 '싫어요'한 사람 전송해야함. 상대방 닉네임 받아오기
-                            likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"F","young");
                         }
 
                         @Override
@@ -102,6 +101,9 @@ public class SubActivity extends AppCompatActivity{
                         }
 
                     });
+
+                    likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE, "내 아이디", "상대방 아이디", "F");
+
                 }else{
                     Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
                                     viewPager.setVisibility(View.GONE);
@@ -124,7 +126,6 @@ public class SubActivity extends AppCompatActivity{
                             viewPager.setCurrentItem(index);
                             //서버에게 '좋아요'한 사람 전송. '좋아요'를 받은사람에게 알림이 가게 해야함.
                             //상대방 닉네임 받아오기.
-                            likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"T","young");
                         }
 
                             @Override
@@ -138,6 +139,9 @@ public class SubActivity extends AppCompatActivity{
                             }
 
                         });
+
+                    likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE, "내 아이디", "상대방 아이디", "T");
+
                     }else{
                         Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
                         viewPager.setVisibility(View.GONE);
@@ -198,6 +202,7 @@ public class SubActivity extends AppCompatActivity{
             @Override
             public void onSuccesTask(FragmentResult result) {
                 fragmentResult = result;
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -211,15 +216,17 @@ public class SubActivity extends AppCompatActivity{
             }
         });
 
+        fragmentTask.execute(ApiValue.APT_GET_MATCHING_INFO, "내 아이디");
+
     }
 
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
         ImageView profileImage;
-        String name;
-        String gender;
-        int age;
-        String area;
+        String name = "" ;
+        String gender = "" ;
+        int age = 0 ;
+        String area = "";
         Fragment fragment;
 
         public ViewPagerAdapter(FragmentManager fm) {
@@ -230,10 +237,13 @@ public class SubActivity extends AppCompatActivity{
         public Fragment getItem(final int position) {
             //string을 imageview로 받아야함.
 //                        profileImage = result.getInfoList().get(position).profileImage;
-            name = fragmentResult.getInfoList().get(position).name;
-            gender = fragmentResult.getInfoList().get(position).gender;
-            age = fragmentResult.getInfoList().get(position).age;
-            area = fragmentResult.getInfoList().get(position).area;
+
+            if(fragmentResult != null){
+                name = fragmentResult.getInfoList().get(position).name;
+                gender = fragmentResult.getInfoList().get(position).gender;
+                age = fragmentResult.getInfoList().get(position).age;
+                area = fragmentResult.getInfoList().get(position).area;
+            }
 
             //프래그먼트에 정보주기
 //                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
