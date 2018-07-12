@@ -12,7 +12,30 @@ public class DataReceiveResult {
 
     @SerializedName("error")
     private String error = "";
+    private String name = "";
+    private String gender = "";
+    private String area = "";
+    private int age;
 
+    // 나이
+    public int getAge() { return age; }
+
+    public void setAge(int age) { this.age = age; }
+    // 성별
+    public String getGender() { return gender;}
+
+    public void setGender(String gender) { this.gender = gender; }
+    // 사는 곳
+    public String getArea() { return area; }
+
+    public void setArea(String area) { this.area = area; }
+    // 이름
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName() { return name; }
+    // 성공했을 시
     public boolean isSuccess() {
         return success;
     }
@@ -20,7 +43,7 @@ public class DataReceiveResult {
     public void setSuccess(boolean success) {
         this.success = success;
     }
-
+    // 에러났을 시
     public String getError() {
         return error;
     }
@@ -28,5 +51,7 @@ public class DataReceiveResult {
     public void setError(String error) {
         this.error = error;
     }
+
+
 
 }

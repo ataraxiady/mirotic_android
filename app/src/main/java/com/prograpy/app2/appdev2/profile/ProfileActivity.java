@@ -238,7 +238,7 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onCancelTask() {
                         networkProgressDialog.dismiss();
 
-                        Toast.makeText(ProfileActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileActivity.this, "서버 통신을 취소하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
