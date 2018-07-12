@@ -26,9 +26,24 @@
         android:textColor="@android:color/black"/>
 
     <TextView
-        android:id="@+id/infoText"
+        android:id="@+id/infoAge"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="안녕하세요. 윙크남 강호동입니다. 많은 좋아요 부탁드립니다!" />
+        android:text="나이" />
+
+    <TextView
+        android:id="@+id/infoGender"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="성별" />
+    <TextView
+        android:id="@+id/infoArea"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="지역" />
+
+
 </LinearLayout>

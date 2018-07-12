@@ -44,6 +44,7 @@ public class SubActivity extends AppCompatActivity{
     TextView textView;
     LikeDislikeButtonTask likeDislikeButtonTask;
     FragmentTask fragmentTask;
+    FragmentResult fragmentResult;
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -193,6 +194,23 @@ public class SubActivity extends AppCompatActivity{
             }
         });
 
+        fragmentTask = new FragmentTask(new FragmentTask.FragmentResultHandler() {
+            @Override
+            public void onSuccesTask(FragmentResult result) {
+                fragmentResult = result;
+            }
+
+            @Override
+            public void onFailTask() {
+
+            }
+
+            @Override
+            public void onCancelTask() {
+
+            }
+        });
+
     }
 
 
@@ -210,36 +228,17 @@ public class SubActivity extends AppCompatActivity{
 
         @Override
         public Fragment getItem(final int position) {
-
-            fragmentTask = new FragmentTask(new FragmentTask.FragmentResultHandler() {
-                @Override
-                public void onSuccesTask(FragmentResult result) {
-                    if (result.isSuccess()){
-                        //string을 imageview로 받아야함.
+            //string을 imageview로 받아야함.
 //                        profileImage = result.getInfoList().get(position).profileImage;
-                        name = result.getInfoList().get(position).name;
-                        gender = result.getInfoList().get(position).gender;
-                        age = result.getInfoList().get(position).age;
-                        area = result.getInfoList().get(position).area;
+            name = fragmentResult.getInfoList().get(position).name;
+            gender = fragmentResult.getInfoList().get(position).gender;
+            age = fragmentResult.getInfoList().get(position).age;
+            area = fragmentResult.getInfoList().get(position).area;
 
-                        //프래그먼트에 정보주기
+            //프래그먼트에 정보주기
 //                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
-                        fragment = InfoFragment.newInstance(name,gender,age,area);
-                    }
 
-                }
-
-                @Override
-                public void onFailTask() {
-                    //실패했다는 이미지 주기.
-
-                }
-
-                @Override
-                public void onCancelTask() {
-
-                }
-            });
+            fragment = InfoFragment.newInstance(name,gender,age,area);
             return fragment;
         }
 
