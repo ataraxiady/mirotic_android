@@ -13,7 +13,7 @@ public class FragmentResult {
     @SerializedName("msg")
     private String msg = "";
 
-    @SerializedName("infoList")
+    @SerializedName("userInfos")
     private ArrayList<Fragment> infoList = null;
 
     public boolean isSuccess() {
