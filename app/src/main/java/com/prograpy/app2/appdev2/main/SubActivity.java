@@ -124,6 +124,9 @@ public class SubActivity extends AppCompatActivity{
                             viewPager.setCurrentItem(index);
                             //서버에게 '좋아요'한 사람 전송. '좋아요'를 받은사람에게 알림이 가게 해야함.
                             //상대방 닉네임 받아오기.
+
+                            //프래그먼트리절트에 담겨져있는 추전인 정보
+                            //내정보도 받아오기(닉네임 혹은 네이버키)
                             likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE,"T","young");
                         }
 
