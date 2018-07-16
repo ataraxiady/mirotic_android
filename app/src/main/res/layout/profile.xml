@@ -6,6 +6,8 @@
                 android:layout_height="match_parent"
                 android:keepScreenOn="true"
                 android:background="@drawable/background"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="vertical">
 
     <ScrollView
@@ -92,6 +94,7 @@
                     android:gravity="center"
                     android:hint="입 력"
                     android:inputType="textPersonName"
+                    android:imeOptions="actionDone"
                     android:textColorLink="@android:color/darker_gray"/>
 
                 <Button
@@ -170,6 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:hint="거주지역은 동까지 입력하시오."
+                    android:imeOptions="actionDone"
                     />
 
             </LinearLayout>

@@ -5,9 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    
-    >
+    android:background="@drawable/background">
 
 
     <ImageView
@@ -21,8 +19,7 @@
         android:id="@+id/buttonOAuthLoginImg"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="80dp"
-        />
+        android:layout_marginTop="80dp"/>
 
     <Button
         android:id="@+id/btnKakao"
@@ -33,4 +30,12 @@
         android:text="카카오톡으로 시작하기"
         android:layout_marginTop="10dp"/>
 
+    <Button
+        android:id="@+id/btnPass"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#ffcc00"
+        android:text="임시 가입 계정으로 시작하기"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>

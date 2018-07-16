@@ -7,32 +7,33 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
 import com.prograpy.app2.appdev2.network.response.FragmentResult;
+import com.prograpy.app2.appdev2.network.response.result.MatchingResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FragmentTask extends AsyncTask<String,Integer,FragmentResult> {
+public class MainMatchingTask extends AsyncTask<String,Integer, MatchingResult> {
 
-    private FragmentResultHandler handler;
+    private TaskResultHandler handler;
 
-    public interface FragmentResultHandler {
-        public void onSuccesTask(FragmentResult result);
+    public interface TaskResultHandler {
+        public void onSuccesTask(MatchingResult result);
 
         public void onFailTask();
 
         public void onCancelTask();
     }
 
-    public FragmentTask(FragmentResultHandler handler) {
+    public MainMatchingTask(TaskResultHandler handler) {
         this.handler = handler;
     }
 
     @Override
-    protected FragmentResult doInBackground(String... strings) {
+    protected MatchingResult doInBackground(String... strings) {
         String path = strings[0];
         String myId = strings[1];
 
-        FragmentResult result = null;
+        MatchingResult result = null;
 
         Map<String, Object> params = new HashMap<>();
 
@@ -45,7 +46,7 @@ public class FragmentTask extends AsyncTask<String,Integer,FragmentResult> {
             Log.d("http", "str >" + str);
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, FragmentResult.class);
+            result = gson.fromJson(str, MatchingResult.class);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -56,7 +57,7 @@ public class FragmentTask extends AsyncTask<String,Integer,FragmentResult> {
         return result;
     }
 
-    protected void onPostExecute(FragmentResult result) {
+    protected void onPostExecute(MatchingResult result) {
         super.onPostExecute(result);
 
         if (result != null) {
