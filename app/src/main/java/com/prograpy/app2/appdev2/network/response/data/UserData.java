@@ -34,7 +34,7 @@ public class UserData {
     @SerializedName("sh_number_1")
     private int sh_number_1= 0;
 
-    @SerializedName("sh_number_1")
+    @SerializedName("bh_number_2")
     private int bh_number_2=0;
 
     @SerializedName("sh_number_2")
