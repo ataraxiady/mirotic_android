@@ -27,6 +27,7 @@ import com.prograpy.app2.appdev2.network.response.result.MatchingResult;
 import com.prograpy.app2.appdev2.profile.MyPage;
 import com.prograpy.app2.appdev2.task.MainMatchingTask;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
+import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 import java.util.ArrayList;
 
@@ -34,18 +35,18 @@ import java.util.ArrayList;
  * Created by samsung on 2018-03-23.
  */
 
-public class SubActivity extends AppCompatActivity{
+public class SubActivity extends AppCompatActivity {
     private MainCustomViewPager viewPager;
     private ViewPagerAdapter adapter;
-    private FloatingActionButton floatingActionButton,floatingActionButton2,floatingActionButton3;
-    private  boolean isOpen = false;
-    private Animation fab_open, fab_close,fabRClockwise, fabRanticlockWise;
+    private FloatingActionButton floatingActionButton, floatingActionButton2, floatingActionButton3;
+    private boolean isOpen = false;
+    private Animation fab_open, fab_close, fabRClockwise, fabRanticlockWise;
     private Intent intent;
     ImageView imageButtonUser;
     ImageView imageButtonSettings;
     Button dislikeButton;
     Button likeButton;
-    int index=0;
+    int index = 0;
     TextView textView;
     LikeDislikeButtonTask likeDislikeButtonTask;
     MainMatchingTask fragmentTask;
@@ -62,7 +63,7 @@ public class SubActivity extends AppCompatActivity{
 
         dialog = new NetworkProgressDialog(this);
 
-        imageButtonUser = (ImageView)findViewById(R.id.imgbtn_user);
+        imageButtonUser = (ImageView) findViewById(R.id.imgbtn_user);
         imageButtonUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +72,7 @@ public class SubActivity extends AppCompatActivity{
             }
         });
 
-        imageButtonSettings = (ImageView)findViewById(R.id.imgbtn_settings);
+        imageButtonSettings = (ImageView) findViewById(R.id.imgbtn_settings);
         imageButtonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,14 +85,27 @@ public class SubActivity extends AppCompatActivity{
         dislikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(index < 5 ){
+                if (index < 5) {
                     likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
                         @Override
                         public void onSuccesTask(LikeDislikeResult result) {
                             dialog.dismiss();
 
-                            index++;
-                            viewPager.setCurrentItem(index);
+
+                            if(result.isSuccess()){
+                                index++;
+
+                                if(index < 5){
+                                    viewPager.setCurrentItem(index);
+                                }else{
+                                    Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+                                    viewPager.setVisibility(View.GONE);
+                                    textView = (TextView) findViewById(R.id.textView);
+                                    textView.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+
                             //서버에게 '싫어요'한 사람 전송해야함. 상대방 닉네임 받아오기
                         }
 
@@ -111,13 +125,13 @@ public class SubActivity extends AppCompatActivity{
 
                     dialog.show();
 
-                    likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE, "내 아이디", "상대방 아이디", "F");
+                    likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE, PreferenceData.getKeyUserId(), "상대방 아이디", "F");
 
-                }else{
-                    Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
-                                    viewPager.setVisibility(View.GONE);
-                                    textView = (TextView)findViewById(R.id.textView);
-                                    textView.setVisibility(View.VISIBLE);
+                } else {
+                    Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+                    viewPager.setVisibility(View.GONE);
+                    textView = (TextView) findViewById(R.id.textView);
+                    textView.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -127,47 +141,59 @@ public class SubActivity extends AppCompatActivity{
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(index < 5 ){
+                if (index < 5) {
                     likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
                         @Override
                         public void onSuccesTask(LikeDislikeResult result) {
                             dialog.dismiss();
 
-                            index++;
-                            viewPager.setCurrentItem(index);
+                            if(result.isSuccess()){
+                                index++;
+
+                                if(index < 5){
+                                    viewPager.setCurrentItem(index);
+                                }else{
+                                    Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+                                    viewPager.setVisibility(View.GONE);
+                                    textView = (TextView) findViewById(R.id.textView);
+                                    textView.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+
                             //서버에게 '좋아요'한 사람 전송. '좋아요'를 받은사람에게 알림이 가게 해야함.
                             //상대방 닉네임 받아오기.
                         }
 
-                            @Override
-                            public void onFailTask() {
-                                dialog.dismiss();
-                                Toast.makeText(SubActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
-                            }
+                        @Override
+                        public void onFailTask() {
+                            dialog.dismiss();
+                            Toast.makeText(SubActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
+                        }
 
-                            @Override
-                            public void onCancelTask() {
-                                dialog.dismiss();
+                        @Override
+                        public void onCancelTask() {
+                            dialog.dismiss();
 
-                            }
+                        }
 
-                        });
+                    });
 
                     dialog.show();
 
-                    likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE, "내 아이디", "상대방 아이디", "T");
+                    likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE, PreferenceData.getKeyUserId(), "상대방 아이디", "T");
 
-                    }else{
-                        Toast.makeText(SubActivity.this,"오늘 소개는 끝났습니다.",Toast.LENGTH_LONG).show();
-                        viewPager.setVisibility(View.GONE);
-                        textView = (TextView)findViewById(R.id.textView);
-                        textView.setVisibility(View.VISIBLE);
-                    }
+                } else {
+                    Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+                    viewPager.setVisibility(View.GONE);
+                    textView = (TextView) findViewById(R.id.textView);
+                    textView.setVisibility(View.VISIBLE);
+                }
 
             }
         });
 
-        viewPager = (MainCustomViewPager)findViewById(R.id.main_pager);
+        viewPager = (MainCustomViewPager) findViewById(R.id.main_pager);
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -181,34 +207,34 @@ public class SubActivity extends AppCompatActivity{
         fabRClockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clockwise);
         fabRanticlockWise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlockwise);
 
-        floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
-        floatingActionButton2 = (FloatingActionButton)findViewById(R.id.fab2);
-        floatingActionButton3 = (FloatingActionButton)findViewById(R.id.fab3);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.fab2);
+        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.fab3);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener(){
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                        if (isOpen) {
-                            floatingActionButton2.startAnimation(fab_close);
-                            floatingActionButton3.startAnimation(fab_close);
-                            floatingActionButton.startAnimation(fabRanticlockWise);
-                            floatingActionButton2.setClickable(false);
-                            floatingActionButton3.setClickable(false);
-                            isOpen = false;
-                        } else {
-                            floatingActionButton2.startAnimation(fab_open);
-                            floatingActionButton3.startAnimation(fab_open);
-                            floatingActionButton.startAnimation(fabRClockwise);
-                            floatingActionButton2.setClickable(true);
-                            floatingActionButton3.setClickable(true);
-                            isOpen = true;
-                        }
+                if (isOpen) {
+                    floatingActionButton2.startAnimation(fab_close);
+                    floatingActionButton3.startAnimation(fab_close);
+                    floatingActionButton.startAnimation(fabRanticlockWise);
+                    floatingActionButton2.setClickable(false);
+                    floatingActionButton3.setClickable(false);
+                    isOpen = false;
+                } else {
+                    floatingActionButton2.startAnimation(fab_open);
+                    floatingActionButton3.startAnimation(fab_open);
+                    floatingActionButton.startAnimation(fabRClockwise);
+                    floatingActionButton2.setClickable(true);
+                    floatingActionButton3.setClickable(true);
+                    isOpen = true;
+                }
             }
         });
 
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(),ChatListActivity.class);
+                intent = new Intent(getApplicationContext(), ChatListActivity.class);
                 startActivity(intent);
             }
         });
@@ -218,9 +244,9 @@ public class SubActivity extends AppCompatActivity{
             public void onSuccesTask(MatchingResult result) {
                 dialog.dismiss();
 
-                if(result.isSuccess()){
+                if (result.isSuccess()) {
 
-                    if(result.getUserInfos() != null && result.getUserInfos().size() > 0){
+                    if (result.getUserInfos() != null && result.getUserInfos().size() > 0) {
                         userDataList = result.getUserInfos();
                     }
                 }
@@ -249,9 +275,9 @@ public class SubActivity extends AppCompatActivity{
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
         String profileImage = "";
         String kakaoKey = "";
-        String name = "" ;
-        String gender = "" ;
-        int age = 0 ;
+        String name = "";
+        String gender = "";
+        int age = 0;
         String area = "";
         Fragment fragment;
 
@@ -264,7 +290,7 @@ public class SubActivity extends AppCompatActivity{
             //string을 imageview로 받아야함.
 //                        profileImage = result.getInfoList().get(position).profileImage;
 
-            if(userDataList != null && userDataList.size() > 0){
+            if (userDataList != null && userDataList.size() > 0) {
                 name = userDataList.get(position).getName();
                 gender = userDataList.get(position).getGender();
                 age = userDataList.get(position).getAge();
@@ -276,13 +302,13 @@ public class SubActivity extends AppCompatActivity{
             //프래그먼트에 정보주기
 //                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
 
-            fragment = InfoFragment.newInstance(name,gender,age,area, profileImage, kakaoKey);
+            fragment = InfoFragment.newInstance(name, gender, age, area, profileImage, kakaoKey);
             return fragment;
         }
 
         @Override
         public int getCount() {
-            return 5;
+            return userDataList.size();
         }
 
     }
