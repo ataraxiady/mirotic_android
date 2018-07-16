@@ -22,9 +22,13 @@ import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.FragmentResult;
 import com.prograpy.app2.appdev2.network.response.LikeDislikeResult;
+import com.prograpy.app2.appdev2.network.response.data.UserData;
+import com.prograpy.app2.appdev2.network.response.result.MatchingResult;
 import com.prograpy.app2.appdev2.profile.MyPage;
-import com.prograpy.app2.appdev2.task.FragmentTask;
+import com.prograpy.app2.appdev2.task.MainMatchingTask;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
+
+import java.util.ArrayList;
 
 /**
  * Created by samsung on 2018-03-23.
@@ -44,18 +48,11 @@ public class SubActivity extends AppCompatActivity{
     int index=0;
     TextView textView;
     LikeDislikeButtonTask likeDislikeButtonTask;
-    FragmentTask fragmentTask;
-    FragmentResult fragmentResult;
+    MainMatchingTask fragmentTask;
+    private ArrayList<UserData> userDataList = new ArrayList<UserData>();
 
 
     private NetworkProgressDialog dialog;
-
-    private View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(SubActivity.this, "헹", Toast.LENGTH_LONG).show();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,11 +213,17 @@ public class SubActivity extends AppCompatActivity{
             }
         });
 
-        fragmentTask = new FragmentTask(new FragmentTask.FragmentResultHandler() {
+        fragmentTask = new MainMatchingTask(new MainMatchingTask.TaskResultHandler() {
             @Override
-            public void onSuccesTask(FragmentResult result) {
+            public void onSuccesTask(MatchingResult result) {
                 dialog.dismiss();
-                fragmentResult = result;
+
+                if(result.isSuccess()){
+
+                    if(result.getUserInfos() != null && result.getUserInfos().size() > 0){
+                        userDataList = result.getUserInfos();
+                    }
+                }
                 adapter.notifyDataSetChanged();
             }
 
@@ -244,7 +247,8 @@ public class SubActivity extends AppCompatActivity{
 
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
-        ImageView profileImage;
+        String profileImage = "";
+        String kakaoKey = "";
         String name = "" ;
         String gender = "" ;
         int age = 0 ;
@@ -260,17 +264,19 @@ public class SubActivity extends AppCompatActivity{
             //string을 imageview로 받아야함.
 //                        profileImage = result.getInfoList().get(position).profileImage;
 
-            if(fragmentResult != null){
-                name = fragmentResult.getInfoList().get(position).name;
-                gender = fragmentResult.getInfoList().get(position).gender;
-                age = fragmentResult.getInfoList().get(position).age;
-                area = fragmentResult.getInfoList().get(position).area;
+            if(userDataList != null && userDataList.size() > 0){
+                name = userDataList.get(position).getName();
+                gender = userDataList.get(position).getGender();
+                age = userDataList.get(position).getAge();
+                area = userDataList.get(position).getArea();
+                profileImage = userDataList.get(position).getProfileimage();
+                kakaoKey = userDataList.get(position).getKakaoKey();
             }
 
             //프래그먼트에 정보주기
 //                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
 
-            fragment = InfoFragment.newInstance(name,gender,age,area);
+            fragment = InfoFragment.newInstance(name,gender,age,area, profileImage, kakaoKey);
             return fragment;
         }
 

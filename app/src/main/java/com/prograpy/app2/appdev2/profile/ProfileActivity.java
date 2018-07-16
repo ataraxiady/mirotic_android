@@ -180,6 +180,11 @@ public class ProfileActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (picData.equals("")) {
+                    Toast.makeText(ProfileActivity.this, "사진을 추가 해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 if (bh_number_1.equals("") || bh_number_2.equals("") || bh_number_3.equals("") ||
                         sh_number_1.equals("") || sh_number_2.equals("") || sh_number_3.equals("")) {
@@ -206,6 +211,8 @@ public class ProfileActivity extends AppCompatActivity {
                             if (result.isSuccess()) {
                                 Intent i = new Intent(ProfileActivity.this, SubActivity.class);
                                 startActivity(i);
+                                finish();
+
                             } else {
                                 Toast.makeText(ProfileActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
                             }
