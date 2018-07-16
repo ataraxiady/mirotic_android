@@ -7,12 +7,30 @@ import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
 import com.prograpy.app2.appdev2.network.response.result.DataReceiveResult;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by User on 2018-07-11.
  */
 
 public class DataReceiveTask extends AsyncTask<String, Integer, DataReceiveResult>
 {
+
+    private  DataReceiveTaskHandler handler;
+
+    public interface DataReceiveTaskHandler{
+        public void onSuccesTask(DataReceiveResult result);
+
+        public void onFailTask();
+
+        public void onCancelTask();
+    }
+
+    public DataReceiveTask(DataReceiveTaskHandler handler)
+    {
+        this.handler = handler;
+    }
 
     @Override
     protected void onPreExecute() {
@@ -21,26 +39,44 @@ public class DataReceiveTask extends AsyncTask<String, Integer, DataReceiveResul
 
     @Override
     protected DataReceiveResult doInBackground(String... strings) {
-        String url = strings[0];
-        String path = strings[1];
+
+        String path = strings[0];
+        String myId = strings[1];
 
         DataReceiveResult result = null;
 
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("myId", myId);
+
         HttpRequest request = new HttpRequest();
+
         try {
-            String str = request.callRequestServer(url,path,null);
+
+            String str = request.callRequestServer(path, "POST",params);
+
 
             Gson gson = new GsonBuilder().create();
             result = gson.fromJson(str, DataReceiveResult.class);
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            return null;
         }
-        return null;
+
+        return result;
     }
 
     @Override
     protected void onPostExecute(DataReceiveResult result) {
         super.onPostExecute(result);
+
+        if(result != null){
+            handler.onSuccesTask(result);
+        }
+        else{
+            handler.onCancelTask();
+        }
     }
 }

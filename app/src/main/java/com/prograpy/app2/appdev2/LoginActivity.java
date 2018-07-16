@@ -10,13 +10,14 @@ import android.widget.Toast;
 
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
-import com.nhn.android.naverlogin.ui.OAuthLoginDialogMng;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button kakao;
+
+    private Button test;
 
     OAuthLogin mOAuthLoginModule;
     OAuthLoginButton authLoginButton;
@@ -45,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         kakao = (Button) findViewById(R.id.btnKakao);
 
