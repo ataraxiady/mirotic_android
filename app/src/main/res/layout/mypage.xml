@@ -12,30 +12,24 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:gravity="center">
+        >
 
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignParentTop="true"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
             app:srcCompat="@android:color/darker_gray" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/second_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/first_layout"
-        android:layout_centerHorizontal="false"
-        android:layout_centerInParent="false"
-        android:orientation="horizontal"
-
-        >
+        android:layout_below="@+id/first_layout">
 
         <TextView
             android:id="@+id/profile_name"
@@ -43,18 +37,20 @@
             android:layout_height="wrap_content"
             android:text="홍길동"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
-
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            />
         <TextView
             android:id="@+id/profile_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="(24)"
             android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:layout_toRightOf="@+id/profile_name"
+            />
 
-    </LinearLayout>
-
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/third_layout"
         android:layout_width="match_parent"

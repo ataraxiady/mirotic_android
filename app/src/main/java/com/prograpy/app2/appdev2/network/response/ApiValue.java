@@ -14,4 +14,5 @@ public class ApiValue {
     public static final String APT_GET_MATCHING_INFO = "/getTestMatchingInfo";
     public static final String APT_GET_MY_INFO = "/getMyInfo";
 
+
 }

@@ -16,6 +16,12 @@ public class DataReceiveResult {
     private String gender = "";
     private String area = "";
     private int age;
+    private String First_main = "";
+
+    // 1순위 취미
+    public String getFirst_main() { return First_main; }
+
+    public void setFirst_main(String first_main) { First_main = first_main; }
 
     // 나이
     public int getAge() { return age; }
