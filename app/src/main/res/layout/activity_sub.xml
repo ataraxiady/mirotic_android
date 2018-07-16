@@ -44,8 +44,8 @@
 
     <com.prograpy.app2.appdev2.main.MainCustomViewPager
         android:id="@+id/main_pager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="8dp"
         android:layout_weight="1">
     </com.prograpy.app2.appdev2.main.MainCustomViewPager>
@@ -90,7 +90,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="30dp"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:src="@drawable/signalarm" />
 
     <android.support.design.widget.FloatingActionButton
@@ -101,7 +101,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginRight="20dp"
         android:src="@drawable/floatingmessage"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
         android:src="@android:drawable/ic_dialog_email" />
 
