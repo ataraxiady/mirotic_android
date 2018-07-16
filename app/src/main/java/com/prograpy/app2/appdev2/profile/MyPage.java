@@ -19,9 +19,13 @@ public class MyPage extends AppCompatActivity {
 
     private TextView name_TextView, area_TextView, age_TextView;
     private Spinner First_main, First_sub, Second_main, Second_sub, Third_main, Third_sub;
-    ImageView profileImage;
-    String name,gender,area;
+    private ImageView profileImage;
+    private String name,gender,area;
+    private String myld = "";
+    private String path = "";
     int age;
+
+    DataReceiveTask datarecivetask;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class MyPage extends AppCompatActivity {
 
         name_TextView = findViewById(R.id.profile_name);
         area_TextView = findViewById(R.id.profile_area);
+        age_TextView = findViewById(R.id.profile_age);
         First_main = findViewById(R.id.mypage_firsthobby1);
         First_sub = findViewById(R.id.mypage_firsthobby2);
         Second_main = findViewById(R.id.mypage_second_hobby1);
@@ -50,7 +55,7 @@ public class MyPage extends AppCompatActivity {
         /**
          *   서버로부터 데이터를 입력받음
          */
-        DataReceiveTask task = new DataReceiveTask(new DataReceiveTask.DataReceiveTaskHandler() {
+        datarecivetask = new DataReceiveTask(new DataReceiveTask.DataReceiveTaskHandler() {
             @Override
             public void onSuccesTask(DataReceiveResult result) {
 
@@ -59,6 +64,10 @@ public class MyPage extends AppCompatActivity {
                         name_TextView.setText(result.getName()); // <- 이런식으로 구현 / spinner 아직
                         area_TextView.setText(result.getArea());
                         age_TextView.setText(result.getAge());
+                        First_main.setPrompt(result.getFirst_main()); // spinner 손봐야됨
+
+
+
 
                     } else {
                         Toast.makeText(MyPage.this, result.getError(), Toast.LENGTH_SHORT).show();
@@ -79,6 +88,7 @@ public class MyPage extends AppCompatActivity {
                 Toast.makeText(MyPage.this, "서버통신 취소", Toast.LENGTH_SHORT).show();
             }
         });
+        datarecivetask.execute(myld,path,"내 아이디", "경로");
 
     }
 }

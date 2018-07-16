@@ -8,24 +8,23 @@
     >
 
     <TextView
-        android:id="@+id/first"
+        android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="버전정보"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        />
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="버전정보"
+        android:textSize="20sp" />
     <TextView
-        android:id="@+id/second"
+        android:id="@+id/accessterms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="이용약관"
         android:textSize="20sp"
         android:gravity="center"
-        android:layout_below="@id/first"
+        android:layout_below="@id/version"
         />
     <TextView
         android:id="@+id/third"
@@ -35,7 +34,7 @@
         android:text="Q / A"
         android:textSize="20sp"
         android:gravity="center"
-        android:layout_below="@id/second"
+        android:layout_below="@id/accessterms"
         />
     <TextView
         android:id="@+id/four"
