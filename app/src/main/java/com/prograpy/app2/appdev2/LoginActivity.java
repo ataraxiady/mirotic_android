@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -11,7 +12,9 @@ import android.widget.Toast;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
+import com.prograpy.app2.appdev2.main.SubActivity;
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
+import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -48,6 +51,17 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         kakao = (Button) findViewById(R.id.btnKakao);
+        test = (Button) findViewById(R.id.btnPass);
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferenceData.setKeyUserId("test_naver");
+                Intent k = new Intent(LoginActivity.this, SubActivity.class);
+                startActivity(k);
+                finish();
+            }
+        });
 
         kakao.setOnClickListener(new View.OnClickListener() {
             @Override
