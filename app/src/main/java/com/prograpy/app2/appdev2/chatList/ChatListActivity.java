@@ -77,6 +77,7 @@ public class ChatListActivity extends AppCompatActivity{
 
                         userDataList = result.getMatchUsers();
 
+                        chatRecyclerViewAdapter.setUserData(userDataList);
                         chatRecyclerViewAdapter.notifyDataSetChanged();
 
                     }else{
