@@ -6,33 +6,33 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
-import com.prograpy.app2.appdev2.network.response.result.MainMatchingResult;
+import com.prograpy.app2.appdev2.network.response.result.MatchResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResult> {
+public class MatchListTask extends AsyncTask<String,Integer, MatchResult> {
 
     private TaskResultHandler handler;
 
     public interface TaskResultHandler {
-        public void onSuccesTask(MainMatchingResult result);
+        public void onSuccessTask(MatchResult result);
 
         public void onFailTask();
 
         public void onCancelTask();
     }
 
-    public MainMatchingTask(TaskResultHandler handler) {
+    public MatchListTask(TaskResultHandler handler) {
         this.handler = handler;
     }
 
     @Override
-    protected MainMatchingResult doInBackground(String... strings) {
+    protected MatchResult doInBackground(String... strings) {
         String path = strings[0];
         String myId = strings[1];
 
-        MainMatchingResult result = null;
+        MatchResult result = null;
 
         Map<String, Object> params = new HashMap<>();
 
@@ -45,7 +45,7 @@ public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResu
             Log.d("http", "str >" + str);
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, MainMatchingResult.class);
+            result = gson.fromJson(str, MatchResult.class);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -56,11 +56,11 @@ public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResu
         return result;
     }
 
-    protected void onPostExecute(MainMatchingResult result) {
+    protected void onPostExecute(MatchResult result) {
         super.onPostExecute(result);
 
         if (result != null) {
-            handler.onSuccesTask(result);
+            handler.onSuccessTask(result);
         } else {
             handler.onCancelTask();
         }

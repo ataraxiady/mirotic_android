@@ -208,6 +208,8 @@ public class ProfileActivity extends AppCompatActivity {
                             // 서버에서 파싱한 데이터중 성공여부에 대한 데이터가 성공일때만 화면이동
                             if (result.isSuccess()) {
 
+                                PreferenceData.setKeyUserId(nick +"_naver");
+
                                 Intent i = new Intent(ProfileActivity.this, SubActivity.class);
                                 startActivity(i);
                                 finish();
@@ -236,13 +238,12 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
-                PreferenceData.setKeyUserId(nick +"_naver");
 
                 // execute 함수를 호출하는 순간 task의 내용들이 실행된다
                 // execute 함수 안에 넘겨주는 파라미터 값들은 doinBackground에서 strings.... 에 들어가는 내용들
                 joinTask.execute(ApiValue.API_JOIN, nick, gender, "0", area, picData,
                         bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2,
-                        sh_number_3, PreferenceData.getKeyUserId(), "test", "1234", PreferenceData.getKeyFcmToken());
+                        sh_number_3, nick +"_naver", "test", "1234", PreferenceData.getKeyFcmToken());
 
             }
         });

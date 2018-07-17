@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void run(boolean success) {
             if (success) {
-                final String accessToken = mOAuthLoginModule.getAccessToken(mContext);
+                String accessToken = mOAuthLoginModule.getAccessToken(mContext);
 
                 String refreshToken = mOAuthLoginModule.getRefreshToken(mContext);
                 long expiresAt = mOAuthLoginModule.getExpiresAt(mContext);
@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferenceData.setKeyUserId("test_naver");
                 Intent k = new Intent(LoginActivity.this, SubActivity.class);
                 startActivity(k);
                 finish();
@@ -87,6 +86,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        if(PreferenceData.getKeyUserId().isEmpty()){
+            test.setVisibility(View.GONE);
+            kakao.setVisibility(View.VISIBLE);
+        }else{
+            test.setVisibility(View.VISIBLE);
+            kakao.setVisibility(View.GONE);
+        }
+
+
         // 네이버 아이디 로그인을 요청하는 코드
         authLoginButton = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
         mOAuthLoginModule = OAuthLogin.getInstance();
@@ -97,14 +106,6 @@ public class LoginActivity extends AppCompatActivity {
                 ,"MeYou"
 
         );
-        /*
-        if (mOAuthLoginModule.getAccessToken(this) != null) {
-            startActivity(new Intent(this,LoginActivity.class));
-        } else {
-            authLoginButton.setOAuthLoginHandler(mOAuthLoginHandler);
-        }
-        */
-
     }
 
 }

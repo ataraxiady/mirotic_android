@@ -16,4 +16,6 @@ public class ApiValue {
 
     public static final String API_SEND_MSG = "/sendMessage";
 
+    public static final String API_GET_MATCH_LIST = "/getMatchList";
+
 }

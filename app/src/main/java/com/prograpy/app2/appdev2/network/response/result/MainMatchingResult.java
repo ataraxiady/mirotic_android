@@ -5,7 +5,7 @@ import com.prograpy.app2.appdev2.network.response.data.UserData;
 
 import java.util.ArrayList;
 
-public class MatchingResult {
+public class MainMatchingResult {
 
 
     @SerializedName("success")

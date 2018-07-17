@@ -22,7 +22,7 @@ import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
 import com.prograpy.app2.appdev2.network.response.data.UserData;
-import com.prograpy.app2.appdev2.network.response.result.MatchingResult;
+import com.prograpy.app2.appdev2.network.response.result.MainMatchingResult;
 import com.prograpy.app2.appdev2.profile.MyPage;
 import com.prograpy.app2.appdev2.task.MainMatchingTask;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
@@ -54,6 +54,62 @@ public class SubActivity extends AppCompatActivity {
 
     private NetworkProgressDialog dialog;
 
+
+    private View.OnClickListener likeDisLikeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (index < 5) {
+                likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
+                    @Override
+                    public void onSuccesTask(LikeDislikeResult result) {
+                        dialog.dismiss();
+
+                        if(result.isSuccess()){
+                            index++;
+
+                            if(index < 5){
+                                viewPager.setCurrentItem(index);
+                            }else{
+                                Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+                                viewPager.setVisibility(View.GONE);
+                                textView = (TextView) findViewById(R.id.textView);
+                                textView.setVisibility(View.VISIBLE);
+                            }
+
+                        }
+
+                        //서버에게 '싫어요'한 사람 전송해야함. 상대방 닉네임 받아오기
+                    }
+
+                    @Override
+                    public void onFailTask() {
+                        dialog.dismiss();
+
+                        Toast.makeText(SubActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelTask() {
+                        dialog.dismiss();
+                    }
+
+                });
+
+                dialog.show();
+
+                likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), userDataList.get(index).getKakaoKey(),
+                        v.getId() == R.id.btn_dislike ? "F" : "T");
+
+            } else {
+                Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+                viewPager.setVisibility(View.GONE);
+                textView = (TextView) findViewById(R.id.textView);
+                textView.setVisibility(View.VISIBLE);
+            }
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,116 +137,10 @@ public class SubActivity extends AppCompatActivity {
         });
 
         dislikeButton = (Button) findViewById(R.id.btn_dislike);
-        dislikeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (index < 5) {
-                    likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
-                        @Override
-                        public void onSuccesTask(LikeDislikeResult result) {
-                            dialog.dismiss();
-
-
-                            if(result.isSuccess()){
-                                index++;
-
-                                if(index < 5){
-                                    viewPager.setCurrentItem(index);
-                                }else{
-                                    Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
-                                    viewPager.setVisibility(View.GONE);
-                                    textView = (TextView) findViewById(R.id.textView);
-                                    textView.setVisibility(View.VISIBLE);
-                                }
-
-                            }
-
-                            //서버에게 '싫어요'한 사람 전송해야함. 상대방 닉네임 받아오기
-                        }
-
-                        @Override
-                        public void onFailTask() {
-                            dialog.dismiss();
-
-                            Toast.makeText(SubActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelTask() {
-                            dialog.dismiss();
-                        }
-
-                    });
-
-                    dialog.show();
-
-                    likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), "상대방 아이디", "F");
-
-                } else {
-                    Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
-                    viewPager.setVisibility(View.GONE);
-                    textView = (TextView) findViewById(R.id.textView);
-                    textView.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
+        dislikeButton.setOnClickListener(likeDisLikeListener);
 
         likeButton = (Button) findViewById(R.id.btn_like);
-        likeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (index < 5) {
-                    likeDislikeButtonTask = new LikeDislikeButtonTask(new LikeDislikeButtonTask.LikeDislikeResultHandler() {
-                        @Override
-                        public void onSuccesTask(LikeDislikeResult result) {
-                            dialog.dismiss();
-
-                            if(result.isSuccess()){
-                                index++;
-
-                                if(index < 5){
-                                    viewPager.setCurrentItem(index);
-                                }else{
-                                    Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
-                                    viewPager.setVisibility(View.GONE);
-                                    textView = (TextView) findViewById(R.id.textView);
-                                    textView.setVisibility(View.VISIBLE);
-                                }
-
-                            }
-
-                            //서버에게 '좋아요'한 사람 전송. '좋아요'를 받은사람에게 알림이 가게 해야함.
-                            //상대방 닉네임 받아오기.
-                        }
-
-                        @Override
-                        public void onFailTask() {
-                            dialog.dismiss();
-                            Toast.makeText(SubActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelTask() {
-                            dialog.dismiss();
-
-                        }
-
-                    });
-
-                    dialog.show();
-
-                    likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), "상대방 아이디", "T");
-
-                } else {
-                    Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
-                    viewPager.setVisibility(View.GONE);
-                    textView = (TextView) findViewById(R.id.textView);
-                    textView.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
+        likeButton.setOnClickListener(likeDisLikeListener);
 
         viewPager = (MainCustomViewPager) findViewById(R.id.main_pager);
 
@@ -240,7 +190,7 @@ public class SubActivity extends AppCompatActivity {
 
         fragmentTask = new MainMatchingTask(new MainMatchingTask.TaskResultHandler() {
             @Override
-            public void onSuccesTask(MatchingResult result) {
+            public void onSuccesTask(MainMatchingResult result) {
                 dialog.dismiss();
 
                 if (result.isSuccess()) {
