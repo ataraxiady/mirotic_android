@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
-import com.prograpy.app2.appdev2.network.response.result.DataReceiveResult;
+import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,20 +14,20 @@ import java.util.Map;
  * Created by User on 2018-07-11.
  */
 
-public class DataReceiveTask extends AsyncTask<String, Integer, DataReceiveResult>
+public class GetMyInfoTask extends AsyncTask<String, Integer, MyInfoResult>
 {
 
-    private  DataReceiveTaskHandler handler;
+    private  TaskResultHandler handler;
 
-    public interface DataReceiveTaskHandler{
-        public void onSuccesTask(DataReceiveResult result);
+    public interface TaskResultHandler{
+        public void onSuccesTask(MyInfoResult result);
 
         public void onFailTask();
 
         public void onCancelTask();
     }
 
-    public DataReceiveTask(DataReceiveTaskHandler handler)
+    public GetMyInfoTask(TaskResultHandler handler)
     {
         this.handler = handler;
     }
@@ -38,12 +38,12 @@ public class DataReceiveTask extends AsyncTask<String, Integer, DataReceiveResul
     }
 
     @Override
-    protected DataReceiveResult doInBackground(String... strings) {
+    protected MyInfoResult doInBackground(String... strings) {
 
         String path = strings[0];
         String myId = strings[1];
 
-        DataReceiveResult result = null;
+        MyInfoResult result = null;
 
         Map<String, Object> params = new HashMap<>();
 
@@ -57,7 +57,7 @@ public class DataReceiveTask extends AsyncTask<String, Integer, DataReceiveResul
 
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, DataReceiveResult.class);
+            result = gson.fromJson(str, MyInfoResult.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class DataReceiveTask extends AsyncTask<String, Integer, DataReceiveResul
     }
 
     @Override
-    protected void onPostExecute(DataReceiveResult result) {
+    protected void onPostExecute(MyInfoResult result) {
         super.onPostExecute(result);
 
         if(result != null){

@@ -11,9 +11,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.network.response.result.DataReceiveResult;
-import com.prograpy.app2.appdev2.task.DataReceiveTask;
+import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
+import com.prograpy.app2.appdev2.task.GetMyInfoTask;
+import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 public class MyPage extends AppCompatActivity {
 
@@ -21,24 +24,23 @@ public class MyPage extends AppCompatActivity {
     private Spinner First_main, First_sub, Second_main, Second_sub, Third_main, Third_sub;
     private ImageView profileImage;
     private String name,gender,area;
-    private String myld = "";
-    private String path = "";
     int age;
 
-    DataReceiveTask datarecivetask;
+    GetMyInfoTask datarecivetask;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage);
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
+
+        profileImage = (ImageView)findViewById(R.id.imageView);
 
         /**
          *   프로필 이미지 원형모양으로 변경
          */
-        imageView.setBackground(new ShapeDrawable(new OvalShape()));
+        profileImage.setBackground(new ShapeDrawable(new OvalShape()));
         if(Build.VERSION.SDK_INT >= 21){
-            imageView.setClipToOutline(true);
+            profileImage.setClipToOutline(true);
         }
 
         name_TextView = findViewById(R.id.profile_name);
@@ -55,27 +57,28 @@ public class MyPage extends AppCompatActivity {
         /**
          *   서버로부터 데이터를 입력받음
          */
-        datarecivetask = new DataReceiveTask(new DataReceiveTask.DataReceiveTaskHandler() {
+        datarecivetask = new GetMyInfoTask(new GetMyInfoTask.TaskResultHandler() {
             @Override
-            public void onSuccesTask(DataReceiveResult result) {
+            public void onSuccesTask(MyInfoResult result) {
 
-                if (result != null) {
-                    if (result.isSuccess()) {
-                        name_TextView.setText(result.getName()); // <- 이런식으로 구현 / spinner 아직
-                        area_TextView.setText(result.getArea());
-                        age_TextView.setText(result.getAge());
-                        First_main.setPrompt(result.getFirst_main()); // spinner 손봐야됨
+                if (result.isSuccess()) {
+
+                    if(result.getUserInfos() != null && result.getUserInfos().size() > 0){
 
 
+                        Glide.with(MyPage.this).load(result.getUserInfos().get(0).getProfileimage()).into(profileImage);
 
-
-                    } else {
-                        Toast.makeText(MyPage.this, result.getError(), Toast.LENGTH_SHORT).show();
+                        name_TextView.setText(result.getUserInfos().get(0).getName()); // <- 이런식으로 구현 / spinner 아직
+                        area_TextView.setText(result.getUserInfos().get(0).getArea());
+                        age_TextView.setText(result.getUserInfos().get(0).getAge());
+//                        First_main.setPrompt(result.getUserInfos().get(0).getBh_number_1()); // spinner 손봐야됨
                     }
 
+
                 } else {
-                    Toast.makeText(MyPage.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyPage.this, result.getError(), Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
@@ -88,7 +91,8 @@ public class MyPage extends AppCompatActivity {
                 Toast.makeText(MyPage.this, "서버통신 취소", Toast.LENGTH_SHORT).show();
             }
         });
-        datarecivetask.execute(myld,path,"내 아이디", "경로");
+
+        datarecivetask.execute(ApiValue.APT_GET_MY_INFO, PreferenceData.getKeyUserId());
 
     }
 }
