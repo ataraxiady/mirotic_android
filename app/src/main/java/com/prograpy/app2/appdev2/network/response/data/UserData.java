@@ -46,6 +46,8 @@ public class UserData {
     @SerializedName("sh_number_3")
     private int sh_number_3=0;
 
+    @SerializedName("fcmKey")
+    private String fcmKey="";
 
     public String getID() {
         return ID;
@@ -157,5 +159,13 @@ public class UserData {
 
     public void setSh_number_3(int sh_number_3) {
         this.sh_number_3 = sh_number_3;
+    }
+
+    public String getFcmKey() {
+        return fcmKey;
+    }
+
+    public void setFcmKey(String fcmKey) {
+        this.fcmKey = fcmKey;
     }
 }
