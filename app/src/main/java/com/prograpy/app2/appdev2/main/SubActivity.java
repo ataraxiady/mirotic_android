@@ -267,7 +267,7 @@ public class SubActivity extends AppCompatActivity {
         });
 
         dialog.show();
-        fragmentTask.execute(ApiValue.APT_GET_MATCHING_INFO, "내 아이디");
+        fragmentTask.execute(ApiValue.APT_GET_MATCHING_INFO, PreferenceData.getKeyUserId());
 
     }
 
