@@ -46,6 +46,8 @@ public class ChatMainActivity extends AppCompatActivity {
     private String msg = "";
     private String fileName = "";
 
+    private String matchId ="";
+
     private int msgType = 0;
 
 
@@ -67,8 +69,9 @@ public class ChatMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
 
+        matchId = getIntent().getStringExtra("matchId");
 
-        fileName = PreferenceData.getKeyUserId() + "_" + getIntent().getStringExtra("matchId") + "_chat";
+        fileName = PreferenceData.getKeyUserId() + "_" + matchId + "_chat";
 
         fileUtils = new FileUtils(this);
 
@@ -85,6 +88,8 @@ public class ChatMainActivity extends AppCompatActivity {
                     chatList.add(chatData);
                 }
             }
+        }else{
+            fileUtils.createFile(fileName);
         }
 
         chatMainAdapter = new ChatMainAdapter();
@@ -205,7 +210,7 @@ public class ChatMainActivity extends AppCompatActivity {
         });
 
 
-        sendMsgTask.execute(ApiValue.API_SEND_MSG, "ㅎㅎㅎ_naver", "공유_naver", msg, format.format(date));
+        sendMsgTask.execute(ApiValue.API_SEND_MSG, PreferenceData.getKeyUserId(), matchId, msg, format.format(date));
     }
 
 }

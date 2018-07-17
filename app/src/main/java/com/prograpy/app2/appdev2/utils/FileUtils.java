@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FileUtils {
@@ -36,6 +37,15 @@ public class FileUtils {
 
     public boolean isFileExists(String fileName){
         return new File(context.getFilesDir() + FOLDER_NAME,fileName +".txt").exists();
+    }
+
+
+    public void createFile(String fileName){
+        try {
+            new File(context.getFilesDir() + FOLDER_NAME,fileName +".txt").createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void writeFileText(String fileName, String writeText){
