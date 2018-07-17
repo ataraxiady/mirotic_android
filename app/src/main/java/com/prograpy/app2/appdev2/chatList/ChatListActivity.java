@@ -37,7 +37,10 @@ public class ChatListActivity extends AppCompatActivity{
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
+            MatchUserData data = (MatchUserData) view.getTag();
             Intent intent = new Intent(ChatListActivity.this, ChatMainActivity.class);
+            intent.putExtra("matchId", data.getMatchId());
             startActivity(intent);
         }
     };
