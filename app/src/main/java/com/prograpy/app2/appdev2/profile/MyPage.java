@@ -63,7 +63,7 @@ public class MyPage extends AppCompatActivity {
 
                         name_TextView.setText(result.getUserInfos().get(0).getName()); // <- 이런식으로 구현 / spinner 아직
                         area_TextView.setText(result.getUserInfos().get(0).getArea());
-                        age_TextView.setText(result.getUserInfos().get(0).getAge());
+                        age_TextView.setText("("+result.getUserInfos().get(0).getAge()+")");
 //                        First_main.setPrompt(result.getUserInfos().get(0).getBh_number_1()); // spinner 손봐야됨
                     }
 
