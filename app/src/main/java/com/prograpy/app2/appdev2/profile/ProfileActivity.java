@@ -98,10 +98,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         center_image = (ImageView) findViewById(R.id.center_image);
-        center_image.setBackground(new ShapeDrawable(new OvalShape()));
-        if(Build.VERSION.SDK_INT >= 21){
-            center_image.setClipToOutline(true);
-        }
 
         networkProgressDialog = new NetworkProgressDialog(this);
 

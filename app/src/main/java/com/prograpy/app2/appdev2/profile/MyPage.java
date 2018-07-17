@@ -35,13 +35,6 @@ public class MyPage extends AppCompatActivity {
 
         profileImage = (ImageView)findViewById(R.id.imageView);
 
-        /**
-         *   프로필 이미지 원형모양으로 변경
-         */
-        profileImage.setBackground(new ShapeDrawable(new OvalShape()));
-        if(Build.VERSION.SDK_INT >= 21){
-            profileImage.setClipToOutline(true);
-        }
 
         name_TextView = findViewById(R.id.profile_name);
         area_TextView = findViewById(R.id.profile_area);
