@@ -1,11 +1,12 @@
-package com.prograpy.app2.appdev2.network.response;
+package com.prograpy.app2.appdev2.network.response.result;
 
 import com.google.gson.annotations.SerializedName;
-import com.prograpy.app2.appdev2.network.response.data.Fragment;
+import com.prograpy.app2.appdev2.network.response.data.UserData;
 
 import java.util.ArrayList;
 
-public class FragmentResult {
+public class MainMatchingResult {
+
 
     @SerializedName("success")
     private boolean success = false;
@@ -14,7 +15,8 @@ public class FragmentResult {
     private String msg = "";
 
     @SerializedName("userInfos")
-    private ArrayList<Fragment> infoList = null;
+    private ArrayList<UserData> userInfos = new ArrayList<UserData>();
+
 
     public boolean isSuccess() {
         return success;
@@ -32,11 +34,11 @@ public class FragmentResult {
         this.msg = msg;
     }
 
-    public ArrayList<Fragment> getInfoList() {
-        return infoList;
+    public ArrayList<UserData> getUserInfos() {
+        return userInfos;
     }
 
-    public void setInfoList(ArrayList<Fragment> infoList) {
-        this.infoList = infoList;
+    public void setUserInfos(ArrayList<UserData> userInfos) {
+        this.userInfos = userInfos;
     }
 }

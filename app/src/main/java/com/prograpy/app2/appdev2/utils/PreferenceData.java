@@ -19,6 +19,7 @@ public class PreferenceData
     private static final String KEY_USER_PW       = "user_pw";
     private static final String KEY_AUTO_LOGIN       = "auto_login";
     private static final String KEY_LOGIN_SUCCESS       = "login_success";
+    private static final String KEY_FCM_TOKEN       = "fcm_token";
 
     private static SharedPreferences mPreferences; // Preference 객체
     private static Editor            mEditor; // Preference에 값을 수정하는 editor 객체
@@ -165,5 +166,26 @@ public class PreferenceData
         }
 
         return isLogin;
+    }
+
+
+
+    public static void setKeyFcmToken(String token){
+
+        if(mEditor != null){
+            mEditor.putString(KEY_FCM_TOKEN, token);
+            mEditor.commit();
+        }
+    }
+
+
+    public static String getKeyFcmToken(){
+        String token = "";
+
+        if(mPreferences != null){
+            token = mPreferences.getString(KEY_FCM_TOKEN, token);
+        }
+
+        return token;
     }
 }

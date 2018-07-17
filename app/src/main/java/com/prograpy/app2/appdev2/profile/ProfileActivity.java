@@ -11,6 +11,8 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -97,10 +99,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         center_image = (ImageView) findViewById(R.id.center_image);
-        center_image.setBackground(new ShapeDrawable(new OvalShape()));
-        if(Build.VERSION.SDK_INT >= 21){
-            center_image.setClipToOutline(true);
-        }
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
@@ -211,9 +209,11 @@ public class ProfileActivity extends AppCompatActivity {
                             // 서버에서 파싱한 데이터중 성공여부에 대한 데이터가 성공일때만 화면이동
                             if (result.isSuccess()) {
 
+                                PreferenceData.setKeyUserId(nick +"_naver");
+
                                 Intent i = new Intent(ProfileActivity.this, SubActivity.class);
                                 startActivity(i);
-                                finish();
+                                ActivityCompat.finishAffinity(ProfileActivity.this);
 
                             } else {
                                 Toast.makeText(ProfileActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
@@ -239,12 +239,12 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
-                PreferenceData.setKeyUserId(nick +"_naver");
 
                 // execute 함수를 호출하는 순간 task의 내용들이 실행된다
                 // execute 함수 안에 넘겨주는 파라미터 값들은 doinBackground에서 strings.... 에 들어가는 내용들
                 joinTask.execute(ApiValue.API_JOIN, nick, gender, "0", area, picData,
-                        bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2, sh_number_3, PreferenceData.getKeyUserId(), "test", "1234");
+                        bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2,
+                        sh_number_3, nick +"_naver", "test", "1234", PreferenceData.getKeyFcmToken());
 
             }
         });
@@ -447,6 +447,7 @@ public class ProfileActivity extends AppCompatActivity {
         // 앨범 호출
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_ALBUM);
     }
 
