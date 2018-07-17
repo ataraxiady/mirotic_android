@@ -3,6 +3,8 @@ package com.prograpy.app2.appdev2.chat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -10,13 +12,16 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.data.ChatData;
 import com.prograpy.app2.appdev2.network.response.result.SendResult;
 import com.prograpy.app2.appdev2.task.SendMsgTask;
+import com.prograpy.app2.appdev2.utils.FileUtils;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 import java.text.SimpleDateFormat;
@@ -29,14 +34,19 @@ import java.util.Date;
 
 public class ChatMainActivity extends AppCompatActivity {
 
-    private ArrayList<String> subjectList;
-    private ArrayAdapter<String> adapter;
-    private ChatDataManager chatDataManager;
+    private ArrayList<ChatData> chatList = new ArrayList<ChatData>();
+
+    private RecyclerView chatListView;
+    private ChatMainAdapter chatMainAdapter;
+
+    private FileUtils fileUtils ;
+
     private Button btnSend;
     private EditText edInputMsg;
     private String msg = "";
-    private String sendTime = "";
-    private int i;
+    private String fileName = "";
+
+    private int msgType = 0;
 
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -57,15 +67,38 @@ public class ChatMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
 
-        chatDataManager = new ChatDataManager();
 
-        subjectList = chatDataManager.getSubjectList();
+        fileName = PreferenceData.getKeyUserId() + "_" + getIntent().getStringExtra("matchId") + "_chat";
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, subjectList);
+        fileUtils = new FileUtils(this);
 
-        ListView listView = (ListView) findViewById(R.id.chatListView);
-        listView.setAdapter(adapter);
-        listView.setItemsCanFocus(false);
+        if(fileUtils.isFileExists(fileName)){
+            ArrayList<String> fileStrList = fileUtils.loadItemsFromFile(fileName);
+
+            if(fileStrList != null && fileStrList.size() > 0){
+                for (String str : fileStrList){
+                    ChatData chatData = new ChatData();
+                    chatData.setChatMsg(str.split(",")[0]);
+                    chatData.setChatTime(str.split(",")[1]);
+                    chatData.setChatType(Integer.parseInt(str.split(",")[2]));
+
+                    chatList.add(chatData);
+                }
+            }
+        }
+
+        chatMainAdapter = new ChatMainAdapter();
+
+        chatListView = (RecyclerView) findViewById(R.id.chatListView);
+
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        chatListView.setLayoutManager(manager);
+        chatListView.setAdapter(chatMainAdapter);
+
+        chatMainAdapter.setChatLists(chatList);
+        chatMainAdapter.notifyDataSetChanged();
 
         edInputMsg = (EditText) findViewById(R.id.editText);
 
@@ -90,6 +123,7 @@ public class ChatMainActivity extends AppCompatActivity {
         });
 
 
+
         btnSend = (Button) findViewById(R.id.sendBtn);
         btnSend.setOnClickListener(listener);
     }
@@ -103,36 +137,57 @@ public class ChatMainActivity extends AppCompatActivity {
         if(intent.getStringExtra("msg") != null &&
                 !intent.getStringExtra("msg").isEmpty()){
 
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
             msg = intent.getStringExtra("msg");
+            msgType = 1;
 
-            Log.d("onResume", msg);
+            ChatData chatData = new ChatData();
+            chatData.setChatMsg(msg);
+            chatData.setChatTime(format.format(date));
+            chatData.setChatType(msgType);
+            chatList.add(chatData);
 
-            chatDataManager.addData(msg);
+            String fileText = msg + "," + format.format(date) + "," + msgType;
+            fileUtils.writeFileText(fileName, fileText);
+
         }
 
-        adapter.notifyDataSetChanged();
+        chatMainAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        adapter.notifyDataSetChanged();
+        chatMainAdapter.notifyDataSetChanged();
     }
 
     private void sendTask(){
 
         long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        final Date date = new Date(now);
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
         SendMsgTask sendMsgTask = new SendMsgTask(new SendMsgTask.TaskResultHandler() {
             @Override
             public void onSuccessTask(SendResult result) {
 
                 if(result.isSuccess()){
-                    chatDataManager.addData(msg);
-                    adapter.notifyDataSetChanged();
+
+                    ChatData chatData = new ChatData();
+                    chatData.setChatMsg(msg);
+                    chatData.setChatTime(format.format(date));
+                    chatData.setChatType(msgType);
+                    chatList.add(chatData);
+
+                    String fileText = msg + "," + format.format(date) + "," + msgType;
+                    fileUtils.writeFileText(fileName, fileText);
+
+
+                    chatMainAdapter.notifyDataSetChanged();
                 }else{
                     Toast.makeText(ChatMainActivity.this, result.getMsg(), Toast.LENGTH_SHORT).show();
                 }
