@@ -98,7 +98,7 @@ public class JoinTask extends AsyncTask<String, Integer, JoinResult> {
         String kakaoKey = strings[12];
         String id = strings[13];
         String password = strings[14];
-        String fcmKey = strings[14];
+        String fcmKey = strings[15];
 
 
         // 현재 task의 return 값이 JoinResult 클래스이므로 결과를 반환해줄 객체를 만든다
