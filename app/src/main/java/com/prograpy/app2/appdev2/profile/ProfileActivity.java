@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -212,7 +213,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 Intent i = new Intent(ProfileActivity.this, SubActivity.class);
                                 startActivity(i);
-                                finish();
+                                ActivityCompat.finishAffinity(ProfileActivity.this);
 
                             } else {
                                 Toast.makeText(ProfileActivity.this, result.getError(), Toast.LENGTH_SHORT).show();

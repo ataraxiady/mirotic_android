@@ -68,12 +68,19 @@ public class SubActivity extends AppCompatActivity {
                             index++;
 
                             if(index < 5){
+
+                                likeButton.setEnabled(true);
+                                dislikeButton.setEnabled(true);
+
                                 viewPager.setCurrentItem(index);
                             }else{
                                 Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
                                 viewPager.setVisibility(View.GONE);
                                 textView = (TextView) findViewById(R.id.textView);
                                 textView.setVisibility(View.VISIBLE);
+
+                                likeButton.setEnabled(false);
+                                dislikeButton.setEnabled(false);
                             }
 
                         }
@@ -196,9 +203,31 @@ public class SubActivity extends AppCompatActivity {
                 if (result.isSuccess()) {
 
                     if (result.getUserInfos() != null && result.getUserInfos().size() > 0) {
+                        likeButton.setEnabled(true);
+                        dislikeButton.setEnabled(true);
+
                         userDataList = result.getUserInfos();
+
+                    }else{
+                        index = 6;
+                        viewPager.setVisibility(View.GONE);
+                        textView = (TextView) findViewById(R.id.textView);
+                        textView.setVisibility(View.VISIBLE);
+
+                        likeButton.setEnabled(false);
+                        dislikeButton.setEnabled(false);
                     }
+
+                }else{
+                    index = 6;
+                    viewPager.setVisibility(View.GONE);
+                    textView = (TextView) findViewById(R.id.textView);
+                    textView.setVisibility(View.VISIBLE);
+
+                    likeButton.setEnabled(false);
+                    dislikeButton.setEnabled(false);
                 }
+
                 adapter.notifyDataSetChanged();
             }
 
