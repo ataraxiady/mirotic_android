@@ -1,8 +1,10 @@
 package com.prograpy.app2.appdev2;
 
+import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
@@ -13,7 +15,10 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.prograpy.app2.appdev2.chat.ChatMainActivity;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
+
+import java.util.List;
 
 public class FireBaseMessagingService extends FirebaseMessagingService {
 
@@ -28,55 +33,39 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         PreferenceData.setKeyFcmToken(s);
     }
 
-    /**
-     * Called when message is received.
-     *
-     * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
-     */
-    // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        // TODO(developer): Handle FCM messages here.
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
-        // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+        }
 
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-            } else {
-                // Handle message within 10 seconds
-                handleNow();
+        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        List< ActivityManager.RunningTaskInfo > taskInfo = activityManager.getRunningTasks(1);
+
+        Log.d( "CURRENT Activity ",  taskInfo.get(0).topActivity.getShortClassName());
+
+
+        if(taskInfo.get(0).topActivity.getShortClassName().contains("ChatMainActivity")){
+
+            Intent intent = new Intent(this, ChatMainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("msg", remoteMessage.getNotification().getBody());
+            startActivity(intent);
+
+        }else{
+
+            if (remoteMessage.getNotification() != null) {
+                Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+                sendNotification(remoteMessage.getNotification().getBody());
             }
 
         }
 
-        // Check if message contains a notification payload.
-        if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage.getNotification().getBody());
-        }
-
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
-    }
-    // [END receive_message]
-
-    /**
-     * Handle time allotted to BroadcastReceivers.
-     */
-    private void handleNow() {
-        Log.d(TAG, "Short lived task is done.");
     }
 
-    /**
-     * Create and show a simple notification containing the received FCM message.
-     *
-     * @param messageBody FCM message body received.
-     */
     private void sendNotification(String messageBody) {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
