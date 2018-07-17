@@ -1,4 +1,4 @@
-package com.prograpy.app2.appdev2.network.response;
+package com.prograpy.app2.appdev2.network.response.result;
 
 import com.google.gson.annotations.SerializedName;
 

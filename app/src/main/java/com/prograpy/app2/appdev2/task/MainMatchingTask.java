@@ -6,7 +6,6 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
-import com.prograpy.app2.appdev2.network.response.FragmentResult;
 import com.prograpy.app2.appdev2.network.response.result.MatchingResult;
 
 import java.util.HashMap;
