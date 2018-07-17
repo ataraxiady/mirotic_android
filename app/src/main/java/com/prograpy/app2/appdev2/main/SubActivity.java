@@ -67,7 +67,7 @@ public class SubActivity extends AppCompatActivity {
                         if(result.isSuccess()){
                             index++;
 
-                            if(index < 5){
+                            if(index < userDataList.size()){
 
                                 likeButton.setEnabled(true);
                                 dislikeButton.setEnabled(true);
