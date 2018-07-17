@@ -92,7 +92,7 @@ public class MyPage extends AppCompatActivity {
             }
         });
 
-        datarecivetask.execute(ApiValue.APT_GET_MY_INFO, PreferenceData.getKeyUserId());
+        datarecivetask.execute(ApiValue.API_GET_MY_INFO, PreferenceData.getKeyUserId());
 
     }
 }

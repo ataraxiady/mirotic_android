@@ -124,7 +124,7 @@ public class SubActivity extends AppCompatActivity {
 
                     dialog.show();
 
-                    likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE, PreferenceData.getKeyUserId(), "상대방 아이디", "F");
+                    likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), "상대방 아이디", "F");
 
                 } else {
                     Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
@@ -180,7 +180,7 @@ public class SubActivity extends AppCompatActivity {
 
                     dialog.show();
 
-                    likeDislikeButtonTask.execute(ApiValue.APT_LIKEDISLIKE, PreferenceData.getKeyUserId(), "상대방 아이디", "T");
+                    likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), "상대방 아이디", "T");
 
                 } else {
                     Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
@@ -266,7 +266,7 @@ public class SubActivity extends AppCompatActivity {
         });
 
         dialog.show();
-        fragmentTask.execute(ApiValue.APT_GET_MATCHING_INFO, PreferenceData.getKeyUserId());
+        fragmentTask.execute(ApiValue.API_GET_MATCHING_INFO, PreferenceData.getKeyUserId());
 
     }
 

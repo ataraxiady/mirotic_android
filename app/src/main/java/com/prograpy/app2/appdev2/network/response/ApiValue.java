@@ -9,10 +9,11 @@ public class ApiValue {
     // 회원가입 요청
     public static final String API_JOIN = "/addUserInfo";
 
-    public static final String APT_LIKEDISLIKE = "/sendLikeInfo";
+    public static final String API_LIKEDISLIKE = "/sendLikeInfo";
 
-    public static final String APT_GET_MATCHING_INFO = "/getTestMatchingInfo";
-    public static final String APT_GET_MY_INFO = "/getMyInfo";
+    public static final String API_GET_MATCHING_INFO = "/getTestMatchingInfo";
+    public static final String API_GET_MY_INFO = "/getMyInfo";
 
+    public static final String API_SEND_MSG = "/sendMessage";
 
 }
