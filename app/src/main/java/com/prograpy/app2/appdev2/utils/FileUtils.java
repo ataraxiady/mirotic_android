@@ -60,6 +60,9 @@ public class FileUtils {
             FileOutputStream fOut = new FileOutputStream(file, true);
             OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
 
+            if(writeText.contains(System.getProperty("line.separator")))
+                writeText = writeText.replaceAll(System.getProperty("line.separator"), "&#xA");
+
             myOutWriter.append(writeText);
             myOutWriter.append("\n");
             myOutWriter.close();

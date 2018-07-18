@@ -91,6 +91,10 @@ public class ChatMainActivity extends AppCompatActivity {
                 for (String str : fileStrList){
                     String[] splitStr = str.split(",");
                     ChatData chatData = new ChatData();
+
+                    if(splitStr[0].contains("&#xA"))
+                        splitStr[0] = splitStr[0].replace("&#xA", "\n");
+
                     chatData.setChatMsg(splitStr[0]);
                     chatData.setChatTime(splitStr[1]);
                     chatData.setChatType(Integer.parseInt(splitStr[2]));
@@ -117,22 +121,6 @@ public class ChatMainActivity extends AppCompatActivity {
         chatListView.scrollToPosition(chatList.size() - 1);
 
         edInputMsg = (EditText) findViewById(R.id.editText);
-        edInputMsg.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_SEND ||
-                        actionId == EditorInfo.IME_ACTION_DONE){
-
-                    msg = edInputMsg.getText().toString();
-
-                    if(!msg.isEmpty())
-                        sendTask();
-
-                    edInputMsg.setText("");
-                }
-                return false;
-            }
-        });
         edInputMsg.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
