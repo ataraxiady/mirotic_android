@@ -28,13 +28,15 @@ import com.prograpy.app2.appdev2.task.MainMatchingTask;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by samsung on 2018-03-23.
  */
 
-public class SubActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private MainCustomViewPager viewPager;
     private ViewPagerAdapter adapter;
     private FloatingActionButton floatingActionButton, floatingActionButton2, floatingActionButton3;
@@ -74,7 +76,10 @@ public class SubActivity extends AppCompatActivity {
 
                                 viewPager.setCurrentItem(index);
                             }else{
-                                Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(MainActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+
+                                PreferenceData.setKeyTodayIntroduce(true);
+
                                 viewPager.setVisibility(View.GONE);
                                 textView = (TextView) findViewById(R.id.textView);
                                 textView.setVisibility(View.VISIBLE);
@@ -92,7 +97,7 @@ public class SubActivity extends AppCompatActivity {
                     public void onFailTask() {
                         dialog.dismiss();
 
-                        Toast.makeText(SubActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "서버통신실패", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -108,7 +113,7 @@ public class SubActivity extends AppCompatActivity {
                         v.getId() == R.id.btn_dislike ? "F" : "T");
 
             } else {
-                Toast.makeText(SubActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
                 viewPager.setVisibility(View.GONE);
                 textView = (TextView) findViewById(R.id.textView);
                 textView.setVisibility(View.VISIBLE);
@@ -122,6 +127,18 @@ public class SubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
+
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+
+        int curTime = Integer.parseInt(format.format(date).toString());
+
+        if(curTime > PreferenceData.getKeyLoginTime()){
+            PreferenceData.setKeyTodayIntroduce(false);
+        }
+
+        PreferenceData.setKeyLoginTime(curTime);
 
         dialog = new NetworkProgressDialog(this);
 
@@ -195,18 +212,31 @@ public class SubActivity extends AppCompatActivity {
             }
         });
 
-        fragmentTask = new MainMatchingTask(new MainMatchingTask.TaskResultHandler() {
-            @Override
-            public void onSuccesTask(MainMatchingResult result) {
-                dialog.dismiss();
 
-                if (result.isSuccess()) {
+        if(!PreferenceData.getKeyTodayIntroduce()){
 
-                    if (result.getUserInfos() != null && result.getUserInfos().size() > 0) {
-                        likeButton.setEnabled(true);
-                        dislikeButton.setEnabled(true);
+            fragmentTask = new MainMatchingTask(new MainMatchingTask.TaskResultHandler() {
+                @Override
+                public void onSuccesTask(MainMatchingResult result) {
+                    dialog.dismiss();
 
-                        userDataList = result.getUserInfos();
+                    if (result.isSuccess()) {
+
+                        if (result.getUserInfos() != null && result.getUserInfos().size() > 0) {
+                            likeButton.setEnabled(true);
+                            dislikeButton.setEnabled(true);
+
+                            userDataList = result.getUserInfos();
+
+                        }else{
+                            index = 6;
+                            viewPager.setVisibility(View.GONE);
+                            textView = (TextView) findViewById(R.id.textView);
+                            textView.setVisibility(View.VISIBLE);
+
+                            likeButton.setEnabled(false);
+                            dislikeButton.setEnabled(false);
+                        }
 
                     }else{
                         index = 6;
@@ -218,34 +248,33 @@ public class SubActivity extends AppCompatActivity {
                         dislikeButton.setEnabled(false);
                     }
 
-                }else{
-                    index = 6;
-                    viewPager.setVisibility(View.GONE);
-                    textView = (TextView) findViewById(R.id.textView);
-                    textView.setVisibility(View.VISIBLE);
-
-                    likeButton.setEnabled(false);
-                    dislikeButton.setEnabled(false);
+                    adapter.notifyDataSetChanged();
                 }
 
-                adapter.notifyDataSetChanged();
-            }
+                @Override
+                public void onFailTask() {
+                    dialog.dismiss();
 
-            @Override
-            public void onFailTask() {
-                dialog.dismiss();
+                }
 
-            }
+                @Override
+                public void onCancelTask() {
+                    dialog.dismiss();
 
-            @Override
-            public void onCancelTask() {
-                dialog.dismiss();
+                }
+            });
 
-            }
-        });
+            dialog.show();
+            fragmentTask.execute(ApiValue.API_GET_MATCHING_INFO, PreferenceData.getKeyUserId());
+        }else{
 
-        dialog.show();
-        fragmentTask.execute(ApiValue.API_GET_MATCHING_INFO, PreferenceData.getKeyUserId());
+            viewPager.setVisibility(View.GONE);
+            textView = (TextView) findViewById(R.id.textView);
+            textView.setVisibility(View.VISIBLE);
+
+            likeButton.setEnabled(false);
+            dislikeButton.setEnabled(false);
+        }
 
     }
 

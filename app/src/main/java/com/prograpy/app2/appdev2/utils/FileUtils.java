@@ -6,9 +6,11 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class FileUtils {
@@ -36,13 +38,13 @@ public class FileUtils {
     }
 
     public boolean isFileExists(String fileName){
-        return new File(context.getFilesDir() + FOLDER_NAME,fileName +".txt").exists();
+        return new File(context.getFilesDir() +"/"+ FOLDER_NAME,fileName +".txt").exists();
     }
 
 
     public void createFile(String fileName){
         try {
-            new File(context.getFilesDir() + FOLDER_NAME,fileName +".txt").createNewFile();
+            new File(context.getFilesDir() +"/"+ FOLDER_NAME,fileName +".txt").createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,41 +52,25 @@ public class FileUtils {
 
     public void writeFileText(String fileName, String writeText){
 
-        File file = new File(context.getFilesDir() + FOLDER_NAME,fileName +".txt");
+        File file = new File(context.getFilesDir() +"/"+ FOLDER_NAME,fileName +".txt");
 
-        Log.d(TAG, "File Path > " + context.getFilesDir() + FOLDER_NAME +fileName +".txt");
-
-        FileWriter fw = null;
-
-        BufferedWriter bufwr = null;
+        Log.d(TAG, "File Path > " + file.getPath());
 
         try {
-            // open file.
-            fw = new FileWriter(file);
-            bufwr = new BufferedWriter(fw);
-            bufwr.write(writeText);
-            bufwr.newLine();
+            FileOutputStream fOut = new FileOutputStream(file, true);
+            OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
+
+            myOutWriter.append(writeText);
+            myOutWriter.append("\n");
+            myOutWriter.close();
+            fOut.close();
 
             Log.d(TAG, "File Write");
 
-            bufwr.flush();
-
         } catch (Exception e) {
             e.printStackTrace() ;
         }
 
-        try {
-            // close file.
-            if (bufwr != null) {
-                bufwr.close();
-            }
-
-            if (fw != null) {
-                fw.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace() ;
-        }
     }
 
 
@@ -92,9 +78,9 @@ public class FileUtils {
 
         ArrayList<String> items = new ArrayList<String>();
 
-        File file = new File(context.getFilesDir() + FOLDER_NAME,fileName +".txt");
+        File file = new File(context.getFilesDir() +"/"+ FOLDER_NAME,fileName +".txt");
 
-        Log.d(TAG, "File Path > " + context.getFilesDir() + FOLDER_NAME +fileName +".txt");
+        Log.d(TAG, "File Path > " + file.getPath());
 
         FileReader fr = null ;
         BufferedReader bufrd = null ;

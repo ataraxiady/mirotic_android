@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
-import com.prograpy.app2.appdev2.main.SubActivity;
+import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
@@ -72,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent k = new Intent(LoginActivity.this, SubActivity.class);
+                Intent k = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(k);
                 finish();
             }

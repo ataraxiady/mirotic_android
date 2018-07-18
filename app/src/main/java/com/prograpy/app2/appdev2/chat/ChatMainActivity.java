@@ -80,10 +80,11 @@ public class ChatMainActivity extends AppCompatActivity {
 
             if(fileStrList != null && fileStrList.size() > 0){
                 for (String str : fileStrList){
+                    String[] splitStr = str.split(",");
                     ChatData chatData = new ChatData();
-                    chatData.setChatMsg(str.split(",")[0]);
-                    chatData.setChatTime(str.split(",")[1]);
-                    chatData.setChatType(Integer.parseInt(str.split(",")[2]));
+                    chatData.setChatMsg(splitStr[0]);
+                    chatData.setChatTime(splitStr[1]);
+                    chatData.setChatType(Integer.parseInt(splitStr[2]));
 
                     chatList.add(chatData);
                 }
@@ -181,6 +182,7 @@ public class ChatMainActivity extends AppCompatActivity {
             public void onSuccessTask(SendResult result) {
 
                 if(result.isSuccess()){
+                    msgType = 0;
 
                     ChatData chatData = new ChatData();
                     chatData.setChatMsg(msg);

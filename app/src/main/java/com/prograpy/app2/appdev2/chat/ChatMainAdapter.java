@@ -52,10 +52,16 @@ public class ChatMainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        if(position % 2 == 0)
+
+        if(chatLists != null && chatLists.size() > 0){
+            if(chatLists.get(position).getChatType() == 0)
+                return MY_CHAT;
+            else
+                return MATCH_CHAT;
+        }else{
             return MY_CHAT;
-        else
-            return MATCH_CHAT;
+        }
+
     }
 
     @Override
