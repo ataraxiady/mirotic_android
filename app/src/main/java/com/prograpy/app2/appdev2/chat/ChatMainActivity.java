@@ -9,17 +9,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.data.ChatData;
-import com.prograpy.app2.appdev2.network.response.result.SendResult;
+import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.task.SendMsgTask;
 import com.prograpy.app2.appdev2.utils.FileUtils;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
@@ -179,7 +176,7 @@ public class ChatMainActivity extends AppCompatActivity {
 
         SendMsgTask sendMsgTask = new SendMsgTask(new SendMsgTask.TaskResultHandler() {
             @Override
-            public void onSuccessTask(SendResult result) {
+            public void onSuccessTask(ServerResult result) {
 
                 if(result.isSuccess()){
                     msgType = 0;

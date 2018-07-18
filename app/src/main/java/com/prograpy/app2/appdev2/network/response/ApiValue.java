@@ -18,4 +18,6 @@ public class ApiValue {
 
     public static final String API_GET_MATCH_LIST = "/getMatchList";
 
+    public static final String API_UPDATE_FCM_KEY = "/updateFcmKey";
+
 }

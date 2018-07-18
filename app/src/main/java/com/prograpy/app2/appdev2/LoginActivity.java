@@ -16,7 +16,10 @@ import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 import com.prograpy.app2.appdev2.main.MainActivity;
+import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
+import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 public class LoginActivity extends AppCompatActivity {
@@ -53,8 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this,  new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
@@ -71,6 +72,9 @@ public class LoginActivity extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                updateFcmKey();
+
                 Intent k = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(k);
                 finish();
@@ -105,6 +109,13 @@ public class LoginActivity extends AppCompatActivity {
                 ,"MeYou"
 
         );
+    }
+
+
+    private void updateFcmKey(){
+
+        UpdateFcmKeyTask updateFcmKeyTask = new UpdateFcmKeyTask(null);
+        updateFcmKeyTask.execute(ApiValue.API_UPDATE_FCM_KEY, PreferenceData.getKeyUserId(), PreferenceData.getKeyFcmToken());
     }
 
 }

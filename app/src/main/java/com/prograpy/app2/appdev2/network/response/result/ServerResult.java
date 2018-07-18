@@ -2,7 +2,7 @@ package com.prograpy.app2.appdev2.network.response.result;
 
 import com.google.gson.annotations.SerializedName;
 
-public class SendResult {
+public class ServerResult {
 
 
     @SerializedName("success")
