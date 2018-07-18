@@ -48,16 +48,23 @@
 
         <activity android:name=".chatList.ChatListActivity"
                   android:screenOrientation="portrait"/>
+
         <activity android:name=".profile.ProfileActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".main.SubActivity"
+
+        <activity android:name=".main.MainActivity"
                   android:screenOrientation="portrait"/>
+
         <activity android:name=".environment_setting.SetActivity"
                   android:screenOrientation="portrait"/>
+
         <activity android:name=".profile.MyPage"
                   android:screenOrientation="portrait"/>
+
         <activity android:name=".chat.ChatMainActivity"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustResize"/>
+
         <activity android:name=".environment_setting.SettingAppVersion" />
 
         <service

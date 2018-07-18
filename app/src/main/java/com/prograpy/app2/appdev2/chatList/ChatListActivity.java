@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.chat.ChatMainActivity;
+import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.data.MatchUserData;
 import com.prograpy.app2.appdev2.network.response.data.UserData;
@@ -31,6 +32,8 @@ public class ChatListActivity extends AppCompatActivity{
 
     private RecyclerView chatRecyclerView;
     private ChatListRecyclerViewAdapter chatRecyclerViewAdapter;
+
+    private NetworkProgressDialog dialog;
 
     private TextView emptyView;
 
@@ -55,6 +58,8 @@ public class ChatListActivity extends AppCompatActivity{
 
         emptyView = (TextView) findViewById(R.id.empty_text);
 
+        dialog = new NetworkProgressDialog(this);
+
         chatRecyclerViewAdapter = new ChatListRecyclerViewAdapter();
         chatRecyclerViewAdapter.setItemClickListener(listener);
         chatRecyclerViewAdapter.setUserData(userDataList);
@@ -67,9 +72,12 @@ public class ChatListActivity extends AppCompatActivity{
         chatRecyclerView.setAdapter(chatRecyclerViewAdapter);
 
 
+
         MatchListTask matchListTask = new MatchListTask(new MatchListTask.TaskResultHandler() {
             @Override
             public void onSuccessTask(MatchResult result) {
+
+                dialog.dismiss();
 
                 if(result.isSuccess()){
 
@@ -100,6 +108,8 @@ public class ChatListActivity extends AppCompatActivity{
 
             @Override
             public void onFailTask() {
+                dialog.dismiss();
+
                 emptyView.setVisibility(View.VISIBLE);
                 chatRecyclerView.setVisibility(View.GONE);
 
@@ -108,11 +118,14 @@ public class ChatListActivity extends AppCompatActivity{
 
             @Override
             public void onCancelTask() {
+                dialog.dismiss();
+
                 emptyView.setVisibility(View.VISIBLE);
                 chatRecyclerView.setVisibility(View.GONE);
             }
         });
 
+        dialog.show();
         matchListTask.execute(ApiValue.API_GET_MATCH_LIST, PreferenceData.getKeyUserId());
     }
 

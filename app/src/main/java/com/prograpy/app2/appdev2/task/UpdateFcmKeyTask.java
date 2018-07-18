@@ -11,7 +11,8 @@ import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SendMsgTask extends AsyncTask<String, Integer, ServerResult>{
+public class UpdateFcmKeyTask extends AsyncTask<String, Integer, ServerResult> {
+
 
     private TaskResultHandler handler;
 
@@ -23,7 +24,7 @@ public class SendMsgTask extends AsyncTask<String, Integer, ServerResult>{
         public void onCancelTask();
     }
 
-    public SendMsgTask(TaskResultHandler handler) {
+    public UpdateFcmKeyTask(TaskResultHandler handler) {
         this.handler = handler;
     }
 
@@ -36,18 +37,13 @@ public class SendMsgTask extends AsyncTask<String, Integer, ServerResult>{
     protected ServerResult doInBackground(String... strings) {
         String path = strings[0];
         String myId = strings[1];
-        String matchId = strings[2];
-        String sendMsg = strings[3];
-        String sendTime = strings[4];
+        String fcmKey = strings[2];
 
         ServerResult result = null;
 
         Map<String, Object> params = new HashMap<>();
-
         params.put("myId", myId);
-        params.put("matchId", matchId);
-        params.put("sendMsg", sendMsg);
-        params.put("sendTime", sendTime);
+        params.put("fcmKey", fcmKey);
 
         HttpRequest request = new HttpRequest();
 
@@ -67,14 +63,10 @@ public class SendMsgTask extends AsyncTask<String, Integer, ServerResult>{
         return result;
     }
 
-    @Override
-    protected void onPostExecute(ServerResult sendResult) {
-        super.onPostExecute(sendResult);
 
-        if (sendResult != null) {
-            handler.onSuccessTask(sendResult);
-        } else {
-            handler.onCancelTask();
-        }
+    @Override
+    protected void onPostExecute(ServerResult serverResult) {
+        super.onPostExecute(serverResult);
+
     }
 }

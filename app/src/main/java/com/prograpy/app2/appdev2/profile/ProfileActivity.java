@@ -5,11 +5,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -27,11 +24,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.main.SubActivity;
+import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.result.JoinResult;
+import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
+import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 import java.io.ByteArrayOutputStream;
@@ -211,7 +210,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 PreferenceData.setKeyUserId(nick +"_naver");
 
-                                Intent i = new Intent(ProfileActivity.this, SubActivity.class);
+                                updateFcmKey();
+
+                                Intent i = new Intent(ProfileActivity.this, MainActivity.class);
                                 startActivity(i);
                                 ActivityCompat.finishAffinity(ProfileActivity.this);
 
@@ -274,6 +275,14 @@ public class ProfileActivity extends AppCompatActivity {
         spinner_hobby_third1.setAdapter(hobby_third);
         spinner_hobby_third1.setOnItemSelectedListener(spinnerSelectListener);
     }
+
+
+    private void updateFcmKey(){
+
+        UpdateFcmKeyTask updateFcmKeyTask = new UpdateFcmKeyTask(null);
+        updateFcmKeyTask.execute(ApiValue.API_UPDATE_FCM_KEY, PreferenceData.getKeyUserId(), PreferenceData.getKeyFcmToken());
+    }
+
 
 
     private AdapterView.OnItemSelectedListener spinnerSelectListener = new AdapterView.OnItemSelectedListener() {

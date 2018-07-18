@@ -16,10 +16,9 @@ public class PreferenceData
      * preference 키값
      */
     private static final String KEY_USER_ID       = "user_id";
-    private static final String KEY_USER_PW       = "user_pw";
-    private static final String KEY_AUTO_LOGIN       = "auto_login";
-    private static final String KEY_LOGIN_SUCCESS       = "login_success";
     private static final String KEY_FCM_TOKEN       = "fcm_token";
+    private static final String KEY_TODAY_INTRODUCE = "today_introduce";
+    private static final String KEY_LOGIN_TIME = "login_time";
 
     private static SharedPreferences mPreferences; // Preference 객체
     private static Editor            mEditor; // Preference에 값을 수정하는 editor 객체
@@ -79,97 +78,6 @@ public class PreferenceData
         return userId;
     }
 
-
-    /**
-     * 사용자 비번 저장
-     * @param userPw
-     */
-    public static void setKeyUserPw(String userPw){
-
-        if(mEditor != null){
-            mEditor.putString(KEY_USER_PW, userPw);
-            mEditor.commit();
-        }
-    }
-
-    /**
-     * 사용자 비번 반환
-     * @return
-     */
-    public static String getKeyUserPw(){
-
-        String userPw = "";
-
-        if(mPreferences != null){
-            userPw = mPreferences.getString(KEY_USER_PW,  userPw);
-        }
-
-        return userPw;
-    }
-
-
-    /**
-     * 자동로그인 여부 저장
-     * @param isAutoLogin
-     */
-    public static void setKeyAutoLogin(boolean isAutoLogin){
-
-        if(mEditor != null){
-            mEditor.putBoolean(KEY_AUTO_LOGIN, isAutoLogin);
-            mEditor.commit();
-        }
-
-    }
-
-
-    /**
-     * 자동 로그인 여부 반환
-     * @return
-     */
-    public static boolean getKeyAutoLogin(){
-
-        boolean isAutoLogin = false;
-
-        if(mPreferences != null){
-            isAutoLogin = mPreferences.getBoolean(KEY_AUTO_LOGIN, isAutoLogin);
-        }
-
-        return isAutoLogin;
-    }
-
-
-
-    /**
-     * 로그인 여부 저장
-     * @param isLogin
-     */
-    public static void setKeyLoginSuccess(boolean isLogin){
-
-        if(mEditor != null){
-            mEditor.putBoolean(KEY_LOGIN_SUCCESS, isLogin);
-            mEditor.commit();
-        }
-
-    }
-
-
-    /**
-     * 로그인 여부 반환
-     * @return
-     */
-    public static boolean getKeyLoginSuccess(){
-
-        boolean isLogin = false;
-
-        if(mPreferences != null){
-            isLogin = mPreferences.getBoolean(KEY_LOGIN_SUCCESS, isLogin);
-        }
-
-        return isLogin;
-    }
-
-
-
     public static void setKeyFcmToken(String token){
 
         if(mEditor != null){
@@ -187,5 +95,44 @@ public class PreferenceData
         }
 
         return token;
+    }
+
+
+    public static void setKeyTodayIntroduce(boolean isOver){
+
+        if(mEditor != null){
+            mEditor.putBoolean(KEY_TODAY_INTRODUCE, isOver);
+            mEditor.commit();
+        }
+    }
+
+
+    public static boolean getKeyTodayIntroduce(){
+        boolean isOver = false;
+
+        if(mPreferences != null){
+            isOver = mPreferences.getBoolean(KEY_TODAY_INTRODUCE, isOver);
+        }
+
+        return isOver;
+    }
+
+
+    public static void setKeyLoginTime(int curTime){
+
+        if(mEditor != null){
+            mEditor.putInt(KEY_LOGIN_TIME, curTime);
+            mEditor.commit();
+        }
+    }
+
+    public static int getKeyLoginTime(){
+        int curTime = 0;
+
+        if(mPreferences != null){
+            curTime = mPreferences.getInt(KEY_LOGIN_TIME, curTime);
+        }
+
+        return curTime;
     }
 }
