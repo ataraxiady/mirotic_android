@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
                 dialog.show();
 
-                likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), userDataList.get(index).getKakaoKey(),
+                likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), userDataList.get(index).getnaverKey(),
                         v.getId() == R.id.btn_dislike ? "F" : "T");
 
             } else {
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
         String profileImage = "";
-        String kakaoKey = "";
+        String naverKey = "";
         String name = "";
         String gender = "";
         int age = 0;
@@ -303,13 +303,13 @@ public class MainActivity extends AppCompatActivity {
                 age = userDataList.get(position).getAge();
                 area = userDataList.get(position).getArea();
                 profileImage = userDataList.get(position).getProfileimage();
-                kakaoKey = userDataList.get(position).getKakaoKey();
+                naverKey = userDataList.get(position).getnaverKey();
             }
 
             //프래그먼트에 정보주기
 //                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
 
-            fragment = InfoFragment.newInstance(name, gender, age, area, profileImage, kakaoKey);
+            fragment = InfoFragment.newInstance(name, gender, age, area, profileImage, naverKey);
             return fragment;
         }
 

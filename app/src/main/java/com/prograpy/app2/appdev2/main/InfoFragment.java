@@ -22,7 +22,7 @@ public class InfoFragment extends Fragment {
     private static final String GENDER = "gender";
     private static final String AREA = "area";
     private static final String IMAGE = "profileImage";
-    private static final String KAKAO = "kakaoKey";
+    private static final String NAVER = "naverKey";
 
 
     ImageView fprofileImage;
@@ -69,7 +69,7 @@ public class InfoFragment extends Fragment {
     }
 
 
-    public static InfoFragment newInstance(String name, String gender, int age, String area, String profileImage, String kakaoKey) {
+    public static InfoFragment newInstance(String name, String gender, int age, String area, String profileImage, String naverKey) {
         InfoFragment fragment = new InfoFragment();
         Bundle bundle = new Bundle();
 
@@ -78,7 +78,7 @@ public class InfoFragment extends Fragment {
         bundle.putInt(AGE, age);
         bundle.putString(AREA, area);
         bundle.putString(IMAGE, profileImage);
-        bundle.putString(KAKAO, kakaoKey);
+        bundle.putString(NAVER, naverKey);
 
         fragment.setArguments(bundle);
 

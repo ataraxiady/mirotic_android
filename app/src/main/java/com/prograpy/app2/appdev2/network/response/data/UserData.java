@@ -10,8 +10,8 @@ public class UserData {
     @SerializedName("password")
     private String password = "";
 
-    @SerializedName("kakaoKey")
-    private String kakaoKey = "";
+    @SerializedName("naverKey")
+    private String naverKey = "";
 
     @SerializedName("name")
     private String name="";
@@ -65,12 +65,12 @@ public class UserData {
         this.password = password;
     }
 
-    public String getKakaoKey() {
-        return kakaoKey;
+    public String getnaverKey() {
+        return naverKey;
     }
 
-    public void setKakaoKey(String kakaoKey) {
-        this.kakaoKey = kakaoKey;
+    public void setnaverKey(String naverKey) {
+        this.naverKey = naverKey;
     }
 
     public String getName() {
