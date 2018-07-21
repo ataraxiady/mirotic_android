@@ -23,7 +23,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="14dp"
             android:scaleType="fitXY"
-            android:src="@drawable/left_arrow" />
+            android:src="@drawable/buttonback" />
 
         <Button
             android:id="@+id/editBtn"

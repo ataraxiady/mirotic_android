@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
                 dialog.show();
 
-                likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), userDataList.get(index).getKakaoKey(),
+                likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), userDataList.get(index).getID(),
                         v.getId() == R.id.btn_dislike ? "F" : "T");
 
             } else {

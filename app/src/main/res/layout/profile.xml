@@ -1,205 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:keepScreenOn="true"
-                android:background="@drawable/background"
+                android:background="@drawable/background2"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:orientation="vertical">
-
+                android:orientation="vertical"
+                android:gravity="center">
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <TextView
-                android:id="@+id/text_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
+            <ImageView
+                android:layout_gravity="left"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:src="@drawable/buttonback"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:src="@drawable/signin"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/center_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/buttonprofile"/>
+
+            <Button
+                android:id="@+id/imageAdd"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
                 android:layout_alignParentTop="true"
-                android:text="프로필 사진"
-                android:textColor="@android:color/background_dark"/>
-
-            <LinearLayout
-                android:id="@+id/linear_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:background="@drawable/buttonprofile"
+                android:shadowColor="#000000"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="사진 추가"
+                android:textColor="#000000" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/center_image"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_margin="20dp"
-                    android:src="@drawable/sub_img_picture"/>
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/linear_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linear_image">
-
-                <Button
-                    android:id="@+id/imageAdd"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/buttonshape"
-                    android:shadowColor="#000000"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="5"
-                    android:text="사진 추가"
-                    android:textColor="#000000" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/linear_button"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_nickname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="닉네임 : "
-                    android:textColor="@android:color/black"/>
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:src="@drawable/basicinfo"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"/>
 
                 <EditText
-                    android:id="@+id/nameText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:hint="입 력"
-                    android:inputType="textPersonName"
-                    android:imeOptions="actionDone"
-                    android:textColorLink="@android:color/darker_gray"/>
+                    android:id="@+id/nameEdit"
+                    android:layout_width="350dp"
+                    android:layout_height="40dp"
+                    android:inputType="text"
+                    android:hint="Name"
+                    android:background="@drawable/inputbg"/>
 
-                <Button
-                    android:id="@+id/nickname_btn"
-                    android:layout_width="wrap_content"
+
+            <EditText
+                android:id="@+id/ageEdit"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:inputType="number"
+                android:hint="Age"
+                android:background="@drawable/inputbg"/>
+
+                <LinearLayout
+                    android:layout_width="350dp"
                     android:layout_height="50dp"
-                    android:layout_margin="10dp"
-                    android:text="중복확인"
-                    />
-            </LinearLayout>
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/inputbg">
 
-            <LinearLayout
-                android:id="@+id/linear_sex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/linear_name"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_sex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_margin="10dp"
-                    android:text="성별  : "
-                    android:textColor="@android:color/black"/>
-
-                <RadioGroup
-                    android:id="@+id/gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/genderText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        android:layout_marginTop="15dp"
+                        android:textSize="17dp" />
 
                     <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:id="@+id/genderRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/man"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_margin="10dp"
-                        android:text="남성"/>
+                        <RadioButton
+                            android:id="@+id/man"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_margin="10dp"
+                            android:text="남성" />
 
-                    <RadioButton
-                        android:id="@+id/woman"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_margin="10dp"
-                        android:text="여성"/>
+                        <RadioButton
+                            android:id="@+id/woman"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:layout_margin="10dp"
+                            android:text="여성" />
 
-                </RadioGroup>
+                    </RadioGroup>
 
-            </LinearLayout>
+                </LinearLayout>
 
-
-            <LinearLayout
-                android:id="@+id/linear_from"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/linear_sex"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="거주지역 : "
-                    android:textColor="@android:color/black"/>
 
                 <EditText
-                    android:id="@+id/from_main"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:hint="거주지역은 동까지 입력하시오."
-                    android:imeOptions="actionDone"
-                    />
+                    android:id="@+id/areaEdit"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:hint="Area"
+                    android:background="@drawable/inputbg"/>
 
+
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:src="@drawable/logininfo"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                    <EditText
+                        android:id="@+id/idEdit"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:inputType="text"
+                        android:layout_marginTop="5dp"
+                        android:hint="ID"
+                        android:background="@drawable/inputbg"/>
+
+
+                <ImageView
+                    android:id="@+id/idCheckButton"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/buttoncheck"/>
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/linear_from">
+                <EditText
+                    android:id="@+id/passwordEdit"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:inputType="text"
+                    android:background="@drawable/inputbg"
+                    android:hint="Password"/>
 
-                <TextView
-                    android:id="@+id/text_hobby"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="취미선택 "
-                    android:textColor="@android:color/black"/>
+
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:src="@drawable/hobbyinfo"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"/>
 
                 <LinearLayout
                     android:id="@+id/linear_hobby1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="350dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/text_hobby"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@drawable/inputbg">
 
                     <TextView
                         android:id="@+id/text_hobby1"
@@ -224,91 +217,93 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/linear_hobby2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/linear_hobby1"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/text_hobby2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="2 순위"/>
+            <LinearLayout
+            android:id="@+id/linear_hobby2"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linear_hobby1"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+                android:background="@drawable/inputbg">
 
-                    <Spinner
-                        android:id="@+id/hobby_second"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:textAlignment="center"/>
+            <TextView
+            android:id="@+id/text_hobby2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="2 순위"/>
 
-                    <Spinner
-                        android:id="@+id/hobby_second_sub"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        />
+            <Spinner
+            android:id="@+id/hobby_second"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textAlignment="center"/>
 
-                </LinearLayout>
+            <Spinner
+            android:id="@+id/hobby_second_sub"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
 
-                <LinearLayout
-                    android:id="@+id/linear_hobby3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/linear_hobby2"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/text_hobby3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="3 순위"/>
+            <LinearLayout
+            android:id="@+id/linear_hobby3"
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linear_hobby2"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+                android:background="@drawable/inputbg">
 
-                    <Spinner
-                        android:id="@+id/hobby_third"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:textAlignment="center"/>
+            <TextView
+            android:id="@+id/text_hobby3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="3 순위"/>
 
-                    <Spinner
-                        android:id="@+id/hobby_third_sub"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        />
+            <Spinner
+            android:id="@+id/hobby_third"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textAlignment="center"/>
 
-                </LinearLayout>
+            <Spinner
+            android:id="@+id/hobby_third_sub"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <Button
+
+            <ImageView
                 android:id="@+id/join"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="회원가입"/>
+                android:layout_width="500dp"
+                android:layout_height="50dp"
+                android:src="@drawable/buttonsignin"/>
 
         </LinearLayout>
 
+
+
+
+
     </ScrollView>
 
-
-
-
-</RelativeLayout>
+</LinearLayout>
 

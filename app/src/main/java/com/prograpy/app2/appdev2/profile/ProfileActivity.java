@@ -28,7 +28,6 @@ import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.result.JoinResult;
-import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
@@ -41,16 +40,29 @@ public class ProfileActivity extends AppCompatActivity {
     // 2. 중복체크가 확인
     // 3. 성별이 빈값이 아닐때
 
-    private Button join;                    // 회원가입 버튼
-    private Button nickname;                // 중복확인
-    private EditText from;              // 닉네임 입력 칸
-    private RadioGroup genderradio;         // 성별 남자 radiobtn
+    private ImageView join;                    // 회원가입 버튼
+    private ImageView idCheckButton;          // 중복확인 버튼
+
+    private EditText nameEdit;
+    private EditText ageEdit;
+    private EditText areaEdit;
+
+    private EditText idEdit;
+    private EditText passwordEdit;
+
+    private RadioGroup genderRadio;         // 성별 남자 radiobtn
     private RadioButton man_btn, woman_btn; // 성별 여자 radiobtn
-    private String gender = "";
-    private String nick = "";
-    private String area = "";
-    private EditText editText;
+
     boolean namechecked = false;
+
+    String name;
+    int age;
+    String gender;
+    String area;
+
+    String id;
+    String password;
+
 
     private String bh_number_1 = "";
     private String bh_number_2 = "";
@@ -76,8 +88,6 @@ public class ProfileActivity extends AppCompatActivity {
     private Spinner spinner_hobby_second2;
     private Spinner spinner_hobby_third1;
     private Spinner spinner_hobby_third2;
-
-
 
 
     @Override
@@ -123,16 +133,16 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-        join = (Button) findViewById(R.id.join);
+        areaEdit = findViewById(R.id.areaEdit);
 
-        nickname = (Button) findViewById(R.id.nickname_btn);
-        editText = (EditText) findViewById(R.id.nameText);
+        idCheckButton = (ImageView) findViewById(R.id.idCheckButton);
+        idEdit = (EditText) findViewById(R.id.idEdit);
         // 닉네임 중복화인 리스너
-        nickname.setOnClickListener(new View.OnClickListener() {
+        idCheckButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                nick = editText.getText().toString();
+                id = idEdit.getText().toString();
 
-                if (nick.equals("")) {
+                if (id.equals("")) {
                     Toast.makeText(ProfileActivity.this, "값을 입력하세요.", Toast.LENGTH_SHORT).show();
                     namechecked = false;
                 } else {
@@ -147,11 +157,12 @@ public class ProfileActivity extends AppCompatActivity {
            회원가입 버튼으로 인한 메인화면으로의 화면전환
            중복환인 및 성별 체크 여부 확인
         */
+        join = (ImageView) findViewById(R.id.join);
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nick = editText.getText().toString();  // 버튼 클릭 시  edittext에서 정보 받아들임
-                area = from.getText().toString();
+                id = idEdit.getText().toString();  // 버튼 클릭 시  edittext에서 정보 받아들임
+                area = areaEdit.getText().toString();
 
                 // String은 == 으로 비교하지말고 .equals 로 비교할것
                 if (gender.equals("")) {
@@ -168,12 +179,12 @@ public class ProfileActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (nick.equals("")) {
+                if (id.equals("")) {
                     Toast.makeText(ProfileActivity.this, "닉네임을 입력 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (from.equals("")) {
+                if (area.equals("")) {
                     Toast.makeText(ProfileActivity.this, "거주지역을 입력 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -208,7 +219,7 @@ public class ProfileActivity extends AppCompatActivity {
                             // 서버에서 파싱한 데이터중 성공여부에 대한 데이터가 성공일때만 화면이동
                             if (result.isSuccess()) {
 
-                                PreferenceData.setKeyUserId(nick +"_naver");
+                                PreferenceData.setKeyUserId(id +"_naver");
 
                                 updateFcmKey();
 
@@ -243,9 +254,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                 // execute 함수를 호출하는 순간 task의 내용들이 실행된다
                 // execute 함수 안에 넘겨주는 파라미터 값들은 doinBackground에서 strings.... 에 들어가는 내용들
-                joinTask.execute(ApiValue.API_JOIN, nick, gender, "0", area, picData,
-                        bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2,
-                        sh_number_3, nick +"_naver", "test", "1234", PreferenceData.getKeyFcmToken());
+                joinTask.execute(ApiValue.API_JOIN, id, gender, "0", area, picData,
+                        bh_number_1, bh_number_2, bh_number_3 , sh_number_1, sh_number_2,
+                        sh_number_3, id, "1234", PreferenceData.getKeyFcmToken());
 
             }
         });
@@ -253,7 +264,6 @@ public class ProfileActivity extends AppCompatActivity {
         /*
             취미를 받아들여옴
          */
-        from = (EditText) findViewById(R.id.from_main);
 
 
         spinner_hobby1 = (Spinner) findViewById(R.id.hobby_first);
@@ -298,15 +308,15 @@ public class ProfileActivity extends AppCompatActivity {
                         hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, android.R.layout.simple_spinner_dropdown_item);
 
                     } else if (hobby_first.getItem(i).equals("운동")) {
-                        bh_number_1 = "0";
+                        bh_number_1 = "1";
                         hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, android.R.layout.simple_spinner_dropdown_item);
 
                     } else if (hobby_first.getItem(i).equals("음악")) {
-                        bh_number_1 = "1";
+                        bh_number_1 = "2";
                         hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, android.R.layout.simple_spinner_dropdown_item);
 
                     } else if (hobby_first.getItem(i).equals("영화")) {
-                        bh_number_1 = "2";
+                        bh_number_1 = "3";
                         hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, android.R.layout.simple_spinner_dropdown_item);
 
                     }
@@ -325,15 +335,15 @@ public class ProfileActivity extends AppCompatActivity {
                         hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, R.layout.support_simple_spinner_dropdown_item);
 
                     } else if (hobby_second.getItem(i).equals("운동")) {
-                        bh_number_2 = "0";
+                        bh_number_2 = "1";
                         hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, R.layout.support_simple_spinner_dropdown_item);
 
                     } else if (hobby_second.getItem(i).equals("음악")) {
-                        bh_number_2 = "1";
+                        bh_number_2 = "2";
                         hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, R.layout.support_simple_spinner_dropdown_item);
 
                     } else if (hobby_second.getItem(i).equals("영화")) {
-                        bh_number_2 = "2";
+                        bh_number_2 = "3";
                         hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, R.layout.support_simple_spinner_dropdown_item);
                     }
 
@@ -353,15 +363,15 @@ public class ProfileActivity extends AppCompatActivity {
                         hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, R.layout.support_simple_spinner_dropdown_item);
 
                     } else if (hobby_third.getItem(i).equals("운동")) {
-                        bh_number_3 = "0";
+                        bh_number_3 = "1";
                         hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, R.layout.support_simple_spinner_dropdown_item);
 
                     } else if (hobby_third.getItem(i).equals("음악")) {
-                        bh_number_3 = "1";
+                        bh_number_3 = "2";
                         hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, R.layout.support_simple_spinner_dropdown_item);
 
                     } else if (hobby_third.getItem(i).equals("영화")) {
-                        bh_number_3 = "2";
+                        bh_number_3 = "3";
                         hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, R.layout.support_simple_spinner_dropdown_item);
 
                     }
@@ -375,15 +385,15 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 case R.id.hobby_first_sub:
-                    sh_number_1 = String.valueOf(i);
-                    break;
+                    sh_number_1 = String.valueOf(i+1);
+                break;
 
                 case R.id.hobby_second_sub:
-                    sh_number_2 = String.valueOf(i);
+                    sh_number_2 = String.valueOf(i+1);
                     break;
 
                 case R.id.hobby_third_sub:
-                    sh_number_3 = String.valueOf(i);
+                    sh_number_3 = String.valueOf(i+1);
                     break;
             }
 
