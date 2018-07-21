@@ -26,19 +26,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/first_version"
+        android:layout_margin="10dp"
         android:layout_centerHorizontal="true">
 
         <TextView
             android:id="@+id/version_main"
             android:layout_width="wrap_content"
-            android:layout_height="40px"
+            android:layout_height="60px"
             android:text="현재 버전  "
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/version_name"
             android:layout_width="wrap_content"
-            android:layout_height="40px"
+            android:layout_height="60px"
             android:layout_toRightOf="@+id/version_main"
             android:text="1.0"
             android:textColor="@android:color/background_dark"

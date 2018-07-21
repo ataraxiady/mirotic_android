@@ -61,7 +61,7 @@ public class MyPage extends AppCompatActivity {
 
                 if (result != null) {
                     if (result.isSuccess()) {
-                        name_TextView.setText(result.getName()); // <- 이런식으로 구현 / spinner 아직
+                        name_TextView.setText(result.getName());
                         area_TextView.setText(result.getArea());
                         age_TextView.setText(result.getAge());
                         First_main.setPrompt(result.getFirst_main()); // spinner 손봐야됨
