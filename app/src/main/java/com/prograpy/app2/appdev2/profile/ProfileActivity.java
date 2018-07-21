@@ -5,12 +5,11 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -25,11 +24,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.main.SubActivity;
+import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.result.JoinResult;
+import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
+import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 import java.io.ByteArrayOutputStream;
@@ -97,10 +98,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         center_image = (ImageView) findViewById(R.id.center_image);
-        center_image.setBackground(new ShapeDrawable(new OvalShape()));
-        if(Build.VERSION.SDK_INT >= 21){
-            center_image.setClipToOutline(true);
-        }
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
@@ -211,9 +208,13 @@ public class ProfileActivity extends AppCompatActivity {
                             // 서버에서 파싱한 데이터중 성공여부에 대한 데이터가 성공일때만 화면이동
                             if (result.isSuccess()) {
 
-                                Intent i = new Intent(ProfileActivity.this, SubActivity.class);
+                                PreferenceData.setKeyUserId(nick +"_naver");
+
+                                updateFcmKey();
+
+                                Intent i = new Intent(ProfileActivity.this, MainActivity.class);
                                 startActivity(i);
-                                finish();
+                                ActivityCompat.finishAffinity(ProfileActivity.this);
 
                             } else {
                                 Toast.makeText(ProfileActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
@@ -239,12 +240,12 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
-                PreferenceData.setKeyUserId(nick +"_naver");
 
                 // execute 함수를 호출하는 순간 task의 내용들이 실행된다
                 // execute 함수 안에 넘겨주는 파라미터 값들은 doinBackground에서 strings.... 에 들어가는 내용들
                 joinTask.execute(ApiValue.API_JOIN, nick, gender, "0", area, picData,
-                        bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2, sh_number_3, PreferenceData.getKeyUserId(), "test", "1234");
+                        bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2,
+                        sh_number_3, nick +"_naver", "test", "1234", PreferenceData.getKeyFcmToken());
 
             }
         });
@@ -274,6 +275,14 @@ public class ProfileActivity extends AppCompatActivity {
         spinner_hobby_third1.setAdapter(hobby_third);
         spinner_hobby_third1.setOnItemSelectedListener(spinnerSelectListener);
     }
+
+
+    private void updateFcmKey(){
+
+        UpdateFcmKeyTask updateFcmKeyTask = new UpdateFcmKeyTask(null);
+        updateFcmKeyTask.execute(ApiValue.API_UPDATE_FCM_KEY, PreferenceData.getKeyUserId(), PreferenceData.getKeyFcmToken());
+    }
+
 
 
     private AdapterView.OnItemSelectedListener spinnerSelectListener = new AdapterView.OnItemSelectedListener() {
@@ -447,6 +456,7 @@ public class ProfileActivity extends AppCompatActivity {
         // 앨범 호출
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_ALBUM);
     }
 

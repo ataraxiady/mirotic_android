@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">appdev2</string>
+    <string name="app_name">MeYou</string>
 
     <string-array name="spinner_hobby">
         <item>대분류</item>

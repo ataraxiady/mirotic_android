@@ -1,14 +1,15 @@
-package com.prograpy.app2.appdev2.network.response;
+package com.prograpy.app2.appdev2.network.response.result;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LikeDislikeResult {
+public class ServerResult {
+
 
     @SerializedName("success")
     private boolean success = false;
 
-    @SerializedName("error")
-    private String error = "";
+    @SerializedName("msg")
+    private String msg = "";
 
     public boolean isSuccess() {
         return success;
@@ -18,11 +19,11 @@ public class LikeDislikeResult {
         this.success = success;
     }
 
-    public String getError() {
-        return error;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

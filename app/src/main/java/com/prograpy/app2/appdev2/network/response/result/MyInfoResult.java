@@ -5,19 +5,22 @@ import com.prograpy.app2.appdev2.network.response.data.UserData;
 
 import java.util.ArrayList;
 
-public class MatchingResult {
+/**
+ * Created by User on 2018-07-11.
+ */
 
-
+public class MyInfoResult {
     @SerializedName("success")
     private boolean success = false;
 
-    @SerializedName("msg")
-    private String msg = "";
+    @SerializedName("error")
+    private String error = "";
 
     @SerializedName("userInfos")
     private ArrayList<UserData> userInfos = new ArrayList<UserData>();
 
 
+    // 성공했을 시
     public boolean isSuccess() {
         return success;
     }
@@ -25,13 +28,13 @@ public class MatchingResult {
     public void setSuccess(boolean success) {
         this.success = success;
     }
-
-    public String getMsg() {
-        return msg;
+    // 에러났을 시
+    public String getError() {
+        return error;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setError(String error) {
+        this.error = error;
     }
 
     public ArrayList<UserData> getUserInfos() {

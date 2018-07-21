@@ -6,37 +6,48 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
-import com.prograpy.app2.appdev2.network.response.result.MainMatchingResult;
+import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResult> {
+public class SendMsgTask extends AsyncTask<String, Integer, ServerResult>{
 
     private TaskResultHandler handler;
 
     public interface TaskResultHandler {
-        public void onSuccesTask(MainMatchingResult result);
+        public void onSuccessTask(ServerResult result);
 
         public void onFailTask();
 
         public void onCancelTask();
     }
 
-    public MainMatchingTask(TaskResultHandler handler) {
+    public SendMsgTask(TaskResultHandler handler) {
         this.handler = handler;
     }
 
     @Override
-    protected MainMatchingResult doInBackground(String... strings) {
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected ServerResult doInBackground(String... strings) {
         String path = strings[0];
         String myId = strings[1];
+        String matchId = strings[2];
+        String sendMsg = strings[3];
+        String sendTime = strings[4];
 
-        MainMatchingResult result = null;
+        ServerResult result = null;
 
         Map<String, Object> params = new HashMap<>();
 
         params.put("myId", myId);
+        params.put("matchId", matchId);
+        params.put("sendMsg", sendMsg);
+        params.put("sendTime", sendTime);
 
         HttpRequest request = new HttpRequest();
 
@@ -45,7 +56,7 @@ public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResu
             Log.d("http", "str >" + str);
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, MainMatchingResult.class);
+            result = gson.fromJson(str, ServerResult.class);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -56,11 +67,12 @@ public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResu
         return result;
     }
 
-    protected void onPostExecute(MainMatchingResult result) {
-        super.onPostExecute(result);
+    @Override
+    protected void onPostExecute(ServerResult sendResult) {
+        super.onPostExecute(sendResult);
 
-        if (result != null) {
-            handler.onSuccesTask(result);
+        if (sendResult != null) {
+            handler.onSuccessTask(sendResult);
         } else {
             handler.onCancelTask();
         }

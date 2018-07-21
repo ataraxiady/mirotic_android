@@ -16,9 +16,9 @@ public class PreferenceData
      * preference 키값
      */
     private static final String KEY_USER_ID       = "user_id";
-    private static final String KEY_USER_PW       = "user_pw";
-    private static final String KEY_AUTO_LOGIN       = "auto_login";
-    private static final String KEY_LOGIN_SUCCESS       = "login_success";
+    private static final String KEY_FCM_TOKEN       = "fcm_token";
+    private static final String KEY_TODAY_INTRODUCE = "today_introduce";
+    private static final String KEY_LOGIN_TIME = "login_time";
 
     private static SharedPreferences mPreferences; // Preference 객체
     private static Editor            mEditor; // Preference에 값을 수정하는 editor 객체
@@ -78,92 +78,61 @@ public class PreferenceData
         return userId;
     }
 
-
-    /**
-     * 사용자 비번 저장
-     * @param userPw
-     */
-    public static void setKeyUserPw(String userPw){
+    public static void setKeyFcmToken(String token){
 
         if(mEditor != null){
-            mEditor.putString(KEY_USER_PW, userPw);
+            mEditor.putString(KEY_FCM_TOKEN, token);
             mEditor.commit();
         }
     }
 
-    /**
-     * 사용자 비번 반환
-     * @return
-     */
-    public static String getKeyUserPw(){
 
-        String userPw = "";
+    public static String getKeyFcmToken(){
+        String token = "";
 
         if(mPreferences != null){
-            userPw = mPreferences.getString(KEY_USER_PW,  userPw);
+            token = mPreferences.getString(KEY_FCM_TOKEN, token);
         }
 
-        return userPw;
+        return token;
     }
 
 
-    /**
-     * 자동로그인 여부 저장
-     * @param isAutoLogin
-     */
-    public static void setKeyAutoLogin(boolean isAutoLogin){
+    public static void setKeyTodayIntroduce(boolean isOver){
 
         if(mEditor != null){
-            mEditor.putBoolean(KEY_AUTO_LOGIN, isAutoLogin);
+            mEditor.putBoolean(KEY_TODAY_INTRODUCE, isOver);
             mEditor.commit();
         }
-
     }
 
 
-    /**
-     * 자동 로그인 여부 반환
-     * @return
-     */
-    public static boolean getKeyAutoLogin(){
-
-        boolean isAutoLogin = false;
+    public static boolean getKeyTodayIntroduce(){
+        boolean isOver = false;
 
         if(mPreferences != null){
-            isAutoLogin = mPreferences.getBoolean(KEY_AUTO_LOGIN, isAutoLogin);
+            isOver = mPreferences.getBoolean(KEY_TODAY_INTRODUCE, isOver);
         }
 
-        return isAutoLogin;
+        return isOver;
     }
 
 
-
-    /**
-     * 로그인 여부 저장
-     * @param isLogin
-     */
-    public static void setKeyLoginSuccess(boolean isLogin){
+    public static void setKeyLoginTime(int curTime){
 
         if(mEditor != null){
-            mEditor.putBoolean(KEY_LOGIN_SUCCESS, isLogin);
+            mEditor.putInt(KEY_LOGIN_TIME, curTime);
             mEditor.commit();
         }
-
     }
 
-
-    /**
-     * 로그인 여부 반환
-     * @return
-     */
-    public static boolean getKeyLoginSuccess(){
-
-        boolean isLogin = false;
+    public static int getKeyLoginTime(){
+        int curTime = 0;
 
         if(mPreferences != null){
-            isLogin = mPreferences.getBoolean(KEY_LOGIN_SUCCESS, isLogin);
+            curTime = mPreferences.getInt(KEY_LOGIN_TIME, curTime);
         }
 
-        return isLogin;
+        return curTime;
     }
 }

@@ -1,5 +1,6 @@
 package com.prograpy.app2.appdev2.chatList;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.prograpy.app2.appdev2.R;
+import com.prograpy.app2.appdev2.network.response.data.MatchUserData;
+
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by samsung on 2018-04-04.
@@ -15,13 +22,21 @@ import com.prograpy.app2.appdev2.R;
 
 public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder> {
 
+    private ArrayList<MatchUserData> userData = new ArrayList<MatchUserData>();
     private View.OnClickListener clickListener;
 
+    private Context context;
 
     @Override
     public ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerviewholder_chat, parent, false);
+        context = parent.getContext();
         return new ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder(view);
+    }
+
+
+    public void setUserData(ArrayList<MatchUserData> userData){
+        this.userData = userData;
     }
 
 
@@ -32,96 +47,31 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     @Override
     public void onBindViewHolder(ChatListRecyclerViewAdapter.ChatRecyclerViewAdapterViewHolder holder, int position) {
 
-        holder.setItemClickListener(clickListener);
 
-        switch (position) {
-            case 0:
+        Glide.with(context).load(userData.get(position).getMatchImage()).into(holder.imageView);
 
-                holder.setText("첫번째 채팅");
+        holder.tvName.setText(userData.get(position).getMatchName());
 
-                break;
-
-            case 1:
-
-                holder.setText("두번째 채팅");
-
-                break;
-
-            case 2:
-
-                holder.setText("세번째 채팅");
-
-                break;
-
-
-            case 3:
-
-                holder.setText("네번째 채팅");
-
-                break;
-
-            case 4:
-
-                holder.setText("다섯번째 채팅");
-
-                break;
-
-            case 5:
-
-                holder.setText("여섯번째 채팅");
-
-                break;
-
-            case 6:
-
-                holder.setText("일곱번째 채팅");
-
-                break;
-
-            case 7:
-
-                holder.setText("여덟번째 채팅");
-
-                break;
-
-            case 8:
-
-                holder.setText("아홉번째 채팅");
-
-                break;
-
-            case 9:
-
-                holder.setText("열번째 채팅");
-
-                break;
-        }
+        holder.itemView.setTag(userData.get(position));
+        holder.itemView.setOnClickListener(clickListener);
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return userData.size();
     }
 
     public class ChatRecyclerViewAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textView;
+        private TextView tvName;
+        private CircleImageView imageView;
         private LinearLayout parentView;
 
         public ChatRecyclerViewAdapterViewHolder(View itemView) {
             super(itemView);
 
-            textView = (TextView) itemView.findViewById(R.id.viewholder_text);
-            parentView = (LinearLayout) itemView.findViewById(R.id.viewholder_parent);
-
-        }
-
-        public void setText(String text) {
-            textView.setText(text);
-        }
-
-        public void setItemClickListener(View.OnClickListener clickListener){
-            parentView.setOnClickListener(clickListener);
+            tvName = (TextView) itemView.findViewById(R.id.chat_name);
+            imageView = (CircleImageView) itemView.findViewById(R.id.photo);
         }
 
     }

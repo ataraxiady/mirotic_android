@@ -95,9 +95,10 @@ public class JoinTask extends AsyncTask<String, Integer, JoinResult> {
         int sh_number_1 = Integer.parseInt(strings[9]);
         int sh_number_2 = Integer.parseInt(strings[10]);
         int sh_number_3 = Integer.parseInt(strings[11]);
-        String kakaoKey = strings[12];
+        String naverKey = strings[12];
         String id = strings[13];
         String password = strings[14];
+        String fcmKey = strings[15];
 
 
         // 현재 task의 return 값이 JoinResult 클래스이므로 결과를 반환해줄 객체를 만든다
@@ -119,9 +120,10 @@ public class JoinTask extends AsyncTask<String, Integer, JoinResult> {
         params.put("sh_number_1", sh_number_1);
         params.put("sh_number_2", sh_number_2);
         params.put("sh_number_3", sh_number_3);
-        params.put("kakaoKey", kakaoKey);
+        params.put("naverKey", naverKey);
         params.put("ID", id);
         params.put("password", password);
+        params.put("fcmKey", fcmKey);
 
 
         // http로 서버에 요청을 위한 클래스 객체 생성

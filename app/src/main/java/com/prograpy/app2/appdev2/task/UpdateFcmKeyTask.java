@@ -6,37 +6,44 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app2.appdev2.network.HttpRequest;
-import com.prograpy.app2.appdev2.network.response.result.MainMatchingResult;
+import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResult> {
+public class UpdateFcmKeyTask extends AsyncTask<String, Integer, ServerResult> {
+
 
     private TaskResultHandler handler;
 
     public interface TaskResultHandler {
-        public void onSuccesTask(MainMatchingResult result);
+        public void onSuccessTask(ServerResult result);
 
         public void onFailTask();
 
         public void onCancelTask();
     }
 
-    public MainMatchingTask(TaskResultHandler handler) {
+    public UpdateFcmKeyTask(TaskResultHandler handler) {
         this.handler = handler;
     }
 
     @Override
-    protected MainMatchingResult doInBackground(String... strings) {
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected ServerResult doInBackground(String... strings) {
         String path = strings[0];
         String myId = strings[1];
+        String fcmKey = strings[2];
 
-        MainMatchingResult result = null;
+        ServerResult result = null;
 
         Map<String, Object> params = new HashMap<>();
-
         params.put("myId", myId);
+        params.put("fcmKey", fcmKey);
 
         HttpRequest request = new HttpRequest();
 
@@ -45,7 +52,7 @@ public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResu
             Log.d("http", "str >" + str);
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, MainMatchingResult.class);
+            result = gson.fromJson(str, ServerResult.class);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -56,13 +63,10 @@ public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResu
         return result;
     }
 
-    protected void onPostExecute(MainMatchingResult result) {
-        super.onPostExecute(result);
 
-        if (result != null) {
-            handler.onSuccesTask(result);
-        } else {
-            handler.onCancelTask();
-        }
+    @Override
+    protected void onPostExecute(ServerResult serverResult) {
+        super.onPostExecute(serverResult);
+
     }
 }
