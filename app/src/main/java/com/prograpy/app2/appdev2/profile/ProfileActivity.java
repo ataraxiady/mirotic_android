@@ -81,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private NetworkProgressDialog networkProgressDialog;
 
-    private ArrayAdapter<CharSequence> from_main, hobby_first, hobby_second, hobby_third;
+    private ArrayAdapter<CharSequence> hobby_first, hobby_second, hobby_third;
     private Spinner spinner_hobby1;
     private Spinner spinner_hobby2;
     private Spinner spinner_hobby_second1;
