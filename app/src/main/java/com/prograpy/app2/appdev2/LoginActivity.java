@@ -17,7 +17,6 @@ import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
-import com.prograpy.app2.appdev2.profile.ProfileActivity;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
@@ -65,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        kakao = (Button) findViewById(R.id.btnKakao);
         test = (Button) findViewById(R.id.btnPass);
 
         test.setOnClickListener(new View.OnClickListener() {
@@ -79,22 +77,11 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        kakao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent k = new Intent(LoginActivity.this, ProfileActivity.class);
-                startActivity(k);
-            }
-        });
-
-
+        
         if(PreferenceData.getKeyUserId().isEmpty()){
             test.setVisibility(View.GONE);
-            kakao.setVisibility(View.VISIBLE);
         }else{
             test.setVisibility(View.VISIBLE);
-            kakao.setVisibility(View.GONE);
         }
 
 
