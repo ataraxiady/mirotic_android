@@ -1,11 +1,12 @@
 package com.prograpy.app2.appdev2.profile;
 
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,10 +22,13 @@ import com.prograpy.app2.appdev2.utils.PreferenceData;
 public class MyPage extends AppCompatActivity {
 
     private TextView name_TextView, area_TextView, age_TextView;
+    private EditText area_EditText;
     private Spinner First_main, First_sub, Second_main, Second_sub, Third_main, Third_sub;
-    private ImageView profileImage;
+    private ImageView profileImage, back;
+    private Button edit;
     private String name,gender,area;
     int age;
+    String s;
 
     GetMyInfoTask datarecivetask;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -34,6 +38,16 @@ public class MyPage extends AppCompatActivity {
         setContentView(R.layout.mypage);
 
         profileImage = (ImageView)findViewById(R.id.imageView);
+        back = (ImageView)findViewById(R.id.back);
+        edit = (Button) findViewById(R.id.editBtn);
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyPage.super.onBackPressed();
+            }
+        });
 
 
         name_TextView = findViewById(R.id.profile_name);
@@ -45,6 +59,29 @@ public class MyPage extends AppCompatActivity {
         Second_sub = findViewById(R.id.mypage_second_hobby2);
         Third_main = findViewById(R.id.mypage_thirdhobby1);
         Third_sub = findViewById(R.id.mypage_thirdhobby2);
+        area_EditText = findViewById(R.id.profile_area_edit);
+
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(edit.getText().equals("수정")){
+                    area_TextView.setVisibility(View.GONE);
+                    area_EditText.setVisibility(View.VISIBLE);
+                    edit.setText("완료");
+                }
+                if(edit.getText().equals("완료")){
+                    s = area_EditText.getText().toString().trim();
+                    area_EditText.setText(s);
+                    area_EditText.setVisibility(View.GONE);
+                    area_TextView.setVisibility(View.VISIBLE);
+                    edit.setText("수정");
+                    //라디오,스피너도 수정된 내용으로 고정
+                    //바뀐내용 서버보내기
+                }
+
+            }
+        });
 
 
         /**
@@ -86,6 +123,7 @@ public class MyPage extends AppCompatActivity {
         });
 
         datarecivetask.execute(ApiValue.API_GET_MY_INFO, PreferenceData.getKeyUserId());
+
 
     }
 }

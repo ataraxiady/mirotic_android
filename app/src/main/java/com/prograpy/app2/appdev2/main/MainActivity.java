@@ -20,12 +20,13 @@ import com.prograpy.app2.appdev2.chatList.ChatListActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
-import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
 import com.prograpy.app2.appdev2.network.response.data.UserData;
+import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
 import com.prograpy.app2.appdev2.network.response.result.MainMatchingResult;
+import com.prograpy.app2.appdev2.notice.NoticeActivity;
 import com.prograpy.app2.appdev2.profile.MyPage;
-import com.prograpy.app2.appdev2.task.MainMatchingTask;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
+import com.prograpy.app2.appdev2.task.MainMatchingTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 import java.text.SimpleDateFormat;
@@ -40,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private MainCustomViewPager viewPager;
     private ViewPagerAdapter adapter;
     private FloatingActionButton floatingActionButton, floatingActionButton2, floatingActionButton3;
-    private boolean isOpen = false;
+    private boolean isFabOpen = false;
     private Animation fab_open, fab_close, fabRClockwise, fabRanticlockWise;
-    private Intent intent;
+    private Intent intent,intent2;
     ImageView imageButtonUser;
     ImageView imageButtonSettings;
     Button dislikeButton;
@@ -109,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
                 dialog.show();
 
-                likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), userDataList.get(index).getnaverKey(),
+
+                likeDislikeButtonTask.execute(ApiValue.API_LIKEDISLIKE, PreferenceData.getKeyUserId(), userDataList.get(index).getID(),
                         v.getId() == R.id.btn_dislike ? "F" : "T");
 
             } else {
@@ -173,33 +175,43 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
 
-        // 플로팅버튼
 
-        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
-        fabRClockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clockwise);
-        fabRanticlockWise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlockwise);
 
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.fab2);
-        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.fab3);
+            // 플로팅버튼
+
+            fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+            fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+            fabRClockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clockwise);
+            fabRanticlockWise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlockwise);
+
+            floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+            floatingActionButton2 = (FloatingActionButton) findViewById(R.id.fab2);
+            floatingActionButton3 = (FloatingActionButton) findViewById(R.id.fab3);
+
+//            floatingActionButton.setOnClickListener(fabListener);
+//            floatingActionButton2.setOnClickListener(fabListener);
+//            floatingActionButton3.setOnClickListener(fabListener);
+//
+
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if (isOpen) {
+
+                if (isFabOpen) {
                     floatingActionButton2.startAnimation(fab_close);
                     floatingActionButton3.startAnimation(fab_close);
                     floatingActionButton.startAnimation(fabRanticlockWise);
                     floatingActionButton2.setClickable(false);
                     floatingActionButton3.setClickable(false);
-                    isOpen = false;
+                    isFabOpen = false;
                 } else {
                     floatingActionButton2.startAnimation(fab_open);
                     floatingActionButton3.startAnimation(fab_open);
                     floatingActionButton.startAnimation(fabRClockwise);
                     floatingActionButton2.setClickable(true);
                     floatingActionButton3.setClickable(true);
-                    isOpen = true;
+                    isFabOpen = true;
                 }
             }
         });
@@ -209,6 +221,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 intent = new Intent(getApplicationContext(), ChatListActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        floatingActionButton3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                intent2 = new Intent(getApplicationContext(), NoticeActivity.class);
+                startActivity(intent2);
             }
         });
 
@@ -277,6 +298,45 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+//    View.OnClickListener fabListener = new View.OnClickListener(){
+//
+//        @Override
+//        public void onClick(View v) {
+//            int id = v.getId();
+//            switch (id){
+//                case R.id.fab:
+//                    anim();
+//                    break;
+//                case R.id.fab2:
+//                    anim();
+//                    intent = new Intent(getApplicationContext(), ChatListActivity.class);
+//                    startActivity(intent);
+//                    break;
+//                case R.id.fab3:
+//                    anim();
+//                    intent2 = new Intent(getApplicationContext(), NoticeActivity.class);
+//                    startActivity(intent2);
+//                    break;
+//        }
+//    }
+
+
+//    public void anim() {
+//
+//        if (isFabOpen) {
+//            floatingActionButton2.startAnimation(fab_close);
+//            floatingActionButton3.startAnimation(fab_close);
+//            floatingActionButton2.setClickable(false);
+//            floatingActionButton3.setClickable(false);
+//            isFabOpen = false;
+//        } else {
+//            floatingActionButton2.startAnimation(fab_open);
+//            floatingActionButton3.startAnimation(fab_open);
+//            floatingActionButton2.setClickable(true);
+//            floatingActionButton3.setClickable(true);
+//            isFabOpen = true;
+//        }
+//    }
 
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {

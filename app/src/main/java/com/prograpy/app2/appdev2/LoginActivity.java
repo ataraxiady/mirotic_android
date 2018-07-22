@@ -17,7 +17,6 @@ import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
-import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.profile.ProfileActivity;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
@@ -100,15 +99,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // 네이버 아이디 로그인을 요청하는 코드
-        authLoginButton = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
-        mOAuthLoginModule = OAuthLogin.getInstance();
-        mOAuthLoginModule.init(
-                LoginActivity.this
-                ,"AFa6RqAFrtTigjbHCodg"
-                ,"_msJq65bIS"
-                ,"MeYou"
-
-        );
+//        authLoginButton = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
+//        mOAuthLoginModule = OAuthLogin.getInstance();
+//        mOAuthLoginModule.init(
+//                LoginActivity.this
+//                ,"AFa6RqAFrtTigjbHCodg"
+//                ,"_msJq65bIS"
+//                ,"MeYou"
+//
+//        );
     }
 
 
