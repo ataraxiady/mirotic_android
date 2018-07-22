@@ -28,7 +28,6 @@ import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.result.JoinResult;
-import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
@@ -69,7 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private NetworkProgressDialog networkProgressDialog;
 
-    private ArrayAdapter<CharSequence> from_main, hobby_first, hobby_second, hobby_third;
+    private ArrayAdapter<CharSequence> hobby_first, hobby_second, hobby_third;
     private Spinner spinner_hobby1;
     private Spinner spinner_hobby2;
     private Spinner spinner_hobby_second1;
