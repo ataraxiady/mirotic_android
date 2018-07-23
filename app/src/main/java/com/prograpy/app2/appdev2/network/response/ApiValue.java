@@ -21,4 +21,6 @@ public class ApiValue {
 
     public static final String API_UPDATE_FCM_KEY = "/updateFcmKey";
 
+    public static final String API_ModifyInfo = "/SendModifydata";
+
 }
