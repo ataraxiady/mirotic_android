@@ -14,7 +14,7 @@ public class SetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set);
+        setContentView(R.layout.fragment_setting);
         vs = findViewById(R.id.version);
 
         vs.setOnClickListener(new View.OnClickListener() {

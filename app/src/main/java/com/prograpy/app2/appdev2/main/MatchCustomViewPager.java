@@ -5,15 +5,15 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-public class MainCustomViewPager extends ViewPager {
+public class MatchCustomViewPager extends ViewPager {
 
     private boolean enabled  = false;
 
-    public MainCustomViewPager(Context context) {
+    public MatchCustomViewPager(Context context) {
         super(context);
     }
 
-    public MainCustomViewPager(Context context, AttributeSet attrs) {
+    public MatchCustomViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

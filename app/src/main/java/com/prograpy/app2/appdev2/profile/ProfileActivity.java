@@ -25,7 +25,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.main.MainActivity;
+import com.prograpy.app2.appdev2.main.MatchFragment;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.result.JoinResult;
@@ -224,7 +224,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 updateFcmKey();
 
-                                Intent i = new Intent(ProfileActivity.this, MainActivity.class);
+                                Intent i = new Intent(ProfileActivity.this, MatchFragment.class);
                                 startActivity(i);
                                 ActivityCompat.finishAffinity(ProfileActivity.this);
 

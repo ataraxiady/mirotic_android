@@ -47,13 +47,13 @@
         </LinearLayout>
 
 
-        <com.prograpy.app2.appdev2.main.MainCustomViewPager
+        <com.prograpy.app2.appdev2.main.MatchCustomViewPager
             android:id="@+id/main_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:layout_weight="1">
-        </com.prograpy.app2.appdev2.main.MainCustomViewPager>
+        </com.prograpy.app2.appdev2.main.MatchCustomViewPager>
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
