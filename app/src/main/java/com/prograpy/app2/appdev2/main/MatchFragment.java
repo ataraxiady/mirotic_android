@@ -184,55 +184,55 @@ public class MatchFragment extends Fragment {
 
 
 
-
-        // 플로팅버튼
-
-        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
-        fabRClockwise = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_clockwise);
-        fabRanticlockWise = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_anticlockwise);
-
-        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
-        floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.fab2);
-        floatingActionButton3 = (FloatingActionButton) view.findViewById(R.id.fab3);
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                if (isFabOpen) {
-                    floatingActionButton2.startAnimation(fab_close);
-                    floatingActionButton3.startAnimation(fab_close);
-                    floatingActionButton.startAnimation(fabRanticlockWise);
-                    floatingActionButton2.setClickable(false);
-                    floatingActionButton3.setClickable(false);
-                    isFabOpen = false;
-                } else {
-                    floatingActionButton2.startAnimation(fab_open);
-                    floatingActionButton3.startAnimation(fab_open);
-                    floatingActionButton.startAnimation(fabRClockwise);
-                    floatingActionButton2.setClickable(true);
-                    floatingActionButton3.setClickable(true);
-                    isFabOpen = true;
-                }
-            }
-        });
-
-        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getContext(), ChatListFragment.class);
-                startActivity(intent);
-            }
-        });
-
-        floatingActionButton3.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                intent2 = new Intent(getContext(), NoticeActivity.class);
-                startActivity(intent2);
-            }
-        });
+//
+//        // 플로팅버튼
+//
+//        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+//        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+//        fabRClockwise = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_clockwise);
+//        fabRanticlockWise = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_anticlockwise);
+//
+//        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
+//        floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.fab2);
+//        floatingActionButton3 = (FloatingActionButton) view.findViewById(R.id.fab3);
+//
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//
+//                if (isFabOpen) {
+//                    floatingActionButton2.startAnimation(fab_close);
+//                    floatingActionButton3.startAnimation(fab_close);
+//                    floatingActionButton.startAnimation(fabRanticlockWise);
+//                    floatingActionButton2.setClickable(false);
+//                    floatingActionButton3.setClickable(false);
+//                    isFabOpen = false;
+//                } else {
+//                    floatingActionButton2.startAnimation(fab_open);
+//                    floatingActionButton3.startAnimation(fab_open);
+//                    floatingActionButton.startAnimation(fabRClockwise);
+//                    floatingActionButton2.setClickable(true);
+//                    floatingActionButton3.setClickable(true);
+//                    isFabOpen = true;
+//                }
+//            }
+//        });
+//
+//        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                intent = new Intent(getContext(), ChatListFragment.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        floatingActionButton3.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View v) {
+//                intent2 = new Intent(getContext(), NoticeActivity.class);
+//                startActivity(intent2);
+//            }
+//        });
 
 
         if(!PreferenceData.getKeyTodayIntroduce()){
@@ -323,13 +323,12 @@ public class MatchFragment extends Fragment {
                 age = userDataList.get(position).getAge();
                 area = userDataList.get(position).getArea();
                 profileImage = userDataList.get(position).getProfileimage();
-                naverKey = userDataList.get(position).getnaverKey();
             }
 
             //프래그먼트에 정보주기
 //                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
 
-            fragment = InfoFragment.newInstance(name, gender, age, area, profileImage, naverKey);
+            fragment = InfoFragment.newInstance(name, gender, age, area, profileImage);
             return fragment;
         }
 
