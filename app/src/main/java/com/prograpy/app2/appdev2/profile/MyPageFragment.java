@@ -179,12 +179,12 @@ public class MyPageFragment extends Fragment {
                         name_TextView.setText(result.getUserInfos().get(0).getName());
                         area_TextView.setText(result.getUserInfos().get(0).getArea());
                         age_TextView.setText("(" + result.getUserInfos().get(0).getAge() + ")");
-                        first_main.setText(result.getUserInfos().get(0).getBh_number_1());
-                        first_sub.setText(result.getUserInfos().get(0).getSh_number_1());
-                        second_sub.setText(result.getUserInfos().get(0).getBh_number_2());
-                        second_sub.setText(result.getUserInfos().get(0).getSh_number_2());
-                        third_main.setText(result.getUserInfos().get(0).getBh_number_3());
-                        third_sub.setText(result.getUserInfos().get(0).getSh_number_3());
+                        first_main.setText(String.valueOf(result.getUserInfos().get(0).getBh_number_1()));
+                        first_sub.setText(String.valueOf(result.getUserInfos().get(0).getSh_number_1()));
+                        second_sub.setText(String.valueOf(result.getUserInfos().get(0).getBh_number_2()));
+                        second_sub.setText(String.valueOf(result.getUserInfos().get(0).getSh_number_2()));
+                        third_main.setText(String.valueOf(result.getUserInfos().get(0).getBh_number_3()));
+                        third_sub.setText(String.valueOf(result.getUserInfos().get(0).getSh_number_3()));
                         // 성별 radio
                         genderdata[0] = result.getUserInfos().get(0).getGender();
 
