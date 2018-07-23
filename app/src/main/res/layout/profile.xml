@@ -31,11 +31,6 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/signin" />
-
             <RelativeLayout
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -58,12 +53,17 @@
             </RelativeLayout>
 
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="20dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/basicinfo" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="normal"
+                android:textSize="15sp"
+                android:textColor="@color/Color_black"
+                android:text="기본정보 입력" />
 
             <EditText
                 android:id="@+id/nameEdit"
@@ -71,7 +71,10 @@
                 android:layout_height="40dp"
                 android:background="@drawable/inputbg"
                 android:paddingLeft="10dp"
-                android:hint="Name"
+                android:textSize="12sp"
+                android:textColor="@color/Color_black"
+                android:textColorHint="@color/Color_grey05"
+                android:hint="이름을 입력해 주세요."
                 android:imeOptions="actionNext"
                 android:inputType="text" />
 
@@ -82,7 +85,10 @@
                 android:background="@drawable/inputbg"
                 android:layout_marginTop="5dp"
                 android:paddingLeft="10dp"
-                android:hint="Age"
+                android:textSize="12sp"
+                android:textColor="@color/Color_black"
+                android:textColorHint="@color/Color_grey05"
+                android:hint="나이를 입력해 주세요."
                 android:imeOptions="actionDone"
                 android:inputType="number" />
 
@@ -100,8 +106,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
-                    android:text="Gender"
-                    android:textSize="17dp" />
+                    android:textColor="@color/Color_black"
+                    android:text="성별"
+                    android:textSize="15dp" />
 
                 <RadioGroup
                     android:id="@+id/genderRadio"
@@ -115,6 +122,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_margin="10dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/Color_black"
                         android:text="남성" />
 
                     <RadioButton
@@ -122,6 +131,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_margin="10dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/Color_black"
                         android:text="여성" />
 
                 </RadioGroup>
@@ -136,17 +147,24 @@
                 android:paddingLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/inputbg"
-                android:hint="Area"
+                android:textSize="12sp"
+                android:textColor="@color/Color_black"
+                android:textColorHint="@color/Color_grey05"
+                android:hint="사는 곳을 동까지 입력해 주세요."
                 android:inputType="text" />
 
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="20dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/logininfo" />
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="normal"
+                android:textSize="15sp"
+                android:textColor="@color/Color_black"
+                android:text="로그인정보 입력" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -161,7 +179,10 @@
                     android:paddingLeft="10dp"
                     android:background="@drawable/inputbg"
                     android:layout_weight="1"
-                    android:hint="ID"
+                    android:textSize="12sp"
+                    android:textColor="@color/Color_black"
+                    android:textColorHint="@color/Color_grey05"
+                    android:hint="영문자 / 숫자 조합으로 아이디를 입력해 주세요"
                     android:singleLine="true"
                     android:maxLines="1"
                     android:imeOptions="actionDone"
@@ -179,20 +200,26 @@
                 android:id="@+id/passwordEdit"
                 android:layout_width="match_parent"
                 android:paddingLeft="10dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/Color_black"
+                android:textColorHint="@color/Color_grey05"
                 android:background="@drawable/inputbg"
-                android:hint="Password"
+                android:hint="비밀번호를 입력해 주세요."
                 android:inputType="textPassword" />
 
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="20dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/hobbyinfo" />
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="normal"
+                android:textSize="15sp"
+                android:textColor="@color/Color_black"
+                android:text="취미정보 입력" />
 
             <LinearLayout
                 android:id="@+id/linear_hobby1"
