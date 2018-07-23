@@ -139,11 +139,6 @@ public class JoinActivity extends AppCompatActivity {
         idEdit = findViewById(R.id.idEdit);
         passwordEdit = findViewById(R.id.passwordEdit);
 
-        name = nameEdit.getText().toString().trim();
-        age = ageEdit.getText().toString().trim();
-        area = areaEdit.getText().toString().trim();
-        id = idEdit.getText().toString().trim();
-        password = passwordEdit.getText().toString().trim();
 
         idCheckButton = (ImageView) findViewById(R.id.idCheckButton);
         idEdit = (EditText) findViewById(R.id.idEdit);
@@ -171,8 +166,11 @@ public class JoinActivity extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                id = idEdit.getText().toString();  // 버튼 클릭 시  edittext에서 정보 받아들임
-                area = areaEdit.getText().toString();
+                name = nameEdit.getText().toString().trim();
+                age = ageEdit.getText().toString().trim();
+                area = areaEdit.getText().toString().trim();
+                id = idEdit.getText().toString().trim();
+                password = passwordEdit.getText().toString().trim();
 
                 // String은 == 으로 비교하지말고 .equals 로 비교할것
                 if (gender.equals("")) {
@@ -229,7 +227,8 @@ public class JoinActivity extends AppCompatActivity {
                             // 서버에서 파싱한 데이터중 성공여부에 대한 데이터가 성공일때만 화면이동
                             if (result.isSuccess()) {
 
-                                PreferenceData.setKeyUserId(id +"_naver");
+//                                PreferenceData.setKeyUserId(id +"_naver");
+                                PreferenceData.setKeyUserId(id);
 
                                 updateFcmKey();
 

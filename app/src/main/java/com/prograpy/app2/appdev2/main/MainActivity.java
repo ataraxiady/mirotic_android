@@ -9,21 +9,18 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.chatList.ChatListActivity;
 import com.prograpy.app2.appdev2.environment_setting.SetActivity;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.data.UserData;
 import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
 import com.prograpy.app2.appdev2.network.response.result.MainMatchingResult;
-import com.prograpy.app2.appdev2.notice.NoticeActivity;
 import com.prograpy.app2.appdev2.profile.MyPage;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
 import com.prograpy.app2.appdev2.task.MainMatchingTask;
@@ -175,62 +172,62 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-            // 플로팅버튼
-
-            fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
-            fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
-            fabRClockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clockwise);
-            fabRanticlockWise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlockwise);
-
-            floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-            floatingActionButton2 = (FloatingActionButton) findViewById(R.id.fab2);
-            floatingActionButton3 = (FloatingActionButton) findViewById(R.id.fab3);
-
-//            floatingActionButton.setOnClickListener(fabListener);
-//            floatingActionButton2.setOnClickListener(fabListener);
-//            floatingActionButton3.setOnClickListener(fabListener);
 //
+//            // 플로팅버튼
+//
+//            fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+//            fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+//            fabRClockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clockwise);
+//            fabRanticlockWise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlockwise);
+//
+//            floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+//            floatingActionButton2 = (FloatingActionButton) findViewById(R.id.fab2);
+////            floatingActionButton3 = (FloatingActionButton) findViewById(R.id.fab3);
+//
+////            floatingActionButton.setOnClickListener(fabListener);
+////            floatingActionButton2.setOnClickListener(fabListener);
+////            floatingActionButton3.setOnClickListener(fabListener);
+////
+//
+//
+//
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//
+//                if (isFabOpen) {
+//                    floatingActionButton2.startAnimation(fab_close);
+////                    floatingActionButton3.startAnimation(fab_close);
+//                    floatingActionButton.startAnimation(fabRanticlockWise);
+//                    floatingActionButton2.setClickable(false);
+////                    floatingActionButton3.setClickable(false);
+//                    isFabOpen = false;
+//                } else {
+//                    floatingActionButton2.startAnimation(fab_open);
+////                    floatingActionButton3.startAnimation(fab_open);
+//                    floatingActionButton.startAnimation(fabRClockwise);
+//                    floatingActionButton2.setClickable(true);
+////                    floatingActionButton3.setClickable(true);
+//                    isFabOpen = true;
+//                }
+//            }
+//        });
+//
+//        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                intent = new Intent(getApplicationContext(), ChatListActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
-
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                if (isFabOpen) {
-                    floatingActionButton2.startAnimation(fab_close);
-                    floatingActionButton3.startAnimation(fab_close);
-                    floatingActionButton.startAnimation(fabRanticlockWise);
-                    floatingActionButton2.setClickable(false);
-                    floatingActionButton3.setClickable(false);
-                    isFabOpen = false;
-                } else {
-                    floatingActionButton2.startAnimation(fab_open);
-                    floatingActionButton3.startAnimation(fab_open);
-                    floatingActionButton.startAnimation(fabRClockwise);
-                    floatingActionButton2.setClickable(true);
-                    floatingActionButton3.setClickable(true);
-                    isFabOpen = true;
-                }
-            }
-        });
-
-        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), ChatListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        floatingActionButton3.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                intent2 = new Intent(getApplicationContext(), NoticeActivity.class);
-                startActivity(intent2);
-            }
-        });
+//        floatingActionButton3.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View v) {
+//                intent2 = new Intent(getApplicationContext(), NoticeActivity.class);
+//                startActivity(intent2);
+//            }
+//        });
 
 
         if(!PreferenceData.getKeyTodayIntroduce()){
@@ -340,7 +337,6 @@ public class MainActivity extends AppCompatActivity {
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
         String profileImage = "";
-        String kakaoKey = "";
         String name = "";
         String gender = "";
         int age = 0;
@@ -353,8 +349,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(final int position) {
-            //string을 imageview로 받아야함.
-//                        profileImage = result.getInfoList().get(position).profileImage;
 
             if (userDataList != null && userDataList.size() > 0) {
                 name = userDataList.get(position).getName();
@@ -362,13 +356,12 @@ public class MainActivity extends AppCompatActivity {
                 age = userDataList.get(position).getAge();
                 area = userDataList.get(position).getArea();
                 profileImage = userDataList.get(position).getProfileimage();
-                kakaoKey = userDataList.get(position).getKakaoKey();
             }
 
             //프래그먼트에 정보주기
 //                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
 
-            fragment = InfoFragment.newInstance(name, gender, age, area, profileImage, kakaoKey);
+            fragment = InfoFragment.newInstance(name, gender, age, area, profileImage);
             return fragment;
         }
 
