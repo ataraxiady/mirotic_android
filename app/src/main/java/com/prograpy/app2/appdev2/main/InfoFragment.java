@@ -22,7 +22,6 @@ public class InfoFragment extends Fragment {
     private static final String GENDER = "gender";
     private static final String AREA = "area";
     private static final String IMAGE = "profileImage";
-    private static final String NAVER = "naverKey";
 
 
     ImageView fprofileImage;
@@ -31,16 +30,6 @@ public class InfoFragment extends Fragment {
     TextView fgender;
     TextView farea;
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null){
-//            fname.setText(getArguments().getString(NAME));
-//            fage.setText("나이 : " +getArguments().getInt(AGE) + " 세");
-//            fgender.setText("성별 : " +getArguments().getString(GENDER));
-//            farea.setText("거주 지역 : " +getArguments().getString(AREA));
-//        }
-//    }
 
     @Nullable
     @Override
@@ -69,7 +58,7 @@ public class InfoFragment extends Fragment {
     }
 
 
-    public static InfoFragment newInstance(String name, String gender, int age, String area, String profileImage, String naverKey) {
+    public static InfoFragment newInstance(String name, String gender, int age, String area, String profileImage) {
         InfoFragment fragment = new InfoFragment();
         Bundle bundle = new Bundle();
 
@@ -78,8 +67,6 @@ public class InfoFragment extends Fragment {
         bundle.putInt(AGE, age);
         bundle.putString(AREA, area);
         bundle.putString(IMAGE, profileImage);
-        bundle.putString(NAVER, naverKey);
-
         fragment.setArguments(bundle);
 
         return fragment;

@@ -8,6 +8,7 @@ public class ApiValue {
 
     // 회원가입 요청
     public static final String API_JOIN = "/addUserInfo";
+    public static final String API_LOGIN = "/checkLogin";
 
     public static final String API_LIKEDISLIKE = "/sendLikeInfo";
 

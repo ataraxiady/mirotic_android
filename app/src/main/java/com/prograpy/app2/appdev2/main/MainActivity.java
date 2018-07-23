@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-
             }
 
             @Override
@@ -92,8 +91,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+
     @Override
     public void onClick(View v) {
+        int position = 0;
 
+        switch (v.getId()){
+
+            case R.id.tab_match:
+                tabMatch.setSelected(true);
+                tabMy.setSelected(false);
+                tabChat.setSelected(false);
+                tabSetting.setSelected(false);
+                position = 0;
+                break;
+
+            case R.id.tab_my:
+                tabMatch.setSelected(false);
+                tabSetting.setSelected(false);
+                tabChat.setSelected(false);
+                tabMy.setSelected(true);
+                position = 1;
+                break;
+
+            case R.id.tab_chat:
+                tabMatch.setSelected(false);
+                tabChat.setSelected(true);
+                tabMy.setSelected(false);
+                tabSetting.setSelected(false);
+                position = 2;
+                break;
+
+            case R.id.tab_set:
+                tabMatch.setSelected(false);
+                tabChat.setSelected(false);
+                tabSetting.setSelected(true);
+                tabMy.setSelected(false);
+                position = 3;
+                break;
+        }
+
+        mainPager.setCurrentItem(position, true);
     }
 }

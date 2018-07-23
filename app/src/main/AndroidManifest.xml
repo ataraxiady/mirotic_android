@@ -46,20 +46,13 @@
             android:label="OAuth2.0 In-app"
                   android:screenOrientation="portrait"/>
 
-        <activity android:name=".chatList.ChatListFragment"
-                  android:screenOrientation="portrait"/>
 
-        <activity android:name=".profile.ProfileActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".main.MatchFragment"
+        <activity android:name=".profile.JoinActivity"
                   android:screenOrientation="portrait"/>
 
         <activity android:name=".environment_setting.SetActivity"
                   android:screenOrientation="portrait"/>
 
-        <activity android:name=".profile.MyPageFragment"
-                  android:screenOrientation="portrait"/>
 
         <activity android:name=".chat.ChatMainActivity"
                   android:screenOrientation="portrait"

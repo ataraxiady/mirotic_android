@@ -10,9 +10,12 @@ public class UserData {
     @SerializedName("password")
     private String password = "";
 
+<<<<<<< HEAD
     @SerializedName("naverKey")
     private String naverKey = "";
 
+=======
+>>>>>>> origin/young_20180711
     @SerializedName("name")
     private String name="";
 
@@ -65,6 +68,7 @@ public class UserData {
         this.password = password;
     }
 
+<<<<<<< HEAD
     public String getnaverKey() {
         return naverKey;
     }
@@ -73,6 +77,8 @@ public class UserData {
         this.naverKey = naverKey;
     }
 
+=======
+>>>>>>> origin/young_20180711
     public String getName() {
         return name;
     }
