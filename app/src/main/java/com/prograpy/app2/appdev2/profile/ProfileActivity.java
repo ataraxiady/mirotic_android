@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -99,7 +100,7 @@ public class ProfileActivity extends AppCompatActivity {
         /*
             갤러리 접속해 이미지 불러오기
          */
-        Button ImageAdd = (Button) findViewById(R.id.imageAdd);
+        ImageButton ImageAdd = (ImageButton) findViewById(R.id.imageAdd);
         ImageAdd.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 doTakeAlbumAction();
