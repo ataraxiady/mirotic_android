@@ -34,7 +34,7 @@ import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 import java.io.ByteArrayOutputStream;
 
-public class ProfileActivity extends AppCompatActivity {
+public class JoinActivity extends AppCompatActivity {
     // ㅁ 조건
     // 1. 닉네임되야한다
     // 2. 중복체크가 확인
@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
     boolean namechecked = false;
 
     String name;
-    int age;
+    String age;
     String gender;
     String area;
 
@@ -93,7 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile);
+        setContentView(R.layout.activity_join);
 
 
         /*
@@ -133,7 +133,17 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
+        nameEdit = findViewById(R.id.nameEdit);
+        ageEdit = findViewById(R.id.ageEdit);
         areaEdit = findViewById(R.id.areaEdit);
+        idEdit = findViewById(R.id.idEdit);
+        passwordEdit = findViewById(R.id.passwordEdit);
+
+        name = nameEdit.getText().toString().trim();
+        age = ageEdit.getText().toString().trim();
+        area = areaEdit.getText().toString().trim();
+        id = idEdit.getText().toString().trim();
+        password = passwordEdit.getText().toString().trim();
 
         idCheckButton = (ImageView) findViewById(R.id.idCheckButton);
         idEdit = (EditText) findViewById(R.id.idEdit);
@@ -143,10 +153,10 @@ public class ProfileActivity extends AppCompatActivity {
                 id = idEdit.getText().toString();
 
                 if (id.equals("")) {
-                    Toast.makeText(ProfileActivity.this, "값을 입력하세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this, "값을 입력하세요.", Toast.LENGTH_SHORT).show();
                     namechecked = false;
                 } else {
-                    Toast.makeText(ProfileActivity.this, "사용 가능한 닉네임입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this, "사용 가능한 닉네임입니다.", Toast.LENGTH_SHORT).show();
                     namechecked = true;
                     // 중복확인이 됬는지 안됬는지 확인
                 }
@@ -166,7 +176,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 // String은 == 으로 비교하지말고 .equals 로 비교할것
                 if (gender.equals("")) {
-                    Toast.makeText(ProfileActivity.this, "성별을 선택하세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this, "성별을 선택하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -175,29 +185,29 @@ public class ProfileActivity extends AppCompatActivity {
                 final ArrayAdapter<CharSequence> from_main;
 
                 if (!namechecked) {
-                    Toast.makeText(ProfileActivity.this, "중복확인을 하세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this, "중복확인을 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (id.equals("")) {
-                    Toast.makeText(ProfileActivity.this, "닉네임을 입력 하세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this, "닉네임을 입력 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (area.equals("")) {
-                    Toast.makeText(ProfileActivity.this, "거주지역을 입력 하세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this, "거주지역을 입력 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (picData.equals("")) {
-                    Toast.makeText(ProfileActivity.this, "사진을 추가 해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this, "사진을 추가 해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
 
                 if (bh_number_1.equals("") || bh_number_2.equals("") || bh_number_3.equals("") ||
                         sh_number_1.equals("") || sh_number_2.equals("") || sh_number_3.equals("")) {
-                    Toast.makeText(ProfileActivity.this, "취미를 모두 선택 해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JoinActivity.this, "취미를 모두 선택 해주세요.", Toast.LENGTH_SHORT).show();
                     return;
 
                 }
@@ -223,16 +233,16 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 updateFcmKey();
 
-                                Intent i = new Intent(ProfileActivity.this, MainActivity.class);
+                                Intent i = new Intent(JoinActivity.this, MainActivity.class);
                                 startActivity(i);
-                                ActivityCompat.finishAffinity(ProfileActivity.this);
+                                ActivityCompat.finishAffinity(JoinActivity.this);
 
                             } else {
-                                Toast.makeText(ProfileActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(JoinActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
                             }
 
                         } else {
-                            Toast.makeText(ProfileActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(JoinActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -240,23 +250,23 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onFailTask() {
                         networkProgressDialog.dismiss();
 
-                        Toast.makeText(ProfileActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JoinActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancelTask() {
                         networkProgressDialog.dismiss();
 
-                        Toast.makeText(ProfileActivity.this, "서버 통신을 취소하였습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JoinActivity.this, "서버 통신을 취소하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
 
                 // execute 함수를 호출하는 순간 task의 내용들이 실행된다
                 // execute 함수 안에 넘겨주는 파라미터 값들은 doinBackground에서 strings.... 에 들어가는 내용들
-                joinTask.execute(ApiValue.API_JOIN, id, gender, "0", area, picData,
+                joinTask.execute(ApiValue.API_JOIN, name, gender, age, area, picData,
                         bh_number_1, bh_number_2, bh_number_3 , sh_number_1, sh_number_2,
-                        sh_number_3, id, "1234", PreferenceData.getKeyFcmToken());
+                        sh_number_3, id, password, PreferenceData.getKeyFcmToken());
 
             }
         });
@@ -448,7 +458,7 @@ public class ProfileActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
 
-                        Toast.makeText(ProfileActivity.this, "다른 사진을 선택 해주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JoinActivity.this, "다른 사진을 선택 해주세요.", Toast.LENGTH_SHORT).show();
                     }
                 }
 

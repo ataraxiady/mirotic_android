@@ -17,15 +17,17 @@ import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
-import com.prograpy.app2.appdev2.profile.ProfileActivity;
+import com.prograpy.app2.appdev2.profile.JoinActivity;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button kakao;
+    private Button join;
 
-    private Button test;
+    private Button login;
+
+    private Button pass;
 
     OAuthLogin mOAuthLoginModule;
     OAuthLoginButton authLoginButton;
@@ -65,10 +67,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        kakao = (Button) findViewById(R.id.btnKakao);
-        test = (Button) findViewById(R.id.btnPass);
+        login = (Button) findViewById(R.id.login);
+        join = (Button) findViewById(R.id.join);
+        pass = (Button) findViewById(R.id.pass);
 
-        test.setOnClickListener(new View.OnClickListener() {
+        pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -80,34 +83,33 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        kakao.setOnClickListener(new View.OnClickListener() {
+        join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent k = new Intent(LoginActivity.this, ProfileActivity.class);
+                Intent k = new Intent(LoginActivity.this, JoinActivity.class);
                 startActivity(k);
+            }
+        });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent k = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(k);
+                finish();
             }
         });
 
 
         if(PreferenceData.getKeyUserId().isEmpty()){
-            test.setVisibility(View.GONE);
-            kakao.setVisibility(View.VISIBLE);
+            pass.setVisibility(View.GONE);
+            join.setVisibility(View.VISIBLE);
         }else{
-            test.setVisibility(View.VISIBLE);
-            kakao.setVisibility(View.GONE);
+            pass.setVisibility(View.VISIBLE);
+//            join.setVisibility(View.GONE);
         }
 
 
-        // 네이버 아이디 로그인을 요청하는 코드
-//        authLoginButton = (OAuthLoginButton) findViewById(R.id.buttonOAuthLoginImg);
-//        mOAuthLoginModule = OAuthLogin.getInstance();
-//        mOAuthLoginModule.init(
-//                LoginActivity.this
-//                ,"AFa6RqAFrtTigjbHCodg"
-//                ,"_msJq65bIS"
-//                ,"MeYou"
-//
-//        );
     }
 
 
