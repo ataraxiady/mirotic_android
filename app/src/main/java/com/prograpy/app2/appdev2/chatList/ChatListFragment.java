@@ -114,8 +114,6 @@ public class ChatListFragment extends Fragment{
 
 
                 }else{
-                    Toast.makeText(getContext(), result.getMsg(), Toast.LENGTH_SHORT).show();
-
                     emptyView.setVisibility(View.VISIBLE);
                     chatRecyclerView.setVisibility(View.GONE);
                 }
@@ -128,7 +126,6 @@ public class ChatListFragment extends Fragment{
                 emptyView.setVisibility(View.VISIBLE);
                 chatRecyclerView.setVisibility(View.GONE);
 
-                Toast.makeText(getContext(), "서버 통신에 실패하였습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override

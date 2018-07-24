@@ -3,20 +3,38 @@
 
     <string-array name="spinner_hobby">
         <item>대분류</item>
-        <item>운동</item>
+        <item>스포츠</item>
         <item>음악</item>
         <item>영화</item>
+        <item>독서</item>
+        <item>e-스포츠</item>
+        <item>여가</item>
+        <item>문화생활</item>
+        <item>먹기</item>
     </string-array>
+
     <string-array name="spinner_hobby_sport">
-        <item>수영</item>
-        <item>골프</item>
+        <item>헬스</item>
         <item>축구</item>
         <item>농구</item>
+        <item>배구</item>
+        <item>야구</item>
         <item>배드민턴</item>
         <item>테니스</item>
+        <item>수영</item>
+        <item>골프</item>
         <item>탁구</item>
         <item>스키/보드</item>
+        <item>등산</item>
+        <item>복싱/킥복싱</item>
+        <item>쿵푸</item>
+        <item>레슬링</item>
+        <item>태권도</item>
+        <item>양궁</item>
+        <item>스케이트</item>
+        <item>요가</item>
     </string-array>
+
     <string-array name="spinner_hobby_music">
         <item>힙합</item>
         <item>발라드</item>
@@ -26,6 +44,7 @@
         <item>가요</item>
         <item>EDM</item>
     </string-array>
+
     <string-array name="spinner_hobby_movie">
         <item>공포</item>
         <item>스릴러</item>
@@ -39,6 +58,102 @@
         <item>미스터리</item>
         <item>범죄</item>
     </string-array>
+
+    <string-array name="spinner_hobby_book">
+        <item>추리</item>
+        <item>판타지</item>
+        <item>로맨스</item>
+        <item>만화</item>
+        <item>공상과학</item>
+        <item>공포</item>
+        <item>역사</item>
+        <item>로맨스/연애</item>
+        <item>스릴러</item>
+        <item>무협</item>
+        <item>라이트노벨</item>
+        <item>게임소설</item>
+        <item>사극소설</item>
+        <item>아동문학</item>
+    </string-array>
+
+    <string-array name="spinner_hobby_esports">
+        <item>배틀그라운드</item>
+        <item>오버워치</item>
+        <item>리그오브레전드</item>
+        <item>월드오브워크래프트</item>
+        <item>메이플스토리</item>
+        <item>카트라이더</item>
+        <item>크레이지아케이드</item>
+        <item>카운터스트라이크</item>
+        <item>포트나이트</item>
+        <item>테일즈러너</item>
+        <item>검은사막</item>
+        <item>파이널판타지</item>
+        <item>아이온</item>
+        <item>서든어택</item>
+        <item>피파온라인</item>
+        <item>테라</item>
+        <item>던전앤파이터</item>
+        <item>리니지</item>
+        <item>서든어택</item>
+        <item>그랜드체이스</item>
+        <item>블레이드앤소울</item>
+        <item>디아블로</item>
+        <item>사이퍼즈</item>
+        <item>히오스</item>
+        <item>스타크래프트</item>
+        <item>니드포스피드엣지</item>
+        <item>이카루스</item>
+        <item>아키에이지</item>
+        <item>버블파이터</item>
+        <item>클로저스</item>
+        <item>아바</item>
+        <item>뮤</item>
+        <item>EOS</item>
+        <item>하스스톤</item>
+        <item>스팀게임</item>
+    </string-array>
+
+    <string-array name="spinner_hobby_hobby">
+        <item>수다떨기</item>
+        <item>음주</item>
+        <item>요리</item>
+        <item>낮잠</item>
+        <item>청소</item>
+        <item>글쓰기</item>
+        <item>쇼핑하기</item>
+        <item>코디하기</item>
+        <item>SNS하기</item>
+        <item>사진찍기</item>
+        <item>멍때리기</item>
+        <item>덕질하기</item>
+        <item>2차창작하기</item>
+        <item>여행</item>
+        <item>흡연</item>
+        <item>도박</item>
+        <item>수집</item>
+        <item>공예</item>
+        <item>뜨개질</item>
+        <item>사우나</item>
+        <item>명상</item>
+    </string-array>
+
+    <string-array name="spinner_hobby_monwha">
+        <item>전시회,미술관가기</item>
+        <item>연극관람</item>
+        <item>콘서트가기</item>
+        <item>방탈출게임</item>
+        <item>플스방가기</item>
+        <item>바둑두기</item>
+        <item>악기연주</item>
+    </string-array>
+
+    <string-array name="spinner_hobby_eat">
+        <item>맛집찾아가기</item>
+        <item>카페가기</item>
+        <item>폭식하기</item>
+    </string-array>
+
     <string-array name="spinner_hobby_empty">
         <item>소분류</item>
     </string-array>

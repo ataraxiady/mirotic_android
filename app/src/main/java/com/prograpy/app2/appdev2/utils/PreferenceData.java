@@ -16,6 +16,8 @@ public class PreferenceData
      * preference 키값
      */
     private static final String KEY_USER_ID       = "user_id";
+    private static final String KEY_USER_PW       = "user_pw";
+    private static final String KEY_USER_LOGIN_SUCCESS       = "login_success";
     private static final String KEY_FCM_TOKEN       = "fcm_token";
     private static final String KEY_TODAY_INTRODUCE = "today_introduce";
     private static final String KEY_LOGIN_TIME = "login_time";
@@ -135,4 +137,46 @@ public class PreferenceData
 
         return curTime;
     }
+
+    public static void setKeyUserPw(String pw){
+
+        if(mEditor != null){
+            mEditor.putString(KEY_USER_PW, pw);
+            mEditor.commit();
+        }
+    }
+
+
+    public static String getKeyUserPw(){
+        String pw = "";
+
+        if(mPreferences != null){
+            pw = mPreferences.getString(KEY_USER_PW, pw);
+        }
+
+        return pw;
+
+    }
+
+
+    public static void setKeyUserLoginSuccess(boolean isSuccess){
+        if(mEditor != null){
+            mEditor.putBoolean(KEY_USER_LOGIN_SUCCESS, isSuccess);
+            mEditor.commit();
+        }
+    }
+
+
+    public static boolean getKeyUserLoginSuccess(){
+
+        boolean isSuccess = false;
+
+
+        if(mPreferences != null){
+            isSuccess = mPreferences.getBoolean(KEY_USER_LOGIN_SUCCESS, isSuccess);
+        }
+
+        return isSuccess;
+    }
+
 }

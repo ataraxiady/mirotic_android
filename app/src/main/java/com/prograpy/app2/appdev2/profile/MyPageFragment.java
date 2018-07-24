@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.data.UserData;
 import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
 import com.prograpy.app2.appdev2.task.GetMyInfoTask;
 import com.prograpy.app2.appdev2.task.ModifyinformationTask;
@@ -77,8 +78,6 @@ public class MyPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
 
-
-        final String[] genderdata = {""};
         // 프로필 정보
         profileImage = (ImageView) view.findViewById(R.id.imageView);
         name_TextView = view.findViewById(R.id.profile_name);
@@ -185,25 +184,29 @@ public class MyPageFragment extends Fragment {
 
                     if (result.getUserInfos() != null && result.getUserInfos().size() > 0) {
 
-                        Glide.with(getContext()).load(result.getUserInfos().get(0).getProfileimage()).into(profileImage);
+                        UserData myInfo = result.getUserInfos().get(0);
 
-                        name_TextView.setText(result.getUserInfos().get(0).getName());
-                        area_TextView.setText(result.getUserInfos().get(0).getArea());
-                        age_TextView.setText("(" + result.getUserInfos().get(0).getAge() + ")");
-                        first_main.setText(String.valueOf(result.getUserInfos().get(0).getBh_number_1()));
-                        first_sub.setText(String.valueOf(result.getUserInfos().get(0).getSh_number_1()));
-                        second_sub.setText(String.valueOf(result.getUserInfos().get(0).getBh_number_2()));
-                        second_sub.setText(String.valueOf(result.getUserInfos().get(0).getSh_number_2()));
-                        third_main.setText(String.valueOf(result.getUserInfos().get(0).getBh_number_3()));
-                        third_sub.setText(String.valueOf(result.getUserInfos().get(0).getSh_number_3()));
+                        Glide.with(getContext()).load(myInfo.getProfileimage()).into(profileImage);
 
-                        // 성별 radio
-                        genderdata[0] = result.getUserInfos().get(0).getGender();
+                        name_TextView.setText(myInfo.getName());
+                        area_TextView.setText(myInfo.getArea());
+                        age_TextView.setText("(" + myInfo.getAge() + ")");
 
-                        if (genderdata.equals("남자")) {
-                            man_btn.isChecked();
+                        first_main.setText(hobby_first_edit.getItem(myInfo.getBh_number_1()));
+
+                        first_sub.setText(String.valueOf(myInfo.getSh_number_1()));
+
+                        second_main.setText(hobby_second_edit.getItem(myInfo.getBh_number_2()));
+                        second_sub.setText(String.valueOf(myInfo.getSh_number_2()));
+
+                        third_main.setText(hobby_third_edit.getItem(myInfo.getBh_number_3()));
+                        third_sub.setText(String.valueOf(myInfo.getSh_number_3()));
+
+
+                        if (myInfo.getGender().equals("남자")) {
+                            man_btn.setChecked(true);
                         } else {
-                            woman_btn.isChecked();
+                            woman_btn.setChecked(true);
                         }
                     }
 
@@ -345,5 +348,4 @@ public class MyPageFragment extends Fragment {
                 sh_number_3);
 
     }
-
 }

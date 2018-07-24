@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button join;
     private Button login;
-    private Button pass;
 
     private EditText myIdEdit;
     private EditText myPwEdit;
@@ -85,25 +84,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        networkProgressDialog = new NetworkProgressDialog(this);
+
         login = (Button) findViewById(R.id.login);
         join = (Button) findViewById(R.id.go_join);
-        pass = (Button) findViewById(R.id.go_pass);
 
         myIdEdit = findViewById(R.id.id);
 
         myPwEdit = findViewById(R.id.password);
-
-        pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                updateFcmKey();
-
-                Intent k = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(k);
-                finish();
-            }
-        });
 
         join.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,41 +107,38 @@ public class LoginActivity extends AppCompatActivity {
                 myId = myIdEdit.getText().toString().trim();
                 myPw = myPwEdit.getText().toString().trim();
 
-//                networkProgressDialog.show();
+                networkProgressDialog.show();
 
                 LoginTask loginTask = new LoginTask(new LoginTask.LoginTaskResultHandler() {
                     @Override
                     public void onSuccessTask(MyInfoResult result) {
-//                        networkProgressDialog.dismiss();
+                        networkProgressDialog.dismiss();
 
-                        if (result != null) {
-                            if (result.isSuccess()) {
+                        if (result.isSuccess()) {
 
-                                Log.d("확인","확인1");
+                            loginDataList = result.getUserInfos();
 
-                                loginDataList = result.getUserInfos();
-                                if (loginDataList != null && loginDataList.size() > 0) {
-                                    id = loginDataList.get(0).getID();
-                                    pw = loginDataList.get(0).getPassword();
-                                    Log.d("확인","확인2");
-                                }
+                            PreferenceData.setKeyUserId(loginDataList.get(0).getID());
+                            PreferenceData.setKeyUserPw(loginDataList.get(0).getPassword());
+                            PreferenceData.setKeyUserLoginSuccess(true);
 
-                                    Intent k = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(k);
-                                    finish();
-                                    Log.d("확인","확인3");
+                            Intent k = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(k);
+                            finish();
 
-                            } else {
-                                Toast.makeText(LoginActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
-                            }
                         } else {
-                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailTask() {
                         networkProgressDialog.dismiss();
+
+                        PreferenceData.setKeyUserId("");
+                        PreferenceData.setKeyUserPw("");
+                        PreferenceData.setKeyUserLoginSuccess(false);
+
                         Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
                     }
@@ -161,34 +146,21 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCancelTask() {
                         networkProgressDialog.dismiss();
+
+                        PreferenceData.setKeyUserId("");
+                        PreferenceData.setKeyUserPw("");
+                        PreferenceData.setKeyUserLoginSuccess(false);
+
                         Toast.makeText(LoginActivity.this, "서버 통신을 취소하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
                 loginTask.execute(ApiValue.API_LOGIN, myId, myPw);
-                Log.d("확인","확인4");
 
             }
         });
 
-
-
-        if(PreferenceData.getKeyUserId().isEmpty()){
-            pass.setVisibility(View.GONE);
-            join.setVisibility(View.VISIBLE);
-        }else{
-            pass.setVisibility(View.VISIBLE);
-//            join.setVisibility(View.GONE);
-        }
-
-
     }
 
-
-    private void updateFcmKey(){
-
-        UpdateFcmKeyTask updateFcmKeyTask = new UpdateFcmKeyTask(null);
-        updateFcmKeyTask.execute(ApiValue.API_UPDATE_FCM_KEY, PreferenceData.getKeyUserId(), PreferenceData.getKeyFcmToken());
-    }
 
 }

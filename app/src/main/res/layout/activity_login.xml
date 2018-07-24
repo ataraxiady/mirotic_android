@@ -16,60 +16,58 @@
         android:src="@drawable/logo" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/id"
-                android:layout_marginTop="40dp"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="ID"/>
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:textColor="@color/Color_black"
+                android:textColorHint="@color/Color_grey05"
+                android:hint="영문자 / 숫자 조합으로 아이디를 입력해 주세요"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:imeOptions="actionNext"
+                android:inputType="text" />
+
             <EditText
                 android:id="@+id/password"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Password"/>
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:textColor="@color/Color_black"
+                android:textColorHint="@color/Color_grey05"
+                android:hint="비밀번호를 입력해 주세요."
+                android:singleLine="true"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/login"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:text="로그인"
-            android:layout_marginTop="55dp"
             android:background="#0000"/>
 
     </LinearLayout>
 
-
-
-    <!--<Button-->
-    <!--android:id="@+id/btnKakao"-->
-    <!--android:layout_width="230dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:background="#ffcc00"-->
-    <!--android:text="카카오톡으로 시작하기"-->
-    <!--android:layout_marginTop="10dp"/>-->
-
-    <Button
-        android:id="@+id/go_pass"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="#0000"
-        android:text="가입했던 계정으로 시작하기"
-        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/go_join"
