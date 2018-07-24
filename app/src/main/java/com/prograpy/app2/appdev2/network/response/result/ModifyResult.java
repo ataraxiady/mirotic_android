@@ -15,10 +15,6 @@ public class ModifyResult {
     @SerializedName("error")
     private String error = "";
 
-    @SerializedName("myid")
-    private String myid = "";
-
-
     public boolean isSuccess() {
         return success;
     }
@@ -34,8 +30,4 @@ public class ModifyResult {
     public void setError(String error) {
         this.error = error;
     }
-
-    public String getMyid() { return myid; }
-
-    public void setMyid(String myid) { this.myid = myid; }
 }

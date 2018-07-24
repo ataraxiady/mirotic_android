@@ -63,7 +63,6 @@ public class MyPageFragment extends Fragment {
     private String sh_number_3 = "";
 
     GetMyInfoTask datarecivetask;
-    ModifyinformationTask modifyinformationTask;
 
     private ArrayList<HobbyData> bigHobbyList = new ArrayList<HobbyData>();
     private ArrayList<String> bigHobbyNameList = new ArrayList<String>();
@@ -152,24 +151,7 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (edit_btn.getText().equals("수정")) {
-
-                    man_btn.setClickable(true);
-                    woman_btn.setClickable(true);
-                    area_TextView.setVisibility(View.GONE);
-                    area_EditText.setVisibility(View.VISIBLE);
-                    first_main.setVisibility(View.GONE);
-                    spinner_hobby1_edit.setVisibility(View.VISIBLE);
-                    first_sub.setVisibility(View.GONE);
-                    spinner_hobby2_edit.setVisibility(View.VISIBLE);
-                    second_main.setVisibility(View.GONE);
-                    spinner_hobby_second1_edit.setVisibility(View.VISIBLE);
-                    second_sub.setVisibility(View.GONE);
-                    spinner_hobby_second2_edit.setVisibility(View.VISIBLE);
-                    third_main.setVisibility(View.GONE);
-                    spinner_hobby_third1_edit.setVisibility(View.VISIBLE);
-                    third_sub.setVisibility(View.GONE);
-                    spinner_hobby_third2_edit.setVisibility(View.VISIBLE);
-                    edit_btn.setText("완료");
+                    setVisibleView(true);
 
                 } else if (edit_btn.getText().equals("완료")) {
 
@@ -397,56 +379,105 @@ public class MyPageFragment extends Fragment {
         }
     };
 
+    private void setVisibleView(boolean isEdit){
+
+        if(isEdit){
+            area_TextView.setVisibility(View.GONE);
+            area_EditText.setVisibility(View.VISIBLE);
+
+            first_main.setVisibility(View.GONE);
+            spinner_hobby1_edit.setVisibility(View.VISIBLE);
+            spinner_hobby1_edit.setAdapter(hobby_first_edit);
+
+            first_sub.setVisibility(View.GONE);
+            spinner_hobby2_edit.setVisibility(View.VISIBLE);
+
+            second_main.setVisibility(View.GONE);
+            spinner_hobby_second1_edit.setVisibility(View.VISIBLE);
+            spinner_hobby_second1_edit.setAdapter(hobby_second_edit);
+
+            second_sub.setVisibility(View.GONE);
+            spinner_hobby_second2_edit.setVisibility(View.VISIBLE);
+
+            third_main.setVisibility(View.GONE);
+            spinner_hobby_third1_edit.setVisibility(View.VISIBLE);
+            spinner_hobby_third1_edit.setAdapter(hobby_third_edit);
+
+            third_sub.setVisibility(View.GONE);
+            spinner_hobby_third2_edit.setVisibility(View.VISIBLE);
+
+            edit_btn.setText("완료");
+        }else{
+
+            area_EditText.setText("");
+            area_EditText.setVisibility(View.GONE);
+            area_TextView.setVisibility(View.VISIBLE);
+
+            first_main.setVisibility(View.VISIBLE);
+            spinner_hobby1_edit.setVisibility(View.GONE);
+            spinner_hobby1_edit.setAdapter(null);
+
+            first_sub.setVisibility(View.VISIBLE);
+            spinner_hobby2_edit.setVisibility(View.GONE);
+
+            second_main.setVisibility(View.VISIBLE);
+            spinner_hobby_second1_edit.setVisibility(View.GONE);
+            spinner_hobby_second1_edit.setAdapter(null);
+
+            second_sub.setVisibility(View.VISIBLE);
+            spinner_hobby_second2_edit.setVisibility(View.GONE);
+
+            third_main.setVisibility(View.VISIBLE);
+            spinner_hobby_third1_edit.setVisibility(View.GONE);
+            spinner_hobby_third1_edit.setAdapter(null);
+
+            third_sub.setVisibility(View.VISIBLE);
+            spinner_hobby_third2_edit.setVisibility(View.GONE);
+
+            man_btn.setClickable(false);
+            woman_btn.setClickable(false);
+
+            edit_btn.setText("수정");
+
+        }
+    }
+
+
     private void updateData() {
-        ModifyinformationTask modifyinformationTask = new ModifyinformationTask(new ModifyinformationTask.ModifyResulthandler() {
+        ModifyinformationTask modifyinformationTask = new ModifyinformationTask(new ModifyinformationTask.MyInfoResulthandler() {
             @Override
             public void onSuccessTask(ModifyResult result) {
 
                 if(result.isSuccess()){
                     // 수정 데이터 셋팅
-                    area = area_EditText.getText().toString().trim();
-                    area_TextView.setText(area);
+                    area_TextView.setText(area_EditText.getText().toString());
                     first_main.setText(spinner_hobby1_edit.getSelectedItem().toString());
                     first_sub.setText(spinner_hobby2_edit.getSelectedItem().toString());
                     second_main.setText(spinner_hobby_second1_edit.getSelectedItem().toString());
                     second_sub.setText(spinner_hobby_second2_edit.getSelectedItem().toString());
                     third_main.setText(spinner_hobby_third1_edit.getSelectedItem().toString());
                     third_sub.setText(spinner_hobby_third2_edit.getSelectedItem().toString());
-
-                    area_EditText.setVisibility(View.GONE);
-                    area_TextView.setVisibility(View.VISIBLE);
-                    first_main.setVisibility(View.VISIBLE);
-                    spinner_hobby1_edit.setVisibility(View.GONE);
-                    first_sub.setVisibility(View.VISIBLE);
-                    spinner_hobby2_edit.setVisibility(View.GONE);
-                    second_main.setVisibility(View.VISIBLE);
-                    spinner_hobby_second1_edit.setVisibility(View.GONE);
-                    second_sub.setVisibility(View.VISIBLE);
-                    spinner_hobby_second2_edit.setVisibility(View.GONE);
-                    third_main.setVisibility(View.VISIBLE);
-                    spinner_hobby_third1_edit.setVisibility(View.GONE);
-                    third_sub.setVisibility(View.VISIBLE);
-                    spinner_hobby_third2_edit.setVisibility(View.GONE);
-
-                    man_btn.setClickable(false);
-                    woman_btn.setClickable(false);
-
-                    edit_btn.setText("수정");
+                }
+                else{
+                    Toast.makeText(getContext(), result.getError(), Toast.LENGTH_SHORT).show();
                 }
 
+                setVisibleView(false);
             }
 
             @Override
             public void onFailTask() {
-
+                setVisibleView(false);
+                Toast.makeText(getContext(), "서버 통신 실패", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelTask() {
-
+                setVisibleView(false);
+                Toast.makeText(getContext(), "서버 통신 실패", Toast.LENGTH_SHORT).show();
             }
         });
-        modifyinformationTask.execute(ApiValue.API_ModifyInfo, area,
+        modifyinformationTask.execute(ApiValue.API_ModifyInfo, PreferenceData.getKeyUserId(), area_EditText.getText().toString(),
                 bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2,
                 sh_number_3);
 
