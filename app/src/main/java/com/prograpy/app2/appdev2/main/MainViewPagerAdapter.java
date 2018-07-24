@@ -6,14 +6,27 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.prograpy.app2.appdev2.chatList.ChatListFragment;
+import com.prograpy.app2.appdev2.network.response.data.HobbyData;
 import com.prograpy.app2.appdev2.profile.MyPageFragment;
 import com.prograpy.app2.appdev2.setting.SetFragment;
+
+import java.util.ArrayList;
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
 
+    private ArrayList<HobbyData> bigHobbyList = new ArrayList<HobbyData>();
+    private ArrayList<HobbyData> smallHobbyList = new ArrayList<HobbyData>();
+
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
+    }
+
+
+
+    public void setHobbyList(ArrayList<HobbyData> bigHobbyList, ArrayList<HobbyData> smallHobbyList){
+        this.bigHobbyList = bigHobbyList;
+        this.smallHobbyList = smallHobbyList;
     }
 
     @Override
@@ -25,7 +38,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
                 return MatchFragment.createFragment();
 
             case 1:
-                return MyPageFragment.createFragment();
+                return MyPageFragment.createFragment(bigHobbyList, smallHobbyList);
 
             case 2:
                 return ChatListFragment.createFragment();

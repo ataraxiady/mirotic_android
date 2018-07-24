@@ -13,13 +13,24 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
+import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.data.HobbyData;
+import com.prograpy.app2.appdev2.network.response.result.HobbyResult;
+import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
+import com.prograpy.app2.appdev2.task.GetHobbyTask;
+import com.prograpy.app2.appdev2.task.LoginTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
+import java.util.ArrayList;
+
 public class IntroActivity extends AppCompatActivity {
+
+    private ArrayList<HobbyData> bigHobbyList = new ArrayList<HobbyData>();
+    private ArrayList<HobbyData> smallHobbyList = new ArrayList<HobbyData>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,32 +41,7 @@ public class IntroActivity extends AppCompatActivity {
 
         if (CheckPermission(this)) {
 
-            if (PreferenceData.getKeyUserLoginSuccess()) {
-
-                updateFcmKey();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        Intent k = new Intent(IntroActivity.this, MainActivity.class);
-                        startActivity(k);
-                        finish();
-                    }
-                }, 2000);
-
-            } else {
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        Intent k = new Intent(IntroActivity.this, LoginActivity.class);
-                        startActivity(k);
-                        finish();
-                    }
-                }, 2000);
-            }
+            callHobbyListData();
 
         }
     }
@@ -68,6 +54,142 @@ public class IntroActivity extends AppCompatActivity {
     }
 
 
+    private void callHobbyListData(){
+
+        GetHobbyTask hobbyTask = new GetHobbyTask(new GetHobbyTask.TaskResultHandler() {
+            @Override
+            public void onSuccessTask(HobbyResult result) {
+
+
+                if(result.isSuccess()){
+
+
+                    if(result.getBigHobbyList() != null && result.getBigHobbyList().size() > 0 &&
+                            result.getSmallHobbyList() != null && result.getSmallHobbyList().size() > 0){
+
+                        bigHobbyList  = result.getBigHobbyList();
+                        smallHobbyList = result.getSmallHobbyList();
+
+                        if (PreferenceData.getKeyUserLoginSuccess()) {
+
+                            callLoginTask();
+
+
+                        } else {
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    Intent k = new Intent(IntroActivity.this, LoginActivity.class);
+                                    k.putParcelableArrayListExtra("bigHobby", bigHobbyList);
+                                    k.putParcelableArrayListExtra("smallHobby", smallHobbyList);
+                                    startActivity(k);
+                                    finish();
+                                }
+                            }, 2000);
+                        }
+
+                    }else{
+
+                        Toast.makeText(IntroActivity.this, "서버 통신 실패", Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    }
+
+
+                }else{
+
+                    Toast.makeText(IntroActivity.this, "서버 통신 실패", Toast.LENGTH_SHORT).show();
+                    finish();
+
+                }
+            }
+
+            @Override
+            public void onFailTask() {
+
+                Toast.makeText(IntroActivity.this, "서버 통신 실패", Toast.LENGTH_SHORT).show();
+                finish();
+
+            }
+
+            @Override
+            public void onCancelTask() {
+
+                Toast.makeText(IntroActivity.this, "서버 통신 실패", Toast.LENGTH_SHORT).show();
+                finish();
+
+            }
+        });
+
+
+        hobbyTask.execute(ApiValue.API_GET_HOBBY_LIST);
+    }
+
+
+    
+    private void callLoginTask(){
+        LoginTask loginTask = new LoginTask(new LoginTask.LoginTaskResultHandler() {
+            @Override
+            public void onSuccessTask(MyInfoResult result) {
+                if (result.isSuccess()) {
+                    
+                    if(result.getUserInfos().size() > 0){
+
+                        PreferenceData.setKeyUserId(result.getUserInfos().get(0).getID());
+                        PreferenceData.setKeyUserPw(result.getUserInfos().get(0).getPassword());
+                        PreferenceData.setKeyUserLoginSuccess(true);
+
+                        updateFcmKey();
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                Intent k = new Intent(IntroActivity.this, MainActivity.class);
+                                k.putParcelableArrayListExtra("bigHobby", bigHobbyList);
+                                k.putParcelableArrayListExtra("smallHobby", smallHobbyList);
+                                startActivity(k);
+                                finish();
+                            }
+                        }, 2000);
+
+                    } else {
+                        Toast.makeText(IntroActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                    }
+                    
+                } else {
+                    Toast.makeText(IntroActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailTask() {
+
+                PreferenceData.setKeyUserId("");
+                PreferenceData.setKeyUserPw("");
+                PreferenceData.setKeyUserLoginSuccess(false);
+
+                Toast.makeText(IntroActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelTask() {
+                PreferenceData.setKeyUserId("");
+                PreferenceData.setKeyUserPw("");
+                PreferenceData.setKeyUserLoginSuccess(false);
+
+                Toast.makeText(IntroActivity.this, "서버 통신을 취소하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        loginTask.execute(ApiValue.API_LOGIN, PreferenceData.getKeyUserId(), PreferenceData.getKeyUserPw());
+    }
+    
+    
+    
     /**
      * 권한 있는지 없는지 체크하는거
      *
@@ -124,7 +246,11 @@ public class IntroActivity extends AppCompatActivity {
                     //이쪽으로 들어오는 false는 다시보지 않기 체크로 인한 false
 
                     ActivityCompat.requestPermissions(this, permissions, 0);
+                }else{
+
+                    callHobbyListData();
                 }
         }
     }
 }
+

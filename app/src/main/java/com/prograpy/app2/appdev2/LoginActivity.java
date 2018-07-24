@@ -97,6 +97,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent k = new Intent(LoginActivity.this, JoinActivity.class);
+                k.putParcelableArrayListExtra("bigHobby", getIntent().getParcelableArrayListExtra("bigHobby"));
+                k.putParcelableArrayListExtra("smallHobby", getIntent().getParcelableArrayListExtra("smallHobby"));
                 startActivity(k);
             }
         });
@@ -123,6 +125,8 @@ public class LoginActivity extends AppCompatActivity {
                             PreferenceData.setKeyUserLoginSuccess(true);
 
                             Intent k = new Intent(LoginActivity.this, MainActivity.class);
+                            k.putParcelableArrayListExtra("bigHobby", getIntent().getParcelableArrayListExtra("bigHobby"));
+                            k.putParcelableArrayListExtra("smallHobby", getIntent().getParcelableArrayListExtra("smallHobby"));
                             startActivity(k);
                             finish();
 

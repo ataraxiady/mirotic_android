@@ -23,4 +23,6 @@ public class ApiValue {
 
     public static final String API_ModifyInfo = "/SendModifydata";
 
+    public static final String API_GET_HOBBY_LIST = "/getAllHobbyList";
+
 }

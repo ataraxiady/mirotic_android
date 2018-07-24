@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,12 +30,14 @@ import com.prograpy.app2.appdev2.main.MainActivity;
 import com.prograpy.app2.appdev2.main.MatchFragment;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.data.HobbyData;
 import com.prograpy.app2.appdev2.network.response.result.JoinResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 public class JoinActivity extends AppCompatActivity {
     // ㅁ 조건
@@ -91,11 +94,30 @@ public class JoinActivity extends AppCompatActivity {
     private Spinner spinner_hobby_third1;
     private Spinner spinner_hobby_third2;
 
+    private ArrayList<HobbyData> bigHobbyList = new ArrayList<HobbyData>();
+    private ArrayList<String> bigHobbyNameList = new ArrayList<String>();
+
+    private ArrayList<HobbyData> smallHobbyList = new ArrayList<HobbyData>();
+    private ArrayList<String> smallHobbyNameList = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+
+
+        bigHobbyList = getIntent().getParcelableArrayListExtra("bigHobby");
+        smallHobbyList = getIntent().getParcelableArrayListExtra("smallHobby");
+
+
+        if(bigHobbyList.size() > 0){
+
+            for (HobbyData data : bigHobbyList){
+                bigHobbyNameList.add(data.getHobby_name());
+            }
+        }
 
 
         /*
@@ -110,6 +132,12 @@ public class JoinActivity extends AppCompatActivity {
 
 
         center_image = (ImageView) findViewById(R.id.center_image);
+        center_image.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                doTakeAlbumAction();
+            }
+        });
+
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
@@ -230,10 +258,14 @@ public class JoinActivity extends AppCompatActivity {
                             if (result.isSuccess()) {
 
                                 PreferenceData.setKeyUserId(id);
+                                PreferenceData.setKeyUserPw(password);
+                                PreferenceData.setKeyUserLoginSuccess(true);
 
                                 updateFcmKey();
 
                                 Intent i = new Intent(JoinActivity.this, MainActivity.class);
+                                i.putParcelableArrayListExtra("bigHobby", bigHobbyList);
+                                i.putParcelableArrayListExtra("smallHobby", smallHobbyList);
                                 startActivity(i);
                                 ActivityCompat.finishAffinity(JoinActivity.this);
 
@@ -278,20 +310,23 @@ public class JoinActivity extends AppCompatActivity {
 
         spinner_hobby1 = (Spinner) findViewById(R.id.hobby_first);
         spinner_hobby2 = (Spinner) findViewById(R.id.hobby_first_sub);
-        hobby_first = ArrayAdapter.createFromResource(this, R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
+        hobby_first = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, bigHobbyNameList);
+
         spinner_hobby1.setAdapter(hobby_first);
         spinner_hobby1.setOnItemSelectedListener(spinnerSelectListener);
 
         spinner_hobby_second1 = (Spinner) findViewById(R.id.hobby_second);
         spinner_hobby_second2 = (Spinner) findViewById(R.id.hobby_second_sub);
-        hobby_second = ArrayAdapter.createFromResource(this, R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
+        hobby_second = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, bigHobbyNameList);
+
         spinner_hobby_second1.setAdapter(hobby_second);
         spinner_hobby_second1.setOnItemSelectedListener(spinnerSelectListener);
 
         // 나중에 수정 * hobby_third => hobby_first로 통일시키기
         spinner_hobby_third1 = (Spinner) findViewById(R.id.hobby_third);
         spinner_hobby_third2 = (Spinner) findViewById(R.id.hobby_third_sub);
-        hobby_third = ArrayAdapter.createFromResource(this, R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
+        hobby_third = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, bigHobbyNameList);
+
         spinner_hobby_third1.setAdapter(hobby_third);
         spinner_hobby_third1.setOnItemSelectedListener(spinnerSelectListener);
     }
@@ -304,109 +339,121 @@ public class JoinActivity extends AppCompatActivity {
     }
 
 
-
     private AdapterView.OnItemSelectedListener spinnerSelectListener = new AdapterView.OnItemSelectedListener() {
+
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
             switch (adapterView.getId()) {
 
                 case R.id.hobby_first:
-                    ArrayAdapter<CharSequence> hobby_first_adapter = null;
+                    ArrayAdapter edit_hobby_first_adapter = null;
+                    ArrayList<String> smallHobbyNameList = new ArrayList<String>();
 
-                    if (hobby_first.getItem(i).equals("대분류")) {
-                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, android.R.layout.simple_spinner_dropdown_item);
+                    smallHobbyNameList.clear();
 
-                    } else if (hobby_first.getItem(i).equals("운동")) {
-                        bh_number_1 = "1";
-                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, android.R.layout.simple_spinner_dropdown_item);
-
-                    } else if (hobby_first.getItem(i).equals("음악")) {
-                        bh_number_1 = "2";
-                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, android.R.layout.simple_spinner_dropdown_item);
-
-                    } else if (hobby_first.getItem(i).equals("영화")) {
-                        bh_number_1 = "3";
-                        hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, android.R.layout.simple_spinner_dropdown_item);
-
+                    for(HobbyData data : smallHobbyList){
+                        if(data.getHobby_big_num() == bigHobbyList.get(i).getHobby_num()){
+                            smallHobbyNameList.add(data.getHobby_name());
+                        }
                     }
 
-                    if (hobby_first_adapter != null) {
-                        spinner_hobby2.setAdapter(hobby_first_adapter);
+                    edit_hobby_first_adapter = new ArrayAdapter(view.getContext(), R.layout.support_simple_spinner_dropdown_item, smallHobbyNameList);
+
+                    if (edit_hobby_first_adapter != null) {
+                        spinner_hobby2.setAdapter(edit_hobby_first_adapter);
+                        edit_hobby_first_adapter.notifyDataSetChanged();
+
                         spinner_hobby2.setOnItemSelectedListener(spinnerSelectListener);
                     }
+
+                    bh_number_1 = String.valueOf(bigHobbyList.get(i).getHobby_num());
 
                     break;
 
                 case R.id.hobby_second:
-                    ArrayAdapter<CharSequence> hobby_second_adapter = null;
+                    ArrayAdapter edit_hobby_second_adapter = null;
+                    ArrayList<String> smallHobbyNameList2 = new ArrayList<String>();
 
-                    if (hobby_second.getItem(i).equals("대분류")) {
-                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, R.layout.support_simple_spinner_dropdown_item);
+                    smallHobbyNameList2.clear();
 
-                    } else if (hobby_second.getItem(i).equals("운동")) {
-                        bh_number_2 = "1";
-                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, R.layout.support_simple_spinner_dropdown_item);
-
-                    } else if (hobby_second.getItem(i).equals("음악")) {
-                        bh_number_2 = "2";
-                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, R.layout.support_simple_spinner_dropdown_item);
-
-                    } else if (hobby_second.getItem(i).equals("영화")) {
-                        bh_number_2 = "3";
-                        hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, R.layout.support_simple_spinner_dropdown_item);
+                    for(HobbyData data : smallHobbyList){
+                        if(data.getHobby_big_num() == bigHobbyList.get(i).getHobby_num()){
+                            smallHobbyNameList2.add(data.getHobby_name());
+                        }
                     }
 
-                    if (hobby_second_adapter != null) {
-                        spinner_hobby_second2.setAdapter(hobby_second_adapter);
+                    edit_hobby_second_adapter = new ArrayAdapter(view.getContext(), R.layout.support_simple_spinner_dropdown_item, smallHobbyNameList2);
+
+                    if (edit_hobby_second_adapter != null) {
+                        spinner_hobby_second2.setAdapter(edit_hobby_second_adapter);
+                        edit_hobby_second_adapter.notifyDataSetChanged();
+
                         spinner_hobby_second2.setOnItemSelectedListener(spinnerSelectListener);
                     }
 
+                    bh_number_2 = String.valueOf(bigHobbyList.get(i).getHobby_num());
                     break;
 
 
                 case R.id.hobby_third:
 
-                    ArrayAdapter<CharSequence> hobby_third_adapter = null;
+                    ArrayAdapter edit_hobby_third_adapter = null;
+                    ArrayList<String> smallHobbyNameList3 = new ArrayList<String>();
 
-                    if (hobby_third.getItem(i).equals("대분류")) {
-                        hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, R.layout.support_simple_spinner_dropdown_item);
+                    smallHobbyNameList3.clear();
 
-                    } else if (hobby_third.getItem(i).equals("운동")) {
-                        bh_number_3 = "1";
-                        hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, R.layout.support_simple_spinner_dropdown_item);
-
-                    } else if (hobby_third.getItem(i).equals("음악")) {
-                        bh_number_3 = "2";
-                        hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, R.layout.support_simple_spinner_dropdown_item);
-
-                    } else if (hobby_third.getItem(i).equals("영화")) {
-                        bh_number_3 = "3";
-                        hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, R.layout.support_simple_spinner_dropdown_item);
-
+                    for(HobbyData data : smallHobbyList){
+                        if(data.getHobby_big_num() == bigHobbyList.get(i).getHobby_num()){
+                            smallHobbyNameList3.add(data.getHobby_name());
+                        }
                     }
 
-                    if (hobby_third_adapter != null) {
-                        spinner_hobby_third2.setAdapter(hobby_third_adapter);
+                    edit_hobby_third_adapter = new ArrayAdapter(view.getContext(), R.layout.support_simple_spinner_dropdown_item, smallHobbyNameList3);
+
+                    if (edit_hobby_third_adapter != null) {
+                        spinner_hobby_third2.setAdapter(edit_hobby_third_adapter);
+                        edit_hobby_third_adapter.notifyDataSetChanged();
+
                         spinner_hobby_third2.setOnItemSelectedListener(spinnerSelectListener);
                     }
 
+                    bh_number_3 = String.valueOf(bigHobbyList.get(i).getHobby_num());
                     break;
 
 
                 case R.id.hobby_first_sub:
-                    sh_number_1 = String.valueOf(i+1);
-                break;
+
+                    for (HobbyData data : smallHobbyList){
+                        if(data.getHobby_name().equals((String)adapterView.getSelectedItem())){
+                            sh_number_1 = String.valueOf(data.getHobby_num());
+                            break;
+                        }
+                    }
+
+                    break;
 
                 case R.id.hobby_second_sub:
-                    sh_number_2 = String.valueOf(i+1);
+
+                    for (HobbyData data : smallHobbyList){
+                        if(data.getHobby_name().equals((String)adapterView.getSelectedItem())){
+                            sh_number_2 = String.valueOf(data.getHobby_num());
+                            break;
+                        }
+                    }
+
                     break;
 
                 case R.id.hobby_third_sub:
-                    sh_number_3 = String.valueOf(i+1);
+                    for (HobbyData data : smallHobbyList){
+                        if(data.getHobby_name().equals((String)adapterView.getSelectedItem())){
+                            sh_number_3 = String.valueOf(data.getHobby_num());
+                            break;
+                        }
+                    }
+
                     break;
             }
-
         }
 
         @Override
@@ -414,6 +461,7 @@ public class JoinActivity extends AppCompatActivity {
 
         }
     };
+
 
 
     @Override

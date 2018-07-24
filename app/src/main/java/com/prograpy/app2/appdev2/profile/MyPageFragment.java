@@ -23,11 +23,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
+import com.prograpy.app2.appdev2.network.response.data.HobbyData;
 import com.prograpy.app2.appdev2.network.response.data.UserData;
 import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
 import com.prograpy.app2.appdev2.task.GetMyInfoTask;
 import com.prograpy.app2.appdev2.task.ModifyinformationTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
+
+import java.util.ArrayList;
 
 public class MyPageFragment extends Fragment {
 
@@ -47,7 +50,7 @@ public class MyPageFragment extends Fragment {
     private Spinner spinner_hobby1_edit, spinner_hobby2_edit, spinner_hobby_second1_edit,
             spinner_hobby_second2_edit, spinner_hobby_third1_edit, spinner_hobby_third2_edit;
 
-    private ArrayAdapter<CharSequence> hobby_first_edit, hobby_second_edit, hobby_third_edit;
+    private ArrayAdapter hobby_first_edit, hobby_second_edit, hobby_third_edit;
 
     //  서버로 보내 줄 키 값 변수
     private String area = "";
@@ -61,10 +64,18 @@ public class MyPageFragment extends Fragment {
     GetMyInfoTask datarecivetask;
     ModifyinformationTask modifyinformationTask;
 
+    private ArrayList<HobbyData> bigHobbyList = new ArrayList<HobbyData>();
+    private ArrayList<String> bigHobbyNameList = new ArrayList<String>();
 
-    public static MyPageFragment createFragment() {
+    private ArrayList<HobbyData> smallHobbyList = new ArrayList<HobbyData>();
+    private ArrayList<String> smallHobbyNameList = new ArrayList<String>();
+
+
+    public static MyPageFragment createFragment(ArrayList<HobbyData> bigHobbyList, ArrayList<HobbyData> smallHobbyList) {
 
         Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("bigHobbyList", bigHobbyList);
+        bundle.putParcelableArrayList("smallHobbyList", smallHobbyList);
 
         MyPageFragment fragment = new MyPageFragment();
         fragment.setArguments(bundle);
@@ -77,6 +88,19 @@ public class MyPageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
+
+
+        bigHobbyList = getArguments().getParcelableArrayList("bigHobbyList");
+        smallHobbyList = getArguments().getParcelableArrayList("smallHobbyList");
+
+
+        if(bigHobbyList.size() > 0){
+
+            for (HobbyData data : bigHobbyList){
+                bigHobbyNameList.add(data.getHobby_name());
+            }
+        }
+
 
         // 프로필 정보
         profileImage = (ImageView) view.findViewById(R.id.imageView);
@@ -97,20 +121,22 @@ public class MyPageFragment extends Fragment {
 
         spinner_hobby1_edit = (Spinner) view.findViewById(R.id.hobby_first_edit);
         spinner_hobby2_edit = (Spinner) view.findViewById(R.id.hobby_first_sub_edit);
-        hobby_first_edit = ArrayAdapter.createFromResource(getContext(), R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
+        hobby_first_edit = new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, bigHobbyNameList);
 
         spinner_hobby1_edit.setAdapter(hobby_first_edit);
         spinner_hobby1_edit.setOnItemSelectedListener(editspinnerSelectListener);
 
         spinner_hobby_second1_edit = (Spinner) view.findViewById(R.id.hobby_second_edit);
         spinner_hobby_second2_edit = (Spinner) view.findViewById(R.id.hobby_second_sub_edit);
-        hobby_second_edit = ArrayAdapter.createFromResource(getContext(), R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
+        hobby_second_edit = new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, bigHobbyNameList);
+
         spinner_hobby_second1_edit.setAdapter(hobby_second_edit);
         spinner_hobby_second1_edit.setOnItemSelectedListener(editspinnerSelectListener);
 
         spinner_hobby_third1_edit = (Spinner) view.findViewById(R.id.hobby_third_edit);
         spinner_hobby_third2_edit = (Spinner) view.findViewById(R.id.hobby_third_sub_edit);
-        hobby_third_edit = ArrayAdapter.createFromResource(getContext(), R.array.spinner_hobby, R.layout.support_simple_spinner_dropdown_item);
+        hobby_third_edit = new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, bigHobbyNameList);
+
         spinner_hobby_third1_edit.setAdapter(hobby_third_edit);
         spinner_hobby_third1_edit.setOnItemSelectedListener(editspinnerSelectListener);
 
@@ -192,21 +218,55 @@ public class MyPageFragment extends Fragment {
                         area_TextView.setText(myInfo.getArea());
                         age_TextView.setText("(" + myInfo.getAge() + ")");
 
-                        first_main.setText(hobby_first_edit.getItem(myInfo.getBh_number_1()));
+                        boolean first = false, sec = false, thr = false;
 
-                        first_sub.setText(String.valueOf(myInfo.getSh_number_1()));
+                        for(HobbyData data : bigHobbyList){
+                            if(data.getHobby_num() == myInfo.getBh_number_1()){
+                                first_main.setText(data.getHobby_name());
+                                first = true;
+                            }
+                            if(data.getHobby_num() == myInfo.getBh_number_2()){
+                                second_main.setText(data.getHobby_name());
+                                sec = true;
+                            }
+                            if(data.getHobby_num() == myInfo.getBh_number_3()){
+                                third_main.setText(data.getHobby_name());
+                                thr = true;
+                            }
 
-                        second_main.setText(hobby_second_edit.getItem(myInfo.getBh_number_2()));
-                        second_sub.setText(String.valueOf(myInfo.getSh_number_2()));
+                            if(first && sec && thr)
+                                break;
+                        }
 
-                        third_main.setText(hobby_third_edit.getItem(myInfo.getBh_number_3()));
-                        third_sub.setText(String.valueOf(myInfo.getSh_number_3()));
+                        first = false;
+                        sec = false;
+                        thr = false;
+
+                        for(HobbyData data : smallHobbyList){
+                            if(data.getHobby_num() == myInfo.getSh_number_1()){
+                                first_sub.setText(data.getHobby_name());
+                                first = true;
+                            }
+                            if(data.getHobby_num() == myInfo.getSh_number_2()){
+                                second_sub.setText(data.getHobby_name());
+                                sec = true;
+                            }
+                            if(data.getHobby_num() == myInfo.getSh_number_3()){
+                                third_sub.setText(data.getHobby_name());
+                                thr = true;
+                            }
+
+                            if(first && sec && thr)
+                                break;
+                        }
 
 
                         if (myInfo.getGender().equals("남자")) {
+                            man_btn.setSelected(true);
                             man_btn.setChecked(true);
                         } else {
                             woman_btn.setChecked(true);
+                            woman_btn.setSelected(true);
                         }
                     }
 
@@ -237,100 +297,115 @@ public class MyPageFragment extends Fragment {
 
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
             switch (adapterView.getId()) {
 
                 case R.id.hobby_first_edit:
-                    ArrayAdapter<CharSequence> edit_hobby_first_adapter = null;
+                    ArrayAdapter edit_hobby_first_adapter = null;
+                    ArrayList<String> smallHobbyNameList = new ArrayList<String>();
 
-                    if (hobby_first_edit.getItem(i).equals("대분류")) {
-                        edit_hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, android.R.layout.simple_spinner_dropdown_item);
+                    smallHobbyNameList.clear();
 
-                    } else if (hobby_first_edit.getItem(i).equals("운동")) {
-                        bh_number_1 = "1";
-                        edit_hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, android.R.layout.simple_spinner_dropdown_item);
-
-                    } else if (hobby_first_edit.getItem(i).equals("음악")) {
-                        bh_number_1 = "2";
-                        edit_hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, android.R.layout.simple_spinner_dropdown_item);
-
-                    } else if (hobby_first_edit.getItem(i).equals("영화")) {
-                        bh_number_1 = "3";
-                        edit_hobby_first_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, android.R.layout.simple_spinner_dropdown_item);
-
+                    for(HobbyData data : smallHobbyList){
+                        if(data.getHobby_big_num() == bigHobbyList.get(i).getHobby_num()){
+                            smallHobbyNameList.add(data.getHobby_name());
+                        }
                     }
+
+                    edit_hobby_first_adapter = new ArrayAdapter(view.getContext(), R.layout.support_simple_spinner_dropdown_item, smallHobbyNameList);
 
                     if (edit_hobby_first_adapter != null) {
                         spinner_hobby2_edit.setAdapter(edit_hobby_first_adapter);
+                        edit_hobby_first_adapter.notifyDataSetChanged();
+
                         spinner_hobby2_edit.setOnItemSelectedListener(editspinnerSelectListener);
                     }
+
+                    bh_number_1 = String.valueOf(bigHobbyList.get(i).getHobby_num());
 
                     break;
 
                 case R.id.hobby_second_edit:
-                    ArrayAdapter<CharSequence> edit_hobby_second_adapter = null;
+                    ArrayAdapter edit_hobby_second_adapter = null;
+                    ArrayList<String> smallHobbyNameList2 = new ArrayList<String>();
 
-                    if (hobby_second_edit.getItem(i).equals("대분류")) {
-                        edit_hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, R.layout.support_simple_spinner_dropdown_item);
+                    smallHobbyNameList2.clear();
 
-                    } else if (hobby_second_edit.getItem(i).equals("운동")) {
-                        bh_number_2 = "1";
-                        edit_hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, R.layout.support_simple_spinner_dropdown_item);
-
-                    } else if (hobby_second_edit.getItem(i).equals("음악")) {
-                        bh_number_2 = "2";
-                        edit_hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, R.layout.support_simple_spinner_dropdown_item);
-
-                    } else if (hobby_second_edit.getItem(i).equals("영화")) {
-                        bh_number_2 = "3";
-                        edit_hobby_second_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, R.layout.support_simple_spinner_dropdown_item);
+                    for(HobbyData data : smallHobbyList){
+                        if(data.getHobby_big_num() == bigHobbyList.get(i).getHobby_num()){
+                            smallHobbyNameList2.add(data.getHobby_name());
+                        }
                     }
+
+                    edit_hobby_second_adapter = new ArrayAdapter(view.getContext(), R.layout.support_simple_spinner_dropdown_item, smallHobbyNameList2);
 
                     if (edit_hobby_second_adapter != null) {
                         spinner_hobby_second2_edit.setAdapter(edit_hobby_second_adapter);
+                        edit_hobby_second_adapter.notifyDataSetChanged();
+
                         spinner_hobby_second2_edit.setOnItemSelectedListener(editspinnerSelectListener);
                     }
 
+                    bh_number_2 = String.valueOf(bigHobbyList.get(i).getHobby_num());
                     break;
 
 
                 case R.id.hobby_third_edit:
 
-                    ArrayAdapter<CharSequence> edit_hobby_third_adapter = null;
+                    ArrayAdapter edit_hobby_third_adapter = null;
+                    ArrayList<String> smallHobbyNameList3 = new ArrayList<String>();
 
-                    if (hobby_third_edit.getItem(i).equals("대분류")) {
-                        edit_hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_empty, R.layout.support_simple_spinner_dropdown_item);
-                    } else if (hobby_third_edit.getItem(i).equals("운동")) {
-                        bh_number_3 = "1";
-                        edit_hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_sport, R.layout.support_simple_spinner_dropdown_item);
+                    smallHobbyNameList3.clear();
 
-                    } else if (hobby_third_edit.getItem(i).equals("음악")) {
-                        bh_number_3 = "2";
-                        edit_hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_music, R.layout.support_simple_spinner_dropdown_item);
-
-                    } else if (hobby_third_edit.getItem(i).equals("영화")) {
-                        bh_number_3 = "3";
-                        edit_hobby_third_adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.spinner_hobby_movie, R.layout.support_simple_spinner_dropdown_item);
-
+                    for(HobbyData data : smallHobbyList){
+                        if(data.getHobby_big_num() == bigHobbyList.get(i).getHobby_num()){
+                            smallHobbyNameList3.add(data.getHobby_name());
+                        }
                     }
+
+                    edit_hobby_third_adapter = new ArrayAdapter(view.getContext(), R.layout.support_simple_spinner_dropdown_item, smallHobbyNameList3);
 
                     if (edit_hobby_third_adapter != null) {
                         spinner_hobby_third2_edit.setAdapter(edit_hobby_third_adapter);
+                        edit_hobby_third_adapter.notifyDataSetChanged();
+
                         spinner_hobby_third2_edit.setOnItemSelectedListener(editspinnerSelectListener);
                     }
 
+                    bh_number_3 = String.valueOf(bigHobbyList.get(i).getHobby_num());
                     break;
 
 
                 case R.id.hobby_first_sub_edit:
-                    sh_number_1 = String.valueOf(i + 1);
+
+                    for (HobbyData data : smallHobbyList){
+                        if(data.getHobby_name().equals((String)adapterView.getSelectedItem())){
+                            sh_number_1 = String.valueOf(data.getHobby_num());
+                            break;
+                        }
+                    }
+
                     break;
 
                 case R.id.hobby_second_sub_edit:
-                    sh_number_2 = String.valueOf(i + 1);
+
+                    for (HobbyData data : smallHobbyList){
+                        if(data.getHobby_name().equals((String)adapterView.getSelectedItem())){
+                            sh_number_2 = String.valueOf(data.getHobby_num());
+                            break;
+                        }
+                    }
+
                     break;
 
                 case R.id.hobby_third_sub_edit:
-                    sh_number_3 = String.valueOf(i + 1);
+                    for (HobbyData data : smallHobbyList){
+                        if(data.getHobby_name().equals((String)adapterView.getSelectedItem())){
+                            sh_number_3 = String.valueOf(data.getHobby_num());
+                            break;
+                        }
+                    }
+
                     break;
             }
         }

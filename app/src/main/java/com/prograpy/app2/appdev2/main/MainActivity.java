@@ -8,11 +8,18 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.prograpy.app2.appdev2.R;
+import com.prograpy.app2.appdev2.network.response.data.HobbyData;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager mainPager;
     private MainViewPagerAdapter mainViewPagerAdapter;
+
+
+    private ArrayList<HobbyData> bigHobbyList = new ArrayList<HobbyData>();
+    private ArrayList<HobbyData> smallHobbyList = new ArrayList<HobbyData>();
 
     private ImageView tabMatch, tabMy, tabChat, tabSetting;
 
@@ -22,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
+        bigHobbyList = getIntent().getParcelableArrayListExtra("bigHobby");
+        smallHobbyList = getIntent().getParcelableArrayListExtra("smallHobby");
 
 
         tabMatch = (ImageView) findViewById(R.id.tab_match);
@@ -37,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabMatch.setSelected(true);
 
         mainViewPagerAdapter = new MainViewPagerAdapter(this.getSupportFragmentManager());
+        mainViewPagerAdapter.setHobbyList(bigHobbyList, smallHobbyList);
 
         mainPager = (ViewPager) findViewById(R.id.main_viewpager);
         mainPager.setOffscreenPageLimit(4);
