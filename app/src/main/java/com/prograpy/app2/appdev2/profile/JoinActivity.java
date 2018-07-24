@@ -35,6 +35,7 @@ import com.prograpy.app2.appdev2.network.response.result.JoinResult;
 import com.prograpy.app2.appdev2.task.JoinTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
+import com.prograpy.app2.appdev2.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -208,17 +209,18 @@ public class JoinActivity extends AppCompatActivity {
                     return;
                 }
 
-
-                // 사는지역 spinner
-                final ArrayAdapter<CharSequence> from_main;
-
                 if (!namechecked) {
                     Toast.makeText(JoinActivity.this, "중복확인을 하세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (id.equals("")) {
-                    Toast.makeText(JoinActivity.this, "닉네임을 입력 하세요.", Toast.LENGTH_SHORT).show();
+                if(!Utils.isValidId(id)){
+                    Toast.makeText(JoinActivity.this, "아이디는 영소문자+숫자 조합으로 4~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!Utils.isValidPw(password)){
+                    Toast.makeText(JoinActivity.this, "비밀번호는 영소문자+숫자 조합으로 8~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

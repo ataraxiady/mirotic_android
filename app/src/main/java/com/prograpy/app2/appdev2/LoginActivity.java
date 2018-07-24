@@ -25,6 +25,7 @@ import com.prograpy.app2.appdev2.profile.JoinActivity;
 import com.prograpy.app2.appdev2.task.LoginTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
+import com.prograpy.app2.appdev2.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -108,6 +109,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 myId = myIdEdit.getText().toString().trim();
                 myPw = myPwEdit.getText().toString().trim();
+
+                if(!Utils.isValidId(myId)){
+                    Toast.makeText(LoginActivity.this, "아이디는 영소문자+숫자 조합으로 4~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!Utils.isValidPw(myPw)){
+                    Toast.makeText(LoginActivity.this, "비밀번호는 영소문자+숫자 조합으로 8~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 networkProgressDialog.show();
 
