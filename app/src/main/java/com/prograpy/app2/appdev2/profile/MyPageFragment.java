@@ -25,6 +25,7 @@ import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.data.HobbyData;
 import com.prograpy.app2.appdev2.network.response.data.UserData;
+import com.prograpy.app2.appdev2.network.response.result.ModifyResult;
 import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
 import com.prograpy.app2.appdev2.task.GetMyInfoTask;
 import com.prograpy.app2.appdev2.task.ModifyinformationTask;
@@ -140,6 +141,10 @@ public class MyPageFragment extends Fragment {
         spinner_hobby_third1_edit.setAdapter(hobby_third_edit);
         spinner_hobby_third1_edit.setOnItemSelectedListener(editspinnerSelectListener);
 
+
+        man_btn.setClickable(false);
+        woman_btn.setClickable(false);
+
         /*  수정 버튼을 누르면 FrameLayout의 GONE으로
             해놓은 위젯들이 VISIBLE로 변환하여 화면에 출력  */
 
@@ -147,6 +152,9 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (edit_btn.getText().equals("수정")) {
+
+                    man_btn.setClickable(true);
+                    woman_btn.setClickable(true);
                     area_TextView.setVisibility(View.GONE);
                     area_EditText.setVisibility(View.VISIBLE);
                     first_main.setVisibility(View.GONE);
@@ -165,34 +173,7 @@ public class MyPageFragment extends Fragment {
 
                 } else if (edit_btn.getText().equals("완료")) {
 
-                    // 수정 데이터 셋팅
-                    area = area_EditText.getText().toString().trim();
-                    area_TextView.setText(area);
-                    first_main.setText(spinner_hobby1_edit.getSelectedItem().toString());
-                    first_sub.setText(spinner_hobby2_edit.getSelectedItem().toString());
-                    second_main.setText(spinner_hobby_second1_edit.getSelectedItem().toString());
-                    second_sub.setText(spinner_hobby_second2_edit.getSelectedItem().toString());
-                    third_main.setText(spinner_hobby_third1_edit.getSelectedItem().toString());
-                    third_sub.setText(spinner_hobby_third2_edit.getSelectedItem().toString());
-
                     updateData();
-
-                    area_EditText.setVisibility(View.GONE);
-                    area_TextView.setVisibility(View.VISIBLE);
-                    first_main.setVisibility(View.VISIBLE);
-                    spinner_hobby1_edit.setVisibility(View.GONE);
-                    first_sub.setVisibility(View.VISIBLE);
-                    spinner_hobby2_edit.setVisibility(View.GONE);
-                    second_main.setVisibility(View.VISIBLE);
-                    spinner_hobby_second1_edit.setVisibility(View.GONE);
-                    second_sub.setVisibility(View.VISIBLE);
-                    spinner_hobby_second2_edit.setVisibility(View.GONE);
-                    third_main.setVisibility(View.VISIBLE);
-                    spinner_hobby_third1_edit.setVisibility(View.GONE);
-                    third_sub.setVisibility(View.VISIBLE);
-                    spinner_hobby_third2_edit.setVisibility(View.GONE);
-                    edit_btn.setText("수정");
-                    return;
                 }
 
             }
@@ -417,7 +398,54 @@ public class MyPageFragment extends Fragment {
     };
 
     private void updateData() {
-        ModifyinformationTask modifyinformationTask = new ModifyinformationTask(null);
+        ModifyinformationTask modifyinformationTask = new ModifyinformationTask(new ModifyinformationTask.ModifyResulthandler() {
+            @Override
+            public void onSuccessTask(ModifyResult result) {
+
+                if(result.isSuccess()){
+                    // 수정 데이터 셋팅
+                    area = area_EditText.getText().toString().trim();
+                    area_TextView.setText(area);
+                    first_main.setText(spinner_hobby1_edit.getSelectedItem().toString());
+                    first_sub.setText(spinner_hobby2_edit.getSelectedItem().toString());
+                    second_main.setText(spinner_hobby_second1_edit.getSelectedItem().toString());
+                    second_sub.setText(spinner_hobby_second2_edit.getSelectedItem().toString());
+                    third_main.setText(spinner_hobby_third1_edit.getSelectedItem().toString());
+                    third_sub.setText(spinner_hobby_third2_edit.getSelectedItem().toString());
+
+                    area_EditText.setVisibility(View.GONE);
+                    area_TextView.setVisibility(View.VISIBLE);
+                    first_main.setVisibility(View.VISIBLE);
+                    spinner_hobby1_edit.setVisibility(View.GONE);
+                    first_sub.setVisibility(View.VISIBLE);
+                    spinner_hobby2_edit.setVisibility(View.GONE);
+                    second_main.setVisibility(View.VISIBLE);
+                    spinner_hobby_second1_edit.setVisibility(View.GONE);
+                    second_sub.setVisibility(View.VISIBLE);
+                    spinner_hobby_second2_edit.setVisibility(View.GONE);
+                    third_main.setVisibility(View.VISIBLE);
+                    spinner_hobby_third1_edit.setVisibility(View.GONE);
+                    third_sub.setVisibility(View.VISIBLE);
+                    spinner_hobby_third2_edit.setVisibility(View.GONE);
+
+                    man_btn.setClickable(false);
+                    woman_btn.setClickable(false);
+
+                    edit_btn.setText("수정");
+                }
+
+            }
+
+            @Override
+            public void onFailTask() {
+
+            }
+
+            @Override
+            public void onCancelTask() {
+
+            }
+        });
         modifyinformationTask.execute(ApiValue.API_ModifyInfo, area,
                 bh_number_1, bh_number_2, bh_number_3, sh_number_1, sh_number_2,
                 sh_number_3);
