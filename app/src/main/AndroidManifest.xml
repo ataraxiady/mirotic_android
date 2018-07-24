@@ -3,10 +3,9 @@
     package="com.prograpy.app2.appdev2">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AppDevApplication"
@@ -16,8 +15,9 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data android:name="android.max_aspect" android:value="2.1" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -26,40 +26,36 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".LoginActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
-
-            />
-
-        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
+        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity" />
+        <activity
+            android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
             android:label="OAuth2.0 In-app"
-                  android:screenOrientation="portrait"/>
-
-
-        <activity android:name=".profile.JoinActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".environment_setting.SetActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".main.MainActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".chat.ChatMainActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustResize"/>
-
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".profile.JoinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".environment_setting.SetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chat.ChatMainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".environment_setting.SettingAppVersion" />
 
         <service
@@ -72,6 +68,7 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".environment_setting.SendMail"></activity>
     </application>
 
 </manifest>
