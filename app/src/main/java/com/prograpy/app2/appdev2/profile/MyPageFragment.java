@@ -1,12 +1,9 @@
 package com.prograpy.app2.appdev2.profile;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +42,7 @@ public class MyPageFragment extends Fragment {
     private TextView third_main = null;
     private TextView third_sub = null;
     private ImageView profileImage;
-    private Button edit_btn;
+    private Button edit_btn, save_btn;
     private EditText area_EditText = null;
     private RadioButton man_btn, woman_btn;
     private Spinner spinner_hobby1_edit, spinner_hobby2_edit, spinner_hobby_second1_edit,
@@ -115,6 +112,7 @@ public class MyPageFragment extends Fragment {
         third_sub = view.findViewById(R.id.mypage_thirdhobby2);
         // 수정 정보
         edit_btn = view.findViewById(R.id.edit);
+        save_btn = view.findViewById(R.id.savebtn);
         area_EditText = view.findViewById(R.id.profile_area_edit);
         man_btn = (RadioButton) view.findViewById(R.id.man);
         woman_btn = (RadioButton) view.findViewById(R.id.woman);
@@ -150,14 +148,14 @@ public class MyPageFragment extends Fragment {
         edit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edit_btn.getText().equals("수정")) {
                     setVisibleView(true);
+            }
+        });
 
-                } else if (edit_btn.getText().equals("완료")) {
-
-                    updateData();
-                }
-
+        save_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateData();
             }
         });
 
@@ -382,6 +380,9 @@ public class MyPageFragment extends Fragment {
     private void setVisibleView(boolean isEdit){
 
         if(isEdit){
+            edit_btn.setVisibility(View.GONE);
+            save_btn.setVisibility(View.VISIBLE);
+
             area_TextView.setVisibility(View.GONE);
             area_EditText.setVisibility(View.VISIBLE);
 
@@ -406,8 +407,9 @@ public class MyPageFragment extends Fragment {
             third_sub.setVisibility(View.GONE);
             spinner_hobby_third2_edit.setVisibility(View.VISIBLE);
 
-            edit_btn.setText("완료");
         }else{
+            edit_btn.setVisibility(View.VISIBLE);
+            save_btn.setVisibility(View.GONE);
 
             area_EditText.setText("");
             area_EditText.setVisibility(View.GONE);
@@ -437,7 +439,6 @@ public class MyPageFragment extends Fragment {
             man_btn.setClickable(false);
             woman_btn.setClickable(false);
 
-            edit_btn.setText("수정");
 
         }
     }

@@ -3,16 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/chattingmainlogo" />
+
     <LinearLayout
         android:id="@+id/viewholder_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:padding="5dp"
             android:id="@+id/photo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:adjustViewBounds="false"
             android:cropToPadding="false"
             android:src="@drawable/sub_img_picture" />
@@ -39,7 +45,8 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="10dp"
                 android:text="대화내용"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                />
 
         </LinearLayout>
 
