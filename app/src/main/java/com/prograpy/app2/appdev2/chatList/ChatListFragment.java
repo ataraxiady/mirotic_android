@@ -36,7 +36,6 @@ public class ChatListFragment extends Fragment{
     private RecyclerView chatRecyclerView;
     private ChatListRecyclerViewAdapter chatRecyclerViewAdapter;
 
-    private NetworkProgressDialog dialog;
 
     private TextView emptyView;
 
@@ -73,8 +72,6 @@ public class ChatListFragment extends Fragment{
 
         emptyView = (TextView) view.findViewById(R.id.empty_text);
 
-        dialog = new NetworkProgressDialog(getContext());
-
         chatRecyclerViewAdapter = new ChatListRecyclerViewAdapter();
         chatRecyclerViewAdapter.setItemClickListener(listener);
         chatRecyclerViewAdapter.setUserData(userDataList);
@@ -86,13 +83,27 @@ public class ChatListFragment extends Fragment{
         chatRecyclerView.setLayoutManager(linearLayoutManager);
         chatRecyclerView.setAdapter(chatRecyclerViewAdapter);
 
+        callMatchTask();
+        return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(isVisibleToUser){
+            callMatchTask();
+        }
+    }
+
+    private void callMatchTask(){
+
 
 
         MatchListTask matchListTask = new MatchListTask(new MatchListTask.TaskResultHandler() {
             @Override
             public void onSuccessTask(MatchResult result) {
 
-                dialog.dismiss();
 
                 if(result.isSuccess()){
 
@@ -121,7 +132,6 @@ public class ChatListFragment extends Fragment{
 
             @Override
             public void onFailTask() {
-                dialog.dismiss();
 
                 emptyView.setVisibility(View.VISIBLE);
                 chatRecyclerView.setVisibility(View.GONE);
@@ -130,20 +140,13 @@ public class ChatListFragment extends Fragment{
 
             @Override
             public void onCancelTask() {
-                dialog.dismiss();
-
                 emptyView.setVisibility(View.VISIBLE);
                 chatRecyclerView.setVisibility(View.GONE);
             }
         });
 
-        dialog.show();
         matchListTask.execute(ApiValue.API_GET_MATCH_LIST, PreferenceData.getKeyUserId());
-
-        return view;
     }
-
-
 
 
 }

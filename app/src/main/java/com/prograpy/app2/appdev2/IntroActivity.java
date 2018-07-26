@@ -157,10 +157,36 @@ public class IntroActivity extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(IntroActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                Intent k = new Intent(IntroActivity.this, LoginActivity.class);
+                                k.putParcelableArrayListExtra("bigHobby", bigHobbyList);
+                                k.putParcelableArrayListExtra("smallHobby", smallHobbyList);
+                                startActivity(k);
+                                finish();
+                            }
+                        }, 2000);
                     }
                     
                 } else {
                     Toast.makeText(IntroActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
+
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Intent k = new Intent(IntroActivity.this, LoginActivity.class);
+                            k.putParcelableArrayListExtra("bigHobby", bigHobbyList);
+                            k.putParcelableArrayListExtra("smallHobby", smallHobbyList);
+                            startActivity(k);
+                            finish();
+                        }
+                    }, 2000);
+
                 }
             }
 
@@ -171,6 +197,18 @@ public class IntroActivity extends AppCompatActivity {
                 PreferenceData.setKeyUserPw("");
                 PreferenceData.setKeyUserLoginSuccess(false);
 
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent k = new Intent(IntroActivity.this, LoginActivity.class);
+                        k.putParcelableArrayListExtra("bigHobby", bigHobbyList);
+                        k.putParcelableArrayListExtra("smallHobby", smallHobbyList);
+                        startActivity(k);
+                        finish();
+                    }
+                }, 2000);
+
                 Toast.makeText(IntroActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
             }
@@ -180,6 +218,18 @@ public class IntroActivity extends AppCompatActivity {
                 PreferenceData.setKeyUserId("");
                 PreferenceData.setKeyUserPw("");
                 PreferenceData.setKeyUserLoginSuccess(false);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent k = new Intent(IntroActivity.this, LoginActivity.class);
+                        k.putParcelableArrayListExtra("bigHobby", bigHobbyList);
+                        k.putParcelableArrayListExtra("smallHobby", smallHobbyList);
+                        startActivity(k);
+                        finish();
+                    }
+                }, 2000);
 
                 Toast.makeText(IntroActivity.this, "서버 통신을 취소하였습니다.", Toast.LENGTH_SHORT).show();
             }
