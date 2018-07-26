@@ -19,37 +19,116 @@
         android:id="@+id/main_tab"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/Color_white">
+        android:background="@color/Color_black_40">
 
-        <ImageView
-            android:id="@+id/tab_match"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/tab_my"
+            <ImageView
+                android:id="@+id/tab_match"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/bottm_tab_home"/>
+
+            <ImageView
+                android:id="@+id/tab_match_sel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_seleter"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/Color_white"/>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/tab_chat"
+            <ImageView
+                android:id="@+id/tab_my"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/bottom_tab_my"/>
+
+            <ImageView
+                android:id="@+id/tab_my_sel"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_seleter"/>
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/Color_white"/>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/tab_set"
+            <ImageView
+                android:id="@+id/tab_chat"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/bottom_tab_chat"/>
+
+            <ImageView
+                android:id="@+id/tab_chat_sel"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_seleter"/>
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/Color_white"/>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/tab_set"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/bottom_tab_set"/>
+
+            <ImageView
+                android:id="@+id/tab_set_sel"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_seleter"/>
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 

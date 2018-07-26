@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +45,8 @@ public class MatchFragment extends Fragment {
     private boolean isFabOpen = false;
     private Animation fab_open, fab_close, fabRClockwise, fabRanticlockWise;
     private Intent intent,intent2;
-    Button dislikeButton;
-    Button likeButton;
+    ImageView dislikeButton;
+    ImageView likeButton;
     int index = 0;
     TextView textView;
     LikeDislikeButtonTask likeDislikeButtonTask;
@@ -170,10 +171,10 @@ public class MatchFragment extends Fragment {
 //            }
 //        });
 
-        dislikeButton = (Button) view.findViewById(R.id.btn_dislike);
+        dislikeButton = (ImageView) view.findViewById(R.id.btn_dislike);
         dislikeButton.setOnClickListener(likeDisLikeListener);
 
-        likeButton = (Button) view.findViewById(R.id.btn_like);
+        likeButton = (ImageView) view.findViewById(R.id.btn_like);
         likeButton.setOnClickListener(likeDisLikeListener);
 
         viewPager = (MatchCustomViewPager) view.findViewById(R.id.main_pager);

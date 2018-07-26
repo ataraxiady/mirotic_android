@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<HobbyData> smallHobbyList = new ArrayList<HobbyData>();
 
     private ImageView tabMatch, tabMy, tabChat, tabSetting;
+    private ImageView tabMatchSel, tabMySel, tabChatSel, tabSettingSel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabMy = (ImageView) findViewById(R.id.tab_my);
         tabChat = (ImageView) findViewById(R.id.tab_chat);
         tabSetting = (ImageView) findViewById(R.id.tab_set);
+
+        tabMatchSel = (ImageView) findViewById(R.id.tab_match_sel);
+        tabMySel = (ImageView) findViewById(R.id.tab_my_sel);
+        tabChatSel = (ImageView) findViewById(R.id.tab_chat_sel);
+        tabSettingSel = (ImageView) findViewById(R.id.tab_set_sel);
 
         tabMatch.setOnClickListener(this);
         tabMy.setOnClickListener(this);
@@ -67,27 +73,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         tabMy.setSelected(false);
                         tabChat.setSelected(false);
                         tabSetting.setSelected(false);
+
+                        tabMatchSel.setVisibility(View.VISIBLE);
+                        tabMySel.setVisibility(View.GONE);
+                        tabChatSel.setVisibility(View.GONE);
+                        tabSettingSel.setVisibility(View.GONE);
                         break;
 
                     case 1:
                         tabMatch.setSelected(false);
-                        tabSetting.setSelected(false);
-                        tabChat.setSelected(false);
                         tabMy.setSelected(true);
+                        tabChat.setSelected(false);
+                        tabSetting.setSelected(false);
+
+                        tabMatchSel.setVisibility(View.GONE);
+                        tabMySel.setVisibility(View.VISIBLE);
+                        tabChatSel.setVisibility(View.GONE);
+                        tabSettingSel.setVisibility(View.GONE);
                         break;
 
                     case 2:
                         tabMatch.setSelected(false);
-                        tabChat.setSelected(true);
                         tabMy.setSelected(false);
+                        tabChat.setSelected(true);
                         tabSetting.setSelected(false);
+
+                        tabMatchSel.setVisibility(View.GONE);
+                        tabMySel.setVisibility(View.GONE);
+                        tabChatSel.setVisibility(View.VISIBLE);
+                        tabSettingSel.setVisibility(View.GONE);
                         break;
 
                     case 3:
                         tabMatch.setSelected(false);
+                        tabMy.setSelected(false);
                         tabChat.setSelected(false);
                         tabSetting.setSelected(true);
-                        tabMy.setSelected(false);
+
+                        tabMatchSel.setVisibility(View.GONE);
+                        tabMySel.setVisibility(View.GONE);
+                        tabChatSel.setVisibility(View.GONE);
+                        tabSettingSel.setVisibility(View.VISIBLE);
                         break;
 
                 }
@@ -114,30 +140,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tabMy.setSelected(false);
                 tabChat.setSelected(false);
                 tabSetting.setSelected(false);
+
+                tabMatchSel.setVisibility(View.VISIBLE);
+                tabMySel.setVisibility(View.GONE);
+                tabChatSel.setVisibility(View.GONE);
+                tabSettingSel.setVisibility(View.GONE);
                 position = 0;
                 break;
 
             case R.id.tab_my:
                 tabMatch.setSelected(false);
-                tabSetting.setSelected(false);
-                tabChat.setSelected(false);
                 tabMy.setSelected(true);
+                tabChat.setSelected(false);
+                tabSetting.setSelected(false);
+
+                tabMatchSel.setVisibility(View.GONE);
+                tabMySel.setVisibility(View.VISIBLE);
+                tabChatSel.setVisibility(View.GONE);
+                tabSettingSel.setVisibility(View.GONE);
                 position = 1;
                 break;
 
             case R.id.tab_chat:
                 tabMatch.setSelected(false);
-                tabChat.setSelected(true);
                 tabMy.setSelected(false);
+                tabChat.setSelected(true);
                 tabSetting.setSelected(false);
+
+                tabMatchSel.setVisibility(View.GONE);
+                tabMySel.setVisibility(View.GONE);
+                tabChatSel.setVisibility(View.VISIBLE);
+                tabSettingSel.setVisibility(View.GONE);
                 position = 2;
                 break;
 
             case R.id.tab_set:
                 tabMatch.setSelected(false);
+                tabMy.setSelected(false);
                 tabChat.setSelected(false);
                 tabSetting.setSelected(true);
-                tabMy.setSelected(false);
+
+                tabMatchSel.setVisibility(View.GONE);
+                tabMySel.setVisibility(View.GONE);
+                tabChatSel.setVisibility(View.GONE);
+                tabSettingSel.setVisibility(View.VISIBLE);
                 position = 3;
                 break;
         }

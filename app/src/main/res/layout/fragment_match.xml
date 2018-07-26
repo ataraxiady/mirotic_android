@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
 
@@ -18,6 +18,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1">
         </com.prograpy.app2.appdev2.main.MatchCustomViewPager>
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
@@ -35,20 +36,20 @@
             android:layout_marginBottom="20dp"
             android:layout_gravity="center">
 
-            <Button
+            <ImageView
                 android:id="@+id/btn_dislike"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
                 android:layout_marginRight="10dp"
                 android:onClick="onClick"
-                android:text="넘기기" />
+                android:src="@drawable/dislike_btn"/>
 
-            <Button
+            <ImageView
                 android:id="@+id/btn_like"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
                 android:onClick="onClick"
-                android:text="좋아요" />
+                android:src="@drawable/like_btn" />
 
         </LinearLayout>
 
