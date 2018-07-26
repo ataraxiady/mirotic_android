@@ -20,6 +20,7 @@ import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.data.HobbyData;
 import com.prograpy.app2.appdev2.network.response.result.HobbyResult;
 import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
+import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.task.GetHobbyTask;
 import com.prograpy.app2.appdev2.task.LoginTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
@@ -49,7 +50,32 @@ public class IntroActivity extends AppCompatActivity {
 
     private void updateFcmKey() {
 
-        UpdateFcmKeyTask updateFcmKeyTask = new UpdateFcmKeyTask(null);
+        UpdateFcmKeyTask updateFcmKeyTask = new UpdateFcmKeyTask(new UpdateFcmKeyTask.TaskResultHandler() {
+            @Override
+            public void onSuccessTask(ServerResult result) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent k = new Intent(IntroActivity.this, MainActivity.class);
+                        k.putParcelableArrayListExtra("bigHobby", bigHobbyList);
+                        k.putParcelableArrayListExtra("smallHobby", smallHobbyList);
+                        startActivity(k);
+                        finish();
+                    }
+                }, 2000);
+            }
+
+            @Override
+            public void onFailTask() {
+
+            }
+
+            @Override
+            public void onCancelTask() {
+
+            }
+        });
         updateFcmKeyTask.execute(ApiValue.API_UPDATE_FCM_KEY, PreferenceData.getKeyUserId(), PreferenceData.getKeyFcmToken());
     }
 
@@ -139,21 +165,10 @@ public class IntroActivity extends AppCompatActivity {
 
                         PreferenceData.setKeyUserId(result.getUserInfos().get(0).getID());
                         PreferenceData.setKeyUserPw(result.getUserInfos().get(0).getPassword());
+                        PreferenceData.setKeyUserImage(result.getUserInfos().get(0).getProfileimage());
                         PreferenceData.setKeyUserLoginSuccess(true);
 
                         updateFcmKey();
-
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                Intent k = new Intent(IntroActivity.this, MainActivity.class);
-                                k.putParcelableArrayListExtra("bigHobby", bigHobbyList);
-                                k.putParcelableArrayListExtra("smallHobby", smallHobbyList);
-                                startActivity(k);
-                                finish();
-                            }
-                        }, 2000);
 
                     } else {
                         Toast.makeText(IntroActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
@@ -195,6 +210,7 @@ public class IntroActivity extends AppCompatActivity {
 
                 PreferenceData.setKeyUserId("");
                 PreferenceData.setKeyUserPw("");
+                PreferenceData.setKeyUserImage("");
                 PreferenceData.setKeyUserLoginSuccess(false);
 
                 new Handler().postDelayed(new Runnable() {
@@ -217,6 +233,7 @@ public class IntroActivity extends AppCompatActivity {
             public void onCancelTask() {
                 PreferenceData.setKeyUserId("");
                 PreferenceData.setKeyUserPw("");
+                PreferenceData.setKeyUserImage("");
                 PreferenceData.setKeyUserLoginSuccess(false);
 
                 new Handler().postDelayed(new Runnable() {

@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background2"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/Color_grey01"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical">
 
-    >
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/chattinglisttop" />
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary">
 
+        <ImageView
+            android:id="@+id/title_back"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/buttonback_w"/>
+
+        <TextView
+            android:id="@+id/match_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="18sp"
+            android:textColor="@color/Color_white"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chatListView"
@@ -21,7 +39,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:divider="@android:color/transparent"
-        android:dividerHeight="0dp" />
+        android:dividerHeight="0dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,18 +58,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="?android:attr/panelBackground"
-            android:gravity="center"
+            android:paddingLeft="10dp"
             android:hint="채팅을 입력하세요"
-            android:privateImeOptions="defaultInputmode=korean" />
+            android:textColorHint="@color/Color_grey04"
+            android:textSize="13sp"
+            android:privateImeOptions="defaultInputmode=korean"/>
 
-        <Button
+        <ImageView
             android:id="@+id/sendBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:background="@drawable/sendbtn"
-            android:layout_width="260dp"
-            android:layout_height="35dp"
-            android:layout_weight="2"
             android:enabled="false"
             android:onClick="onClick"
+            android:scaleType="centerCrop"
             />
     </LinearLayout>
 </LinearLayout>

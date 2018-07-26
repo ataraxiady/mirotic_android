@@ -68,5 +68,11 @@ public class UpdateFcmKeyTask extends AsyncTask<String, Integer, ServerResult> {
     protected void onPostExecute(ServerResult serverResult) {
         super.onPostExecute(serverResult);
 
+        if(serverResult != null){
+            handler.onSuccessTask(serverResult);
+        }else{
+            handler.onCancelTask();
+        }
+
     }
 }

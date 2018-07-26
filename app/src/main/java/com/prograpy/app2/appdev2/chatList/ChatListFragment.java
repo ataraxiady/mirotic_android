@@ -46,6 +46,8 @@ public class ChatListFragment extends Fragment{
             MatchUserData data = (MatchUserData) view.getTag();
             Intent intent = new Intent(getContext(), ChatMainActivity.class);
             intent.putExtra("matchId", data.getMatchId());
+            intent.putExtra("matchImage", data.getMatchImage());
+            intent.putExtra("matchName", data.getMatchName());
             startActivity(intent);
         }
     };

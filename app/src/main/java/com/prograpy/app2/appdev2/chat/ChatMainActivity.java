@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,10 +51,15 @@ public class ChatMainActivity extends AppCompatActivity {
 
     private FileUtils fileUtils ;
 
-    private Button btnSend;
+    private TextView matchName;
+
+    private ImageView back;
+
+    private ImageView btnSend;
     private EditText edInputMsg;
     private String msg = "";
     private String fileName = "";
+    private String image = "";
 
     private String matchId ="";
 
@@ -79,6 +85,15 @@ public class ChatMainActivity extends AppCompatActivity {
         setContentView(R.layout.chat);
 
         matchId = getIntent().getStringExtra("matchId");
+        image = getIntent().getStringExtra("matchImage");
+
+
+        matchName = (TextView) findViewById(R.id.match_txt);
+
+
+        if(getIntent().getStringExtra("matchName") != null){
+            matchName.setText(getIntent().getStringExtra("matchName"));
+        }
 
         fileName = PreferenceData.getKeyUserId() + "_" + matchId + "_chat";
 
@@ -98,6 +113,7 @@ public class ChatMainActivity extends AppCompatActivity {
                     chatData.setChatMsg(splitStr[0]);
                     chatData.setChatTime(splitStr[1]);
                     chatData.setChatType(Integer.parseInt(splitStr[2]));
+                    chatData.setChatImage(splitStr[3]);
 
                     chatList.add(chatData);
                 }
@@ -143,8 +159,17 @@ public class ChatMainActivity extends AppCompatActivity {
 
 
 
-        btnSend = (Button) findViewById(R.id.sendBtn);
+        btnSend = (ImageView) findViewById(R.id.sendBtn);
         btnSend.setOnClickListener(listener);
+
+        back = (ImageView) findViewById(R.id.title_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -153,6 +178,7 @@ public class ChatMainActivity extends AppCompatActivity {
 
         Log.d("onNewIntent", intent.getStringExtra("msg"));
         Log.d("onNewIntent", intent.getStringExtra("matchId"));
+        Log.d("onNewIntent", intent.getStringExtra("matchImage"));
 
         // 메세지를 받긴 받았는데 다른 상대가 보낸 메세지일 경우는
         // 노티를 보여주고 그 상대방 파일에 저장
@@ -168,14 +194,16 @@ public class ChatMainActivity extends AppCompatActivity {
 
                 msg = intent.getStringExtra("msg");
                 msgType = 1;
+                image = intent.getStringExtra("matchImage");
 
                 ChatData chatData = new ChatData();
                 chatData.setChatMsg(msg);
                 chatData.setChatTime(format.format(date));
                 chatData.setChatType(msgType);
+                chatData.setChatImage(image);
                 chatList.add(chatData);
 
-                String fileText = msg + "," + format.format(date) + "," + msgType;
+                String fileText = msg + "," + format.format(date) + "," + msgType + "," + image;
                 fileUtils.writeFileText(fileName, fileText);
 
             }
@@ -183,7 +211,7 @@ public class ChatMainActivity extends AppCompatActivity {
             chatMainAdapter.notifyDataSetChanged();
             chatListView.scrollToPosition(chatList.size() - 1);
         }else{
-            sendNotification(intent.getStringExtra("msg"), intent.getStringExtra("matchId"));
+            sendNotification(intent.getStringExtra("msg"), intent.getStringExtra("matchId"), intent.getStringExtra("matchImage"));
         }
 
     }
@@ -213,9 +241,10 @@ public class ChatMainActivity extends AppCompatActivity {
                     chatData.setChatMsg(msg);
                     chatData.setChatTime(format.format(date));
                     chatData.setChatType(msgType);
+                    chatData.setChatImage(PreferenceData.getKeyUserImage());
                     chatList.add(chatData);
 
-                    String fileText = msg + "," + format.format(date) + "," + msgType;
+                    String fileText = msg + "," + format.format(date) + "," + msgType + "," + PreferenceData.getKeyUserImage();
                     fileUtils.writeFileText(fileName, fileText);
 
 
@@ -239,11 +268,11 @@ public class ChatMainActivity extends AppCompatActivity {
         });
 
 
-        sendMsgTask.execute(ApiValue.API_SEND_MSG, PreferenceData.getKeyUserId(), matchId, msg, format.format(date));
+        sendMsgTask.execute(ApiValue.API_SEND_MSG, PreferenceData.getKeyUserId(), matchId, msg, format.format(date), PreferenceData.getKeyUserImage());
     }
 
 
-    private void sendNotification(String messageBody, String matchId) {
+    private void sendNotification(String messageBody, String matchId, String matchImage) {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -286,7 +315,7 @@ public class ChatMainActivity extends AppCompatActivity {
         Date date = new Date(now);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-        String fileText = messageBody + "," + format.format(date) + "," + 1;
+        String fileText = messageBody + "," + format.format(date) + "," + 1 + "," + matchImage;
         fileUtils.writeFileText(fileName, fileText);
 
     }

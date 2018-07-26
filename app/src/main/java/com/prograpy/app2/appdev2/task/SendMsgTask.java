@@ -39,12 +39,14 @@ public class SendMsgTask extends AsyncTask<String, Integer, ServerResult>{
         String matchId = strings[2];
         String sendMsg = strings[3];
         String sendTime = strings[4];
+        String myImage = strings[5];
 
         ServerResult result = null;
 
         Map<String, Object> params = new HashMap<>();
 
         params.put("myId", myId);
+        params.put("myImage", myImage);
         params.put("matchId", matchId);
         params.put("sendMsg", sendMsg);
         params.put("sendTime", sendTime);

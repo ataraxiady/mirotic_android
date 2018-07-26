@@ -18,6 +18,7 @@ public class PreferenceData
     private static final String KEY_USER_ID       = "user_id";
     private static final String KEY_USER_PW       = "user_pw";
     private static final String KEY_USER_LOGIN_SUCCESS       = "login_success";
+    private static final String KEY_USER_IMAGE       = "user_image";
     private static final String KEY_FCM_TOKEN       = "fcm_token";
     private static final String KEY_TODAY_INTRODUCE = "today_introduce";
     private static final String KEY_LOGIN_TIME = "login_time";
@@ -177,6 +178,25 @@ public class PreferenceData
         }
 
         return isSuccess;
+    }
+
+    public static void setKeyUserImage(String userImage){
+        if(mEditor != null){
+            mEditor.putString(KEY_USER_IMAGE, userImage);
+            mEditor.commit();
+        }
+    }
+
+    public static String getKeyUserImage(){
+        String userImage = "";
+
+
+        if(mPreferences != null){
+            userImage = mPreferences.getString(KEY_USER_IMAGE, userImage);
+
+        }
+
+        return userImage;
     }
 
 }

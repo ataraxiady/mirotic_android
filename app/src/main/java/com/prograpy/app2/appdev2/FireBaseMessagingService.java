@@ -41,12 +41,14 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         String matchId = "";
+        String matchImage ="";
 
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             matchId = remoteMessage.getData().get("matchId");
+            matchImage = remoteMessage.getData().get("matchImage");
         }
 
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
@@ -61,20 +63,21 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("msg", remoteMessage.getNotification().getBody());
             intent.putExtra("matchId", matchId);
+            intent.putExtra("matchImage", matchImage);
             startActivity(intent);
 
         }else{
 
             if (remoteMessage.getNotification() != null) {
                 Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-                sendNotification(remoteMessage.getNotification().getBody(), matchId);
+                sendNotification(remoteMessage.getNotification().getBody(), matchId, matchImage);
             }
 
         }
 
     }
 
-    private void sendNotification(String messageBody, String matchId) {
+    private void sendNotification(String messageBody, String matchId, String matchImage) {
         Intent intent = new Intent(this, IntroActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -117,7 +120,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         Date date = new Date(now);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-        String fileText = messageBody + "," + format.format(date) + "," + 1;
+        String fileText = messageBody + "," + format.format(date) + "," + 1 + "," + matchImage;
         fileUtils.writeFileText(fileName, fileText);
 
     }

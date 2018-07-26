@@ -3,6 +3,7 @@ package com.prograpy.app2.appdev2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.data.UserData;
 import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
+import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.profile.JoinActivity;
 import com.prograpy.app2.appdev2.task.LoginTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
@@ -133,14 +135,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             PreferenceData.setKeyUserId(loginDataList.get(0).getID());
                             PreferenceData.setKeyUserPw(loginDataList.get(0).getPassword());
+                            PreferenceData.setKeyUserImage(loginDataList.get(0).getProfileimage());
                             PreferenceData.setKeyUserLoginSuccess(true);
 
-                            Intent k = new Intent(LoginActivity.this, MainActivity.class);
-                            k.putParcelableArrayListExtra("bigHobby", getIntent().getParcelableArrayListExtra("bigHobby"));
-                            k.putParcelableArrayListExtra("smallHobby", getIntent().getParcelableArrayListExtra("smallHobby"));
-                            startActivity(k);
-                            finish();
-
+                            updateFcmKey();
                         } else {
                             Toast.makeText(LoginActivity.this, result.getError(), Toast.LENGTH_SHORT).show();
                         }
@@ -152,6 +150,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         PreferenceData.setKeyUserId("");
                         PreferenceData.setKeyUserPw("");
+                        PreferenceData.setKeyUserImage("");
                         PreferenceData.setKeyUserLoginSuccess(false);
 
                         Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
@@ -164,6 +163,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         PreferenceData.setKeyUserId("");
                         PreferenceData.setKeyUserPw("");
+                        PreferenceData.setKeyUserImage("");
                         PreferenceData.setKeyUserLoginSuccess(false);
 
                         Toast.makeText(LoginActivity.this, "서버 통신을 취소하였습니다.", Toast.LENGTH_SHORT).show();
@@ -178,4 +178,30 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
+    private void updateFcmKey() {
+
+        UpdateFcmKeyTask updateFcmKeyTask = new UpdateFcmKeyTask(new UpdateFcmKeyTask.TaskResultHandler() {
+            @Override
+            public void onSuccessTask(ServerResult result) {
+
+                Intent k = new Intent(LoginActivity.this, MainActivity.class);
+                k.putParcelableArrayListExtra("bigHobby", getIntent().getParcelableArrayListExtra("bigHobby"));
+                k.putParcelableArrayListExtra("smallHobby", getIntent().getParcelableArrayListExtra("smallHobby"));
+                startActivity(k);
+                finish();
+            }
+
+            @Override
+            public void onFailTask() {
+
+            }
+
+            @Override
+            public void onCancelTask() {
+
+            }
+        });
+        updateFcmKeyTask.execute(ApiValue.API_UPDATE_FCM_KEY, PreferenceData.getKeyUserId(), PreferenceData.getKeyFcmToken());
+    }
 }
