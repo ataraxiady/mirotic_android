@@ -219,7 +219,7 @@ public class MatchFragment extends Fragment {
         }else{
 
             viewPager.setVisibility(View.GONE);
-            textView.setVisibility(View.VISIBLE);
+            end.setVisibility(View.VISIBLE);
 
             likeButton.setEnabled(false);
             dislikeButton.setEnabled(false);

@@ -22,7 +22,7 @@
         <LinearLayout
             android:id="@+id/end"
             android:layout_width="300dp"
-            android:layout_height="480dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
