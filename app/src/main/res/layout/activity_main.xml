@@ -24,12 +24,12 @@
         android:background="@color/Color_black_40">
 
         <RelativeLayout
+            android:id="@+id/tab_match"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/tab_match"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_centerInParent="true"
@@ -51,12 +51,12 @@
             android:background="@color/Color_white"/>
 
         <RelativeLayout
+            android:id="@+id/tab_my"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/tab_my"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_centerInParent="true"
@@ -80,12 +80,12 @@
             android:background="@color/Color_white"/>
 
         <RelativeLayout
+            android:id="@+id/tab_chat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/tab_chat"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_centerInParent="true"
@@ -109,12 +109,12 @@
             android:background="@color/Color_white"/>
 
         <RelativeLayout
+            android:id="@+id/tab_set"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/tab_set"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_centerInParent="true"

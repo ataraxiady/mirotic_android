@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.prograpy.app2.appdev2.R;
 import com.prograpy.app2.appdev2.network.response.data.HobbyData;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<HobbyData> bigHobbyList = new ArrayList<HobbyData>();
     private ArrayList<HobbyData> smallHobbyList = new ArrayList<HobbyData>();
 
-    private ImageView tabMatch, tabMy, tabChat, tabSetting;
+    private RelativeLayout tabMatch, tabMy, tabChat, tabSetting;
     private ImageView tabMatchSel, tabMySel, tabChatSel, tabSettingSel;
 
     @Override
@@ -34,10 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         smallHobbyList = getIntent().getParcelableArrayListExtra("smallHobby");
 
 
-        tabMatch = (ImageView) findViewById(R.id.tab_match);
-        tabMy = (ImageView) findViewById(R.id.tab_my);
-        tabChat = (ImageView) findViewById(R.id.tab_chat);
-        tabSetting = (ImageView) findViewById(R.id.tab_set);
+        tabMatch = (RelativeLayout) findViewById(R.id.tab_match);
+        tabMy = (RelativeLayout) findViewById(R.id.tab_my);
+        tabChat = (RelativeLayout) findViewById(R.id.tab_chat);
+        tabSetting = (RelativeLayout) findViewById(R.id.tab_set);
 
         tabMatchSel = (ImageView) findViewById(R.id.tab_match_sel);
         tabMySel = (ImageView) findViewById(R.id.tab_my_sel);
@@ -66,14 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onPageSelected(int position) {
                 switch (position){
-
-
                     case 0:
-                        tabMatch.setSelected(true);
-                        tabMy.setSelected(false);
-                        tabChat.setSelected(false);
-                        tabSetting.setSelected(false);
-
                         tabMatchSel.setVisibility(View.VISIBLE);
                         tabMySel.setVisibility(View.GONE);
                         tabChatSel.setVisibility(View.GONE);
@@ -81,11 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     case 1:
-                        tabMatch.setSelected(false);
-                        tabMy.setSelected(true);
-                        tabChat.setSelected(false);
-                        tabSetting.setSelected(false);
-
                         tabMatchSel.setVisibility(View.GONE);
                         tabMySel.setVisibility(View.VISIBLE);
                         tabChatSel.setVisibility(View.GONE);
@@ -93,11 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     case 2:
-                        tabMatch.setSelected(false);
-                        tabMy.setSelected(false);
-                        tabChat.setSelected(true);
-                        tabSetting.setSelected(false);
-
                         tabMatchSel.setVisibility(View.GONE);
                         tabMySel.setVisibility(View.GONE);
                         tabChatSel.setVisibility(View.VISIBLE);
@@ -105,11 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     case 3:
-                        tabMatch.setSelected(false);
-                        tabMy.setSelected(false);
-                        tabChat.setSelected(false);
-                        tabSetting.setSelected(true);
-
                         tabMatchSel.setVisibility(View.GONE);
                         tabMySel.setVisibility(View.GONE);
                         tabChatSel.setVisibility(View.GONE);
@@ -136,11 +115,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
 
             case R.id.tab_match:
-                tabMatch.setSelected(true);
-                tabMy.setSelected(false);
-                tabChat.setSelected(false);
-                tabSetting.setSelected(false);
-
                 tabMatchSel.setVisibility(View.VISIBLE);
                 tabMySel.setVisibility(View.GONE);
                 tabChatSel.setVisibility(View.GONE);
@@ -149,11 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.tab_my:
-                tabMatch.setSelected(false);
-                tabMy.setSelected(true);
-                tabChat.setSelected(false);
-                tabSetting.setSelected(false);
-
                 tabMatchSel.setVisibility(View.GONE);
                 tabMySel.setVisibility(View.VISIBLE);
                 tabChatSel.setVisibility(View.GONE);
@@ -162,11 +131,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.tab_chat:
-                tabMatch.setSelected(false);
-                tabMy.setSelected(false);
-                tabChat.setSelected(true);
-                tabSetting.setSelected(false);
-
                 tabMatchSel.setVisibility(View.GONE);
                 tabMySel.setVisibility(View.GONE);
                 tabChatSel.setVisibility(View.VISIBLE);
@@ -175,10 +139,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.tab_set:
-                tabMatch.setSelected(false);
-                tabMy.setSelected(false);
-                tabChat.setSelected(false);
-                tabSetting.setSelected(true);
 
                 tabMatchSel.setVisibility(View.GONE);
                 tabMySel.setVisibility(View.GONE);
