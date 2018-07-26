@@ -59,27 +59,7 @@
         <activity android:name=".chat.ChatMainActivity"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustResize"/>
-
-=======
-        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity" />
-        <activity
-            android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
-            android:label="OAuth2.0 In-app"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".profile.JoinActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".environment_setting.SetActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".main.MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".chat.ChatMainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
->>>>>>> Seung0724
+        
         <activity android:name=".environment_setting.SettingAppVersion" />
 
         <service
