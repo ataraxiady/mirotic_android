@@ -12,20 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.chatList.ChatListFragment;
 import com.prograpy.app2.appdev2.network.NetworkProgressDialog;
 import com.prograpy.app2.appdev2.network.response.ApiValue;
 import com.prograpy.app2.appdev2.network.response.data.UserData;
 import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
 import com.prograpy.app2.appdev2.network.response.result.MainMatchingResult;
-import com.prograpy.app2.appdev2.notice.NoticeActivity;
 import com.prograpy.app2.appdev2.task.LikeDislikeButtonTask;
 import com.prograpy.app2.appdev2.task.MainMatchingTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
@@ -88,8 +84,6 @@ public class MatchFragment extends Fragment {
                             }
 
                         }
-
-                        //서버에게 '싫어요'한 사람 전송해야함. 상대방 닉네임 받아오기
                     }
 
                     @Override
@@ -153,24 +147,6 @@ public class MatchFragment extends Fragment {
 
         dialog = new NetworkProgressDialog(getContext());
 
-//        imageButtonUser = (ImageView) view.findViewById(R.id.imgbtn_user);
-//        imageButtonUser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                intent = new Intent(getContext(), MyPage.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        imageButtonSettings = (ImageView) view.findViewById(R.id.imgbtn_settings);
-//        imageButtonSettings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                intent = new Intent(getContext(), SetActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
         dislikeButton = (ImageView) view.findViewById(R.id.btn_dislike);
         dislikeButton.setOnClickListener(likeDisLikeListener);
 
@@ -182,58 +158,6 @@ public class MatchFragment extends Fragment {
         adapter = new ViewPagerAdapter(getFragmentManager());
 
         viewPager.setAdapter(adapter);
-
-
-
-//
-//        // 플로팅버튼
-//
-//        fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
-//        fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
-//        fabRClockwise = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_clockwise);
-//        fabRanticlockWise = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_anticlockwise);
-//
-//        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
-//        floatingActionButton2 = (FloatingActionButton) view.findViewById(R.id.fab2);
-//        floatingActionButton3 = (FloatingActionButton) view.findViewById(R.id.fab3);
-//
-//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//
-//                if (isFabOpen) {
-//                    floatingActionButton2.startAnimation(fab_close);
-//                    floatingActionButton3.startAnimation(fab_close);
-//                    floatingActionButton.startAnimation(fabRanticlockWise);
-//                    floatingActionButton2.setClickable(false);
-//                    floatingActionButton3.setClickable(false);
-//                    isFabOpen = false;
-//                } else {
-//                    floatingActionButton2.startAnimation(fab_open);
-//                    floatingActionButton3.startAnimation(fab_open);
-//                    floatingActionButton.startAnimation(fabRClockwise);
-//                    floatingActionButton2.setClickable(true);
-//                    floatingActionButton3.setClickable(true);
-//                    isFabOpen = true;
-//                }
-//            }
-//        });
-//
-//        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                intent = new Intent(getContext(), ChatListFragment.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        floatingActionButton3.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                intent2 = new Intent(getContext(), NoticeActivity.class);
-//                startActivity(intent2);
-//            }
-//        });
 
 
         if(!PreferenceData.getKeyTodayIntroduce()){
@@ -302,7 +226,6 @@ public class MatchFragment extends Fragment {
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
         String profileImage = "";
-        String naverKey = "";
         String name = "";
         String gender = "";
         int age = 0;
@@ -315,8 +238,6 @@ public class MatchFragment extends Fragment {
 
         @Override
         public Fragment getItem(final int position) {
-            //string을 imageview로 받아야함.
-//                        profileImage = result.getInfoList().get(position).profileImage;
 
             if (userDataList != null && userDataList.size() > 0) {
                 name = userDataList.get(position).getName();
@@ -325,9 +246,6 @@ public class MatchFragment extends Fragment {
                 area = userDataList.get(position).getArea();
                 profileImage = userDataList.get(position).getProfileimage();
             }
-
-            //프래그먼트에 정보주기
-//                    사용자의 이미지 = 서버ㄱㅏ 준 데이터 (position).사용자의 이미지;
 
             fragment = InfoFragment.newInstance(name, gender, age, area, profileImage);
             return fragment;

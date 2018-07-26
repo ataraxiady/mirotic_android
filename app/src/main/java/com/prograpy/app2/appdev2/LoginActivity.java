@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private NetworkProgressDialog networkProgressDialog;
 
-    private Button join;
-    private Button login;
+    private ImageView join;
+    private ImageView login;
 
     private EditText myIdEdit;
     private EditText myPwEdit;
@@ -90,8 +91,8 @@ public class LoginActivity extends AppCompatActivity {
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
-        login = (Button) findViewById(R.id.login);
-        join = (Button) findViewById(R.id.go_join);
+        login = (ImageView) findViewById(R.id.login);
+        join = (ImageView) findViewById(R.id.go_join);
 
         myIdEdit = findViewById(R.id.id);
 
