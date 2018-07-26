@@ -38,7 +38,7 @@ public class SendMail extends AppCompatActivity {
                 email.putExtra(Intent.EXTRA_TEXT, contentsend);
 
 
-                startActivity(email);
+                startActivity(Intent.createChooser(email,"send maill...."));
 
             }
         });

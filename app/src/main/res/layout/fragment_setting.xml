@@ -28,6 +28,7 @@
         android:textColor="@color/Color_black"
         android:onClick="onClick"
         />
+
     <TextView
         android:id="@+id/accessterms"
         android:layout_width="match_parent"

@@ -29,38 +29,33 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".IntroActivity"
-                  android:screenOrientation="portrait">
-
+        <activity
+            android:name=".IntroActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity" />
-
-        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
+        <activity
+            android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
             android:label="OAuth2.0 In-app"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".LoginActivity"/>
-
-        <activity android:name=".profile.JoinActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".environment_setting.SetActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".main.MainActivity"
-                  android:screenOrientation="portrait"/>
-
-        <activity android:name=".chat.ChatMainActivity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustResize"/>
-        
-        <activity android:name=".environment_setting.SettingAppVersion" />
+            android:screenOrientation="portrait" />
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".profile.JoinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chat.ChatMainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".environment_setting.SendMail"/>
+        <activity android:name=".environment_setting.SettingAppVersion"/>
 
         <service
             android:name=".FireBaseMessagingService"
@@ -72,7 +67,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".environment_setting.SendMail"></activity>
     </application>
 
 </manifest>
