@@ -52,7 +52,7 @@ public class InfoFragment extends Fragment {
 
         if (getArguments() != null) {
             fname.setText(getArguments().getString(NAME));
-            fage.setText(getArguments().getInt(AGE));
+            fage.setText(getArguments().getString(AGE));
             fgender.setText(getArguments().getString(GENDER));
             farea.setText(getArguments().getString(AREA));
 

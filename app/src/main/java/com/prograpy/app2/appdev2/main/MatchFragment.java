@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import java.util.Date;
  */
 
 public class MatchFragment extends Fragment {
+    LinearLayout end;
     private MatchCustomViewPager viewPager;
     private ViewPagerAdapter adapter;
     private FloatingActionButton floatingActionButton, floatingActionButton2, floatingActionButton3;
@@ -48,6 +50,7 @@ public class MatchFragment extends Fragment {
     LikeDislikeButtonTask likeDislikeButtonTask;
     MainMatchingTask fragmentTask;
     private ArrayList<UserData> userDataList = new ArrayList<UserData>();
+
 
 
     private NetworkProgressDialog dialog;
@@ -77,7 +80,7 @@ public class MatchFragment extends Fragment {
                                 PreferenceData.setKeyTodayIntroduce(true);
 
                                 viewPager.setVisibility(View.GONE);
-                                textView.setVisibility(View.VISIBLE);
+                                end.setVisibility(View.VISIBLE);
 
                                 likeButton.setEnabled(false);
                                 dislikeButton.setEnabled(false);
@@ -109,7 +112,7 @@ public class MatchFragment extends Fragment {
             } else {
                 Toast.makeText(getContext(), "오늘 소개는 끝났습니다.", Toast.LENGTH_LONG).show();
                 viewPager.setVisibility(View.GONE);
-                textView.setVisibility(View.VISIBLE);
+                end.setVisibility(View.VISIBLE);
             }
         }
     };
@@ -146,6 +149,8 @@ public class MatchFragment extends Fragment {
         PreferenceData.setKeyLoginTime(curTime);
 
         dialog = new NetworkProgressDialog(getContext());
+
+        end = (LinearLayout)view.findViewById(R.id.end);
 
         dislikeButton = (ImageView) view.findViewById(R.id.btn_dislike);
         dislikeButton.setOnClickListener(likeDisLikeListener);
