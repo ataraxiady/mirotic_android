@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +11,7 @@
         android:layout_height="40dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="설정"
+        android:text="설  정"
         android:textColor="@color/Color_white"
         android:textSize="18sp"/>
 
@@ -20,10 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="버전정보"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:textColor="@color/Color_black"
+        android:onClick="onClick"
+        />
     <TextView
         android:id="@+id/accessterms"
         android:layout_width="match_parent"
@@ -31,42 +35,21 @@
         android:layout_marginBottom="20dp"
         android:text="이용약관"
         android:textSize="20sp"
+        android:textStyle="normal"
+        android:textColor="@color/Color_black"
         android:gravity="center"
-        android:layout_below="@id/version"
         />
+
     <TextView
-        android:id="@+id/third"
+        android:id="@+id/send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Q / A"
-        android:textSize="20sp"
+        android:clickable="false"
         android:gravity="center"
-        android:layout_below="@id/accessterms"
-        />
-    <TextView
-        android:id="@+id/four"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="기 타"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_below="@id/third"
-        />
-    <TextView
-        android:id="@+id/five"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:textStyle="normal"
+        android:textColor="@color/Color_black"
         android:text="고객센터 / 도움말"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_below="@id/four"
-        />
+        android:textSize="20sp" />
 
-
-
-
-
-</RelativeLayout>
+</LinearLayout>
