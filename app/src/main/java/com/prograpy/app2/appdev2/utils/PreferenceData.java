@@ -17,6 +17,7 @@ public class PreferenceData
      */
     private static final String KEY_USER_ID       = "user_id";
     private static final String KEY_USER_PW       = "user_pw";
+    private static final String KEY_USER_GENDER      = "user_gender";
     private static final String KEY_USER_LOGIN_SUCCESS       = "login_success";
     private static final String KEY_USER_IMAGE       = "user_image";
     private static final String KEY_FCM_TOKEN       = "fcm_token";
@@ -197,6 +198,27 @@ public class PreferenceData
         }
 
         return userImage;
+    }
+
+    public static void setKeyUserGender(String gender){
+
+        if(mEditor != null){
+            mEditor.putString(KEY_USER_GENDER, gender);
+            mEditor.commit();
+        }
+
+    }
+
+    public static String getKeyUserGender(){
+        String gender = "";
+
+        if(mPreferences != null){
+
+            gender = mPreferences.getString(KEY_USER_GENDER, gender);
+
+        }
+
+        return gender;
     }
 
 }

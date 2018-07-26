@@ -11,9 +11,9 @@
     <application
         android:name=".AppDevApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/miloticlogo"
+        android:icon="@mipmap/icon"
         android:label="Milotic"
-        android:roundIcon="@drawable/miloticlogo"
+        android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 

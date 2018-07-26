@@ -136,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                             PreferenceData.setKeyUserId(loginDataList.get(0).getID());
                             PreferenceData.setKeyUserPw(loginDataList.get(0).getPassword());
                             PreferenceData.setKeyUserImage(loginDataList.get(0).getProfileimage());
+                            PreferenceData.setKeyUserGender(loginDataList.get(0).getGender());
                             PreferenceData.setKeyUserLoginSuccess(true);
 
                             updateFcmKey();
@@ -151,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                         PreferenceData.setKeyUserId("");
                         PreferenceData.setKeyUserPw("");
                         PreferenceData.setKeyUserImage("");
+                        PreferenceData.setKeyUserGender("");
                         PreferenceData.setKeyUserLoginSuccess(false);
 
                         Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
@@ -164,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                         PreferenceData.setKeyUserId("");
                         PreferenceData.setKeyUserPw("");
                         PreferenceData.setKeyUserImage("");
+                        PreferenceData.setKeyUserGender("");
                         PreferenceData.setKeyUserLoginSuccess(false);
 
                         Toast.makeText(LoginActivity.this, "서버 통신을 취소하였습니다.", Toast.LENGTH_SHORT).show();

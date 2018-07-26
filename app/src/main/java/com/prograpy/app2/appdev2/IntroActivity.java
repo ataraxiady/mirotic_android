@@ -166,6 +166,7 @@ public class IntroActivity extends AppCompatActivity {
                         PreferenceData.setKeyUserId(result.getUserInfos().get(0).getID());
                         PreferenceData.setKeyUserPw(result.getUserInfos().get(0).getPassword());
                         PreferenceData.setKeyUserImage(result.getUserInfos().get(0).getProfileimage());
+                        PreferenceData.setKeyUserGender(result.getUserInfos().get(0).getGender());
                         PreferenceData.setKeyUserLoginSuccess(true);
 
                         updateFcmKey();
@@ -211,6 +212,7 @@ public class IntroActivity extends AppCompatActivity {
                 PreferenceData.setKeyUserId("");
                 PreferenceData.setKeyUserPw("");
                 PreferenceData.setKeyUserImage("");
+                PreferenceData.setKeyUserGender("");
                 PreferenceData.setKeyUserLoginSuccess(false);
 
                 new Handler().postDelayed(new Runnable() {
@@ -234,6 +236,7 @@ public class IntroActivity extends AppCompatActivity {
                 PreferenceData.setKeyUserId("");
                 PreferenceData.setKeyUserPw("");
                 PreferenceData.setKeyUserImage("");
+                PreferenceData.setKeyUserGender("");
                 PreferenceData.setKeyUserLoginSuccess(false);
 
                 new Handler().postDelayed(new Runnable() {
