@@ -1,7 +1,11 @@
 package com.prograpy.app2.appdev2.main;
 
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,11 +35,11 @@ public class InfoFragment extends Fragment {
     TextView farea;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info, container, false);
-//        이미지뷰.셋팅이미지(전달받은이미지)
 
 
         fname = (TextView) view.findViewById(R.id.infoName);
@@ -43,13 +47,14 @@ public class InfoFragment extends Fragment {
         fgender = (TextView) view.findViewById(R.id.infoGender);
         farea = (TextView) view.findViewById(R.id.infoArea);
         fprofileImage = (ImageView) view.findViewById(R.id.infoPic);
-
+        fprofileImage.setBackground(new ShapeDrawable(new OvalShape()));
+        fprofileImage.setClipToOutline(true);
 
         if (getArguments() != null) {
             fname.setText(getArguments().getString(NAME));
-            fage.setText("나이 : " + getArguments().getInt(AGE) + " 세");
-            fgender.setText("성별 : " + getArguments().getString(GENDER));
-            farea.setText("거주 지역 : " + getArguments().getString(AREA));
+            fage.setText(getArguments().getInt(AGE));
+            fgender.setText(getArguments().getString(GENDER));
+            farea.setText(getArguments().getString(AREA));
 
             Glide.with(container.getContext()).load(getArguments().getString(IMAGE)).into(fprofileImage);
         }

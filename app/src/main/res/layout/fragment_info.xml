@@ -2,51 +2,112 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent">
 
 
     <ImageView
         android:id="@+id/infoPic"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
 
     <TextView
         android:id="@+id/infoName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:text="강호동"
         android:textSize="20dp"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:textColor="@android:color/black"/>
 
     <View
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="1dp"
         android:background="@android:color/black"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="10dp"/>
 
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/infoAge"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="나이" />
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/infoGender"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나이 : "
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/infoAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22"
+            android:layout_gravity="right"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="성별" />
-    <TextView
-        android:id="@+id/infoArea"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성별 : "
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/infoGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="여자"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="지역" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지역 : "
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/infoArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="경기도 과천시"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
 
 
 </LinearLayout>
