@@ -31,12 +31,14 @@ public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResu
     protected MainMatchingResult doInBackground(String... strings) {
         String path = strings[0];
         String myId = strings[1];
+        String myGender = strings[2];
 
         MainMatchingResult result = null;
 
         Map<String, Object> params = new HashMap<>();
 
         params.put("myId", myId);
+        params.put("myGender", myGender);
 
         HttpRequest request = new HttpRequest();
 

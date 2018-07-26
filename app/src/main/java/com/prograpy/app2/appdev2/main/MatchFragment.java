@@ -286,7 +286,7 @@ public class MatchFragment extends Fragment {
             });
 
             dialog.show();
-            fragmentTask.execute(ApiValue.API_GET_MATCHING_INFO, PreferenceData.getKeyUserId());
+            fragmentTask.execute(ApiValue.API_GET_MATCHING_INFO, PreferenceData.getKeyUserId(), PreferenceData.getKeyUserGender());
         }else{
 
             viewPager.setVisibility(View.GONE);
