@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class FireBaseMessagingService extends FirebaseMessagingService {
 
@@ -30,25 +31,16 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 
 
     @Override
-    public void onNewToken(String s) {
-        super.onNewToken(s);
-        Log.d(TAG, "new token: " + s);
-
-        PreferenceData.setKeyFcmToken(s);
-    }
-
-    @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void handleIntent(Intent intent) {
+        super.handleIntent(intent);
 
         String matchId = "";
         String matchImage ="";
 
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-
-        if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-            matchId = remoteMessage.getData().get("matchId");
-            matchImage = remoteMessage.getData().get("matchImage");
+        if (intent.getExtras() != null && intent.getExtras().size() > 0) {
+            Log.d(TAG, "Message data payload: " + intent.getExtras());
+            matchId = intent.getStringExtra("matchId");
+            matchImage = intent.getStringExtra("matchImage");
         }
 
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
@@ -59,23 +51,65 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 
         if(taskInfo.get(0).topActivity.getShortClassName().contains("ChatMainActivity")){
 
-            Intent intent = new Intent(this, ChatMainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("msg", remoteMessage.getNotification().getBody());
-            intent.putExtra("matchId", matchId);
-            intent.putExtra("matchImage", matchImage);
-            startActivity(intent);
+            Intent intent2 = new Intent(this, ChatMainActivity.class);
+            intent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent2.putExtra("msg", (String)intent.getExtras().get("gcm.notification.body"));
+            intent2.putExtra("matchId", matchId);
+            intent2.putExtra("matchImage", matchImage);
+            startActivity(intent2);
 
         }else{
 
-            if (remoteMessage.getNotification() != null) {
-                Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-                sendNotification(remoteMessage.getNotification().getBody(), matchId, matchImage);
+            if (intent.getExtras() != null) {
+                Log.d(TAG, "Message Notification Body: " + (String)intent.getExtras().get("gcm.notification.body"));
+                sendNotification((String)intent.getExtras().get("gcm.notification.body"), matchId, matchImage);
             }
 
         }
+    }
+
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+
+//        String matchId = "";
+//        String matchImage ="";
+//
+//        Log.d(TAG, "From: " + remoteMessage.getFrom());
+//
+//        if (remoteMessage.getData().size() > 0) {
+//            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+//            matchId = remoteMessage.getData().get("matchId");
+//            matchImage = remoteMessage.getData().get("matchImage");
+//        }
+//
+//        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+//        List< ActivityManager.RunningTaskInfo > taskInfo = activityManager.getRunningTasks(1);
+//
+//        Log.d( "CURRENT Activity ",  taskInfo.get(0).topActivity.getShortClassName());
+//
+//
+//        if(taskInfo.get(0).topActivity.getShortClassName().contains("ChatMainActivity")){
+//
+//            Intent intent = new Intent(this, ChatMainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.putExtra("msg", remoteMessage.getNotification().getBody());
+//            intent.putExtra("matchId", matchId);
+//            intent.putExtra("matchImage", matchImage);
+//            startActivity(intent);
+//
+//        }else{
+//
+//            if (remoteMessage.getNotification() != null) {
+//                Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+//                sendNotification(remoteMessage.getNotification().getBody(), matchId, matchImage);
+//            }
+//
+//        }
 
     }
+
+
+
 
     private void sendNotification(String messageBody, String matchId, String matchImage) {
         Intent intent = new Intent(this, IntroActivity.class);
@@ -101,11 +135,12 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create channel to show notifications.
             String channelName = "meyou";
-            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }
+        int id = Integer.parseInt(new SimpleDateFormat("ddHHmmss").format(new Date()));
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(id /* ID of notification */, notificationBuilder.build());
 
 
         FileUtils fileUtils = new FileUtils(this);
