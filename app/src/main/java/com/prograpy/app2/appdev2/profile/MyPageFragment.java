@@ -185,7 +185,7 @@ public class MyPageFragment extends Fragment {
 
                         name_TextView.setText(myInfo.getName());
                         area_TextView.setText(myInfo.getArea());
-                        age_TextView.setText("(" + myInfo.getAge() + ")");
+                        age_TextView.setText( myInfo.getAge() );
 
                         boolean first = false, sec = false, thr = false;
 

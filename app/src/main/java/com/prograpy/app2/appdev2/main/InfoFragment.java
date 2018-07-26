@@ -47,7 +47,7 @@ public class InfoFragment extends Fragment {
 
         if (getArguments() != null) {
             fname.setText(getArguments().getString(NAME));
-            fage.setText("나이 : " + getArguments().getInt(AGE) + " 세");
+            fage.setText("나이 : " + getArguments().getString(AGE) + " 세");
             fgender.setText("성별 : " + getArguments().getString(GENDER));
             farea.setText("거주 지역 : " + getArguments().getString(AREA));
 
