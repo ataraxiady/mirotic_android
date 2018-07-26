@@ -43,7 +43,7 @@ public class MyPageFragment extends Fragment {
     private TextView third_sub = null;
     private TextView gender = null;
     private ImageView profileImage;
-    private Button edit_btn, save_btn;
+    private Button edit_btn, save_btn, exit_btn;
     private EditText area_EditText = null;
     private RadioButton man_btn, woman_btn;
     private Spinner spinner_hobby1_edit, spinner_hobby2_edit, spinner_hobby_second1_edit,
@@ -115,6 +115,7 @@ public class MyPageFragment extends Fragment {
         // 수정 정보
         edit_btn = view.findViewById(R.id.edit);
         save_btn = view.findViewById(R.id.savebtn);
+        exit_btn = view.findViewById(R.id.exitbtn);
         area_EditText = view.findViewById(R.id.profile_area_edit);
         man_btn = (RadioButton) view.findViewById(R.id.man);
         woman_btn = (RadioButton) view.findViewById(R.id.woman);
@@ -150,10 +151,19 @@ public class MyPageFragment extends Fragment {
             }
         });
 
+        // 저장 버튼을 누르면 수정한 내용 서버로 보내고 서버로부터 다시 받아와 셋팅
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateData();
+            }
+        });
+
+        // 저장취소 버튼
+        exit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exitmodify();
             }
         });
 
@@ -377,6 +387,7 @@ public class MyPageFragment extends Fragment {
         if(isEdit){
             edit_btn.setVisibility(View.GONE);
             save_btn.setVisibility(View.VISIBLE);
+            exit_btn.setVisibility(View.VISIBLE);
 
             area_TextView.setVisibility(View.GONE);
             area_EditText.setVisibility(View.VISIBLE);
@@ -405,6 +416,7 @@ public class MyPageFragment extends Fragment {
         }else{
             edit_btn.setVisibility(View.VISIBLE);
             save_btn.setVisibility(View.GONE);
+            exit_btn.setVisibility(View.GONE);
 
             area_EditText.setText("");
             area_EditText.setVisibility(View.GONE);
@@ -474,4 +486,37 @@ public class MyPageFragment extends Fragment {
                 sh_number_3);
 
     }
+    private void exitmodify()
+    {
+            edit_btn.setVisibility(View.VISIBLE);
+            save_btn.setVisibility(View.GONE);
+            exit_btn.setVisibility(View.GONE);
+
+            area_EditText.setText("");
+            area_EditText.setVisibility(View.GONE);
+            area_TextView.setVisibility(View.VISIBLE);
+
+            first_main.setVisibility(View.VISIBLE);
+            spinner_hobby1_edit.setVisibility(View.GONE);
+            spinner_hobby1_edit.setAdapter(null);
+
+            first_sub.setVisibility(View.VISIBLE);
+            spinner_hobby2_edit.setVisibility(View.GONE);
+
+            second_main.setVisibility(View.VISIBLE);
+            spinner_hobby_second1_edit.setVisibility(View.GONE);
+            spinner_hobby_second1_edit.setAdapter(null);
+
+            second_sub.setVisibility(View.VISIBLE);
+            spinner_hobby_second2_edit.setVisibility(View.GONE);
+
+            third_main.setVisibility(View.VISIBLE);
+            spinner_hobby_third1_edit.setVisibility(View.GONE);
+            spinner_hobby_third1_edit.setAdapter(null);
+
+            third_sub.setVisibility(View.VISIBLE);
+            spinner_hobby_third2_edit.setVisibility(View.GONE);
+
+    }
+
 }
