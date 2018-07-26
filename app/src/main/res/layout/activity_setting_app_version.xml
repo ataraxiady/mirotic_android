@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+                android:background="@color/Color_grey01"
     android:orientation="vertical"
     tools:context="com.prograpy.app2.appdev2.environment_setting.SettingAppVersion">
 
@@ -18,7 +18,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="50dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/intro_icon" />
     </LinearLayout>
 
     <LinearLayout
