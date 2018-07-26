@@ -36,12 +36,17 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 
         String matchId = "";
         String matchImage ="";
+        String matchName ="";
 
         if (intent.getExtras() != null && intent.getExtras().size() > 0) {
             Log.d(TAG, "Message data payload: " + intent.getExtras());
             matchId = intent.getStringExtra("matchId");
             matchImage = intent.getStringExtra("matchImage");
+            matchName = intent.getStringExtra("matchName");
         }
+
+        if(matchId.isEmpty() || matchImage.isEmpty() || matchName.isEmpty())
+            return;
 
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         List< ActivityManager.RunningTaskInfo > taskInfo = activityManager.getRunningTasks(1);
@@ -56,13 +61,14 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
             intent2.putExtra("msg", (String)intent.getExtras().get("gcm.notification.body"));
             intent2.putExtra("matchId", matchId);
             intent2.putExtra("matchImage", matchImage);
+            intent2.putExtra("matchName", matchName);
             startActivity(intent2);
 
         }else{
 
             if (intent.getExtras() != null) {
                 Log.d(TAG, "Message Notification Body: " + (String)intent.getExtras().get("gcm.notification.body"));
-                sendNotification((String)intent.getExtras().get("gcm.notification.body"), matchId, matchImage);
+                sendNotification((String)intent.getExtras().get("gcm.notification.body"), matchName, matchId, matchImage);
             }
 
         }
@@ -111,7 +117,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 
 
 
-    private void sendNotification(String messageBody, String matchId, String matchImage) {
+    private void sendNotification(String messageBody, String matchName, String matchId, String matchImage) {
         Intent intent = new Intent(this, IntroActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -122,7 +128,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.mipmap.icon)
-                        .setContentTitle(matchId)
+                        .setContentTitle(matchName)
                         .setContentText(messageBody)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)

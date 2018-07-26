@@ -179,6 +179,7 @@ public class ChatMainActivity extends AppCompatActivity {
         Log.d("onNewIntent", intent.getStringExtra("msg"));
         Log.d("onNewIntent", intent.getStringExtra("matchId"));
         Log.d("onNewIntent", intent.getStringExtra("matchImage"));
+        Log.d("onNewIntent", intent.getStringExtra("matchName"));
 
         // 메세지를 받긴 받았는데 다른 상대가 보낸 메세지일 경우는
         // 노티를 보여주고 그 상대방 파일에 저장
@@ -211,7 +212,8 @@ public class ChatMainActivity extends AppCompatActivity {
             chatMainAdapter.notifyDataSetChanged();
             chatListView.scrollToPosition(chatList.size() - 1);
         }else{
-            sendNotification(intent.getStringExtra("msg"), intent.getStringExtra("matchId"), intent.getStringExtra("matchImage"));
+            sendNotification(intent.getStringExtra("msg"), intent.getStringExtra("matchName"),
+                    intent.getStringExtra("matchId"), intent.getStringExtra("matchImage"));
         }
 
     }
@@ -268,11 +270,11 @@ public class ChatMainActivity extends AppCompatActivity {
         });
 
 
-        sendMsgTask.execute(ApiValue.API_SEND_MSG, PreferenceData.getKeyUserId(), matchId, msg, format.format(date), PreferenceData.getKeyUserImage());
+        sendMsgTask.execute(ApiValue.API_SEND_MSG, PreferenceData.getKeyUserId(), matchId, msg, format.format(date));
     }
 
 
-    private void sendNotification(String messageBody, String matchId, String matchImage) {
+    private void sendNotification(String messageBody,  String matchName, String matchId, String matchImage) {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -283,7 +285,7 @@ public class ChatMainActivity extends AppCompatActivity {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.mipmap.icon)
-                        .setContentTitle(matchId)
+                        .setContentTitle(matchName)
                         .setContentText(messageBody)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
