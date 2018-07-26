@@ -7,13 +7,16 @@
     android:orientation="vertical"
     tools:context="com.prograpy.app2.appdev2.environment_setting.SendMail">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/inputbg"
+        android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="고객센터/도움말" />
+        android:text="고객센터"
+        android:textColor="@color/Color_white"
+        android:textSize="18sp"/>
+
 
     <TextView
         android:layout_width="match_parent"

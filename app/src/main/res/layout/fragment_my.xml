@@ -33,369 +33,350 @@
         </RelativeLayout>
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/second_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="홍길동"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/profile_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/profile_name"
-            android:text="(24)"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/third_layout"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/inputbg"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:gravity="center_vertical"
-            android:text=" 성       별   "
-            android:textStyle="normal"
-            android:textSize="15sp"
-            android:textColor="@color/Color_black"
-            />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-
-            >
-
-            <RadioButton
-                android:id="@+id/man"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="남자" />
-
-            <RadioButton
-                android:id="@+id/woman"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="여자" />
-
-        </RadioGroup>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/four_layout"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/inputbg"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:gravity="center_vertical"
-            android:text="거주지역   "
-            android:textStyle="normal"
-            android:textSize="15sp"
-            android:textColor="@color/Color_black" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/profile_area"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="미입력"
-                android:gravity="center"
-                android:textStyle="normal"
-                android:textSize="15sp"
-                android:textColor="@color/Color_black"
-                android:visibility="visible" />
-
-            <EditText
-                android:id="@+id/profile_area_edit"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@android:color/transparent"
-                android:hint="주소를 입력하세요."
-                android:inputType="text"
-                android:textStyle="normal"
-                android:textSize="15sp"
-                android:textColor="@color/Color_black"
-                android:visibility="gone" />
-
-        </FrameLayout>
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/hobbytext"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/four_layout"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="15dp"
-        android:text="나의 취미"
-        android:textStyle="normal"
-        android:textSize="15sp"
-        android:textColor="@color/Color_black"
-        />
-
-    <LinearLayout
-        android:id="@+id/hobby1_layout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/inputbg"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="15dp"
-            android:text="1 순위"
-            android:textAlignment="center" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/mypage_firsthobby1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="미입력"
-                android:textAlignment="center"
-                android:visibility="visible" />
-
-            <Spinner
-                android:id="@+id/hobby_first_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/mypage_firsthobby2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="미입력"
-                android:textAlignment="center"
-                android:visibility="visible" />
-
-            <Spinner
-                android:id="@+id/hobby_first_sub_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"
-                android:visibility="gone" />
-
-        </FrameLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/hobby2_layout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="7dp"
-        android:gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/inputbg"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="15dp"
-            android:text="2 순위"
-            android:textAlignment="center" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/mypage_second_hobby1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="미입력"
-                android:textAlignment="center"
-                android:visibility="visible" />
-
-            <Spinner
-                android:id="@+id/hobby_second_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"
-                android:visibility="gone" />
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/mypage_second_hobby2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="미입력"
-                android:textAlignment="center"
-                android:visibility="visible" />
-
-            <Spinner
-                android:id="@+id/hobby_second_sub_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"
-                android:visibility="gone" />
-
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/hobby3_layout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="7dp"
-        android:gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/inputbg"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="15dp"
-            android:text="3 순위"
-            android:textAlignment="center" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/mypage_thirdhobby1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="미입력"
-                android:textAlignment="center"
-                android:visibility="visible" />
-
-            <Spinner
-                android:id="@+id/hobby_third_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/mypage_thirdhobby2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="미입력"
-                android:textAlignment="center"
-                android:visibility="visible" />
-
-            <Spinner
-                android:id="@+id/hobby_third_sub_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"
-                android:visibility="gone" />
-
-        </FrameLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
+            android:orientation="vertical">
 
-
-            <Button
-                android:id="@+id/edit"
-                android:text=" "
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/modifybtn"
-                android:gravity="center" />
-
-            <Button
-                android:id="@+id/savebtn"
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_margin="20dp"
-                android:background="@drawable/savebtn"
-                android:visibility="gone" />
-        </FrameLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:text="내 정보"
+                android:textColor="@color/Color_black"
+                android:textSize="15sp"
+                android:textStyle="normal" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/inputbg"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:text="이름"
+                android:textColor="@android:color/background_dark"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/profile_age"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/inputbg"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:text="나이"
+                android:textColor="@android:color/background_dark"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/mygender"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/inputbg"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:text="성별"
+                android:textColor="@color/Color_black"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/inputbg"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/profile_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingStart="15dp"
+                        android:text="거주지"
+                        android:textColor="@color/Color_black"
+                        android:textSize="15sp"
+                        android:textStyle="normal"
+                        android:visibility="visible" />
+
+                    <EditText
+                        android:id="@+id/profile_area_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:backgroundTint="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="주소를 입력하세요."
+                        android:inputType="text"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/Color_black"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="15dp"
+                android:text="취미"
+                android:textColor="@color/Color_black"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/inputbg"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="15dp"
+                    android:text="1 순위"
+                    android:textAlignment="center" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/mypage_firsthobby1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="미입력"
+                        android:textAlignment="center"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/hobby_first_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="center"
+                        android:visibility="gone"
+
+                        />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/mypage_firsthobby2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="미입력"
+                        android:textAlignment="center"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/hobby_first_sub_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="center"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/inputbg"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="15dp"
+                    android:text="2 순위"
+                    android:textAlignment="center" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/mypage_second_hobby1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="미입력"
+                        android:textAlignment="center"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/hobby_second_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="center"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/mypage_second_hobby2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="미입력"
+                        android:textAlignment="center"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/hobby_second_sub_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="center"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/inputbg"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="15dp"
+                    android:text="3 순위"
+                    android:textAlignment="center" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/mypage_thirdhobby1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="미입력"
+                        android:textAlignment="center"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/hobby_third_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="center"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/mypage_thirdhobby2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="미입력"
+                        android:textAlignment="center"
+                        android:visibility="visible" />
+
+                    <Spinner
+                        android:id="@+id/hobby_third_sub_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="center"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true">
+
+
+                    <Button
+                        android:id="@+id/edit"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/modifybtn"
+                        android:text=" " />
+
+                    <Button
+                        android:id="@+id/savebtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/savebtn"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 

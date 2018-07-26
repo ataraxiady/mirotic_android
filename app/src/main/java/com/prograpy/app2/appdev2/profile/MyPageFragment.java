@@ -41,6 +41,7 @@ public class MyPageFragment extends Fragment {
     private TextView second_sub = null;
     private TextView third_main = null;
     private TextView third_sub = null;
+    private TextView gender = null;
     private ImageView profileImage;
     private Button edit_btn, save_btn;
     private EditText area_EditText = null;
@@ -110,6 +111,7 @@ public class MyPageFragment extends Fragment {
         second_sub = view.findViewById(R.id.mypage_second_hobby2);
         third_main = view.findViewById(R.id.mypage_thirdhobby1);
         third_sub = view.findViewById(R.id.mypage_thirdhobby2);
+        gender = view.findViewById(R.id.mygender);
         // 수정 정보
         edit_btn = view.findViewById(R.id.edit);
         save_btn = view.findViewById(R.id.savebtn);
@@ -137,10 +139,6 @@ public class MyPageFragment extends Fragment {
 
         spinner_hobby_third1_edit.setAdapter(hobby_third_edit);
         spinner_hobby_third1_edit.setOnItemSelectedListener(editspinnerSelectListener);
-
-
-        man_btn.setClickable(false);
-        woman_btn.setClickable(false);
 
         /*  수정 버튼을 누르면 FrameLayout의 GONE으로
             해놓은 위젯들이 VISIBLE로 변환하여 화면에 출력  */
@@ -223,12 +221,9 @@ public class MyPageFragment extends Fragment {
 
 
                         if (myInfo.getGender().equals("남자")) {
-                            man_btn.setSelected(true);
-                            man_btn.setChecked(true);
+                            gender.setText("남자");
                         } else {
-                            woman_btn.setChecked(true);
-                            woman_btn.setSelected(true);
-                        }
+                            gender.setText("여자");}
                     }
 
                 }
@@ -435,10 +430,6 @@ public class MyPageFragment extends Fragment {
 
             third_sub.setVisibility(View.VISIBLE);
             spinner_hobby_third2_edit.setVisibility(View.GONE);
-
-            man_btn.setClickable(false);
-            woman_btn.setClickable(false);
-
 
         }
     }

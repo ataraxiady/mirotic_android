@@ -38,6 +38,7 @@
         android:textStyle="normal"
         android:textColor="@color/Color_black"
         android:gravity="center"
+        android:onClick="onClick"
         />
 
     <TextView
@@ -50,6 +51,7 @@
         android:textStyle="normal"
         android:textColor="@color/Color_black"
         android:text="고객센터 / 도움말"
+        android:onClick="onClick"
         android:textSize="20sp" />
 
 </LinearLayout>
