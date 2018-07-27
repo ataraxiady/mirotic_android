@@ -24,6 +24,7 @@ import com.prograpy.app2.appdev2.network.response.data.UserData;
 import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
 import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 import com.prograpy.app2.appdev2.profile.JoinActivity;
+import com.prograpy.app2.appdev2.profile.ProvisionActivity;
 import com.prograpy.app2.appdev2.task.LoginTask;
 import com.prograpy.app2.appdev2.task.UpdateFcmKeyTask;
 import com.prograpy.app2.appdev2.utils.PreferenceData;
@@ -101,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent k = new Intent(LoginActivity.this, JoinActivity.class);
+                Intent k = new Intent(LoginActivity.this, ProvisionActivity.class);
                 k.putParcelableArrayListExtra("bigHobby", getIntent().getParcelableArrayListExtra("bigHobby"));
                 k.putParcelableArrayListExtra("smallHobby", getIntent().getParcelableArrayListExtra("smallHobby"));
                 startActivity(k);
