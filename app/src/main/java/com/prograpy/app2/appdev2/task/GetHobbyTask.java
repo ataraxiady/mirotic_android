@@ -10,6 +10,7 @@ import com.prograpy.app2.appdev2.network.response.result.HobbyResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app2.appdev2.utils.D;
 
 public class GetHobbyTask extends AsyncTask<String, Integer, HobbyResult> {
 
@@ -47,7 +48,7 @@ public class GetHobbyTask extends AsyncTask<String, Integer, HobbyResult> {
             String str = request.callRequestServer(path,  "GET", null);
 
 
-            Log.d("http", "str > " + str);
+            D.log("HttpRequest", "str > " + str);
 
 
             Gson gson = new GsonBuilder().create();

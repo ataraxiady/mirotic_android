@@ -9,6 +9,7 @@ import com.prograpy.app2.appdev2.network.HttpRequest;
 import com.prograpy.app2.appdev2.network.response.result.LikeDislikeResult;
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app2.appdev2.utils.D;
 
 public class LikeDislikeButtonTask extends AsyncTask<String, Integer, LikeDislikeResult> {
 
@@ -46,7 +47,7 @@ public class LikeDislikeButtonTask extends AsyncTask<String, Integer, LikeDislik
         try {
             String str = request.callRequestServer(path,"POST",params);
 
-                Log.d("http","str >" + str);
+                D.log("HttpRequest","str >" + str);
 
             Gson gson = new GsonBuilder().create();
             result = gson.fromJson(str, LikeDislikeResult.class);

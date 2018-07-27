@@ -33,7 +33,7 @@ public class FileUtils {
 
         if(!dir.exists()){
             dir.mkdir();
-            Log.d(TAG, "Create Folder > " + context.getFilesDir() + FOLDER_NAME);
+            D.log(TAG, "Create Folder > " + context.getFilesDir() + FOLDER_NAME);
         }
     }
 
@@ -54,7 +54,7 @@ public class FileUtils {
 
         File file = new File(context.getFilesDir() +"/"+ FOLDER_NAME,fileName +".txt");
 
-        Log.d(TAG, "File Path > " + file.getPath());
+        D.log(TAG, "File Path > " + file.getPath());
 
         try {
             FileOutputStream fOut = new FileOutputStream(file, true);
@@ -68,7 +68,7 @@ public class FileUtils {
             myOutWriter.close();
             fOut.close();
 
-            Log.d(TAG, "File Write");
+            D.log(TAG, "File Write");
 
         } catch (Exception e) {
             e.printStackTrace() ;
@@ -83,7 +83,7 @@ public class FileUtils {
 
         File file = new File(context.getFilesDir() +"/"+ FOLDER_NAME,fileName +".txt");
 
-        Log.d(TAG, "File Path > " + file.getPath());
+        D.log(TAG, "File Path > " + file.getPath());
 
         FileReader fr = null ;
         BufferedReader bufrd = null ;
