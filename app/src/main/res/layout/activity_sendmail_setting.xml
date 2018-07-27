@@ -43,10 +43,11 @@
         android:layout_height="240dp"
         android:layout_margin="10dp"
         android:background="@drawable/inputbg"
+        android:gravity="top"
         android:hint="아래 내용을 함께 보내주시면 더욱 빨리 처리가 가능합니다.\n - 문의 내용 :\n - 문제발생일시"
         android:imeOptions="actionNext"
         android:inputType="text"
-        android:paddingLeft="10dp"
+        android:padding="10dp"
         android:textSize="12sp" />
 
     <Button
@@ -54,7 +55,8 @@
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:background="@android:color/holo_purple"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/Color_white"
         android:text="보내기" />
 
 </LinearLayout>

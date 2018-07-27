@@ -8,7 +8,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:src="@drawable/match_back"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/mypagebackground"/>
 
 
     <LinearLayout
@@ -17,13 +18,48 @@
         android:orientation="vertical">
 
 
-        <com.prograpy.app2.appdev2.main.MatchCustomViewPager
-            android:id="@+id/main_pager"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1">
-        </com.prograpy.app2.appdev2.main.MatchCustomViewPager>
+
+            <com.prograpy.app2.appdev2.main.MatchCustomViewPager
+                android:id="@+id/main_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_marginTop="50dp">
+            </com.prograpy.app2.appdev2.main.MatchCustomViewPager>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/btn_like"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:onClick="onClick"
+                    android:layout_weight="1"
+                    android:src="@drawable/like_btn" />
+
+                <ImageView
+                    android:id="@+id/btn_dislike"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:onClick="onClick"
+                    android:layout_weight="1"
+                    android:src="@drawable/dislike_btn"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/end"
@@ -80,29 +116,6 @@
             android:text="오늘 소개 끝!"
             android:textSize="50sp"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/btn_dislike"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="10dp"
-                android:onClick="onClick"
-                android:src="@drawable/dislike_btn"/>
-
-            <ImageView
-                android:id="@+id/btn_like"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:onClick="onClick"
-                android:src="@drawable/like_btn" />
-
-        </LinearLayout>
 
     </LinearLayout>
 

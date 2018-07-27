@@ -55,7 +55,7 @@ public class ChatMainActivity extends AppCompatActivity {
 
     private ImageView back;
 
-    private ImageView btnSend;
+    private TextView btnSend;
     private EditText edInputMsg;
     private String msg = "";
     private String fileName = "";
@@ -159,7 +159,7 @@ public class ChatMainActivity extends AppCompatActivity {
 
 
 
-        btnSend = (ImageView) findViewById(R.id.sendBtn);
+        btnSend = (TextView) findViewById(R.id.sendBtn);
         btnSend.setOnClickListener(listener);
 
         back = (ImageView) findViewById(R.id.title_back);

@@ -64,15 +64,17 @@
             android:textSize="13sp"
             android:privateImeOptions="defaultInputmode=korean"/>
 
-        <ImageView
+        <TextView
             android:id="@+id/sendBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="3"
-            android:background="@drawable/sendbtn"
+            android:background="@color/colorPrimary"
             android:enabled="false"
             android:onClick="onClick"
-            android:scaleType="centerCrop"
-            />
+            android:text="보내기"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="@color/Color_white"/>
     </LinearLayout>
 </LinearLayout>
