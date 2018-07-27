@@ -46,7 +46,6 @@ public class MatchFragment extends Fragment {
     ImageView dislikeButton;
     ImageView likeButton;
     int index = 0;
-    TextView textView;
     LikeDislikeButtonTask likeDislikeButtonTask;
     MainMatchingTask fragmentTask;
     private ArrayList<UserData> userDataList = new ArrayList<UserData>();
@@ -134,8 +133,6 @@ public class MatchFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_match, container, false);
 
-        textView = (TextView) view.findViewById(R.id.textView);
-
         long now = System.currentTimeMillis();
         Date date = new Date(now);
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -183,7 +180,7 @@ public class MatchFragment extends Fragment {
                         }else{
                             index = 6;
                             viewPager.setVisibility(View.GONE);
-                            textView.setVisibility(View.VISIBLE);
+                            end.setVisibility(View.VISIBLE);
 
                             likeButton.setEnabled(false);
                             dislikeButton.setEnabled(false);
@@ -192,7 +189,7 @@ public class MatchFragment extends Fragment {
                     }else{
                         index = 6;
                         viewPager.setVisibility(View.GONE);
-                        textView.setVisibility(View.VISIBLE);
+                        end.setVisibility(View.VISIBLE);
 
                         likeButton.setEnabled(false);
                         dislikeButton.setEnabled(false);

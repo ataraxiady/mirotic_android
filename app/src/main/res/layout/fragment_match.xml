@@ -105,18 +105,6 @@
 
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="gone"
-            android:gravity="center"
-            android:text="오늘 소개 끝!"
-            android:textSize="50sp"/>
-
-
     </LinearLayout>
 
     <!--<LinearLayout-->
