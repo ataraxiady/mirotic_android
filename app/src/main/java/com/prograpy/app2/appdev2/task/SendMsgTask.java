@@ -10,6 +10,7 @@ import com.prograpy.app2.appdev2.network.response.result.ServerResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app2.appdev2.utils.D;
 
 public class SendMsgTask extends AsyncTask<String, Integer, ServerResult>{
 
@@ -53,7 +54,7 @@ public class SendMsgTask extends AsyncTask<String, Integer, ServerResult>{
 
         try {
             String str = request.callRequestServer(path, "POST", params);
-            Log.d("http", "str >" + str);
+            D.log("HttpRequest", "str >" + str);
 
             Gson gson = new GsonBuilder().create();
             result = gson.fromJson(str, ServerResult.class);

@@ -10,6 +10,7 @@ import com.prograpy.app2.appdev2.network.response.result.MainMatchingResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app2.appdev2.utils.D;
 
 public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResult> {
 
@@ -44,7 +45,7 @@ public class MainMatchingTask extends AsyncTask<String,Integer, MainMatchingResu
 
         try {
             String str = request.callRequestServer(path, "POST", params);
-            Log.d("http", "str >" + str);
+            D.log("HttpRequest", "str >" + str);
 
             Gson gson = new GsonBuilder().create();
             result = gson.fromJson(str, MainMatchingResult.class);

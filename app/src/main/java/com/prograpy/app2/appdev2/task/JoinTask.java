@@ -10,6 +10,7 @@ import com.prograpy.app2.appdev2.network.response.result.JoinResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app2.appdev2.utils.D;
 
 /**
  * 회원 가입을 요청하는 task
@@ -137,7 +138,7 @@ public class JoinTask extends AsyncTask<String, Integer, JoinResult> {
 
 
             // 서버 결과 값 확인
-            Log.d("http", "str > " + str);
+            D.log("HttpRequest", "str > " + str);
 
 
             // String으로 넘어온 서버의 json 데이터를 Gson 라이브러리를 활용하여 파싱한다.

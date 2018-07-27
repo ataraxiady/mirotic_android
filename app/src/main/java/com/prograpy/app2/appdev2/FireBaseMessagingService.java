@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import com.prograpy.app2.appdev2.utils.D;
 
 public class FireBaseMessagingService extends FirebaseMessagingService {
 
@@ -39,7 +40,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         String matchName ="";
 
         if (intent.getExtras() != null && intent.getExtras().size() > 0) {
-            Log.d(TAG, "Message data payload: " + intent.getExtras());
+            D.log(TAG, "Message data payload: " + intent.getExtras());
             matchId = intent.getStringExtra("matchId");
             matchImage = intent.getStringExtra("matchImage");
             matchName = intent.getStringExtra("matchName");
@@ -55,7 +56,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         List< ActivityManager.RunningTaskInfo > taskInfo = activityManager.getRunningTasks(1);
 
-        Log.d( "CURRENT Activity ",  taskInfo.get(0).topActivity.getShortClassName());
+        D.log( "CURRENT Activity ",  taskInfo.get(0).topActivity.getShortClassName());
 
 
         if(taskInfo.get(0).topActivity.getShortClassName().contains("ChatMainActivity")){
@@ -71,7 +72,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         }else{
 
             if (intent.getExtras() != null) {
-                Log.d(TAG, "Message Notification Body: " + (String)intent.getExtras().get("gcm.notification.body"));
+                D.log(TAG, "Message Notification Body: " + (String)intent.getExtras().get("gcm.notification.body"));
                 sendNotification((String)intent.getExtras().get("gcm.notification.body"), matchName, matchId, matchImage);
             }
 
@@ -84,10 +85,10 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 //        String matchId = "";
 //        String matchImage ="";
 //
-//        Log.d(TAG, "From: " + remoteMessage.getFrom());
+//        D.log(TAG, "From: " + remoteMessage.getFrom());
 //
 //        if (remoteMessage.getData().size() > 0) {
-//            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+//            D.log(TAG, "Message data payload: " + remoteMessage.getData());
 //            matchId = remoteMessage.getData().get("matchId");
 //            matchImage = remoteMessage.getData().get("matchImage");
 //        }
@@ -95,7 +96,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 //        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 //        List< ActivityManager.RunningTaskInfo > taskInfo = activityManager.getRunningTasks(1);
 //
-//        Log.d( "CURRENT Activity ",  taskInfo.get(0).topActivity.getShortClassName());
+//        D.log( "CURRENT Activity ",  taskInfo.get(0).topActivity.getShortClassName());
 //
 //
 //        if(taskInfo.get(0).topActivity.getShortClassName().contains("ChatMainActivity")){
@@ -110,7 +111,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 //        }else{
 //
 //            if (remoteMessage.getNotification() != null) {
-//                Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+//                D.log(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
 //                sendNotification(remoteMessage.getNotification().getBody(), matchId, matchImage);
 //            }
 //

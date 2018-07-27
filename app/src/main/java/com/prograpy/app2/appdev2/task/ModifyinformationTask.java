@@ -11,6 +11,7 @@ import com.prograpy.app2.appdev2.network.response.result.MyInfoResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app2.appdev2.utils.D;
 
 public class ModifyinformationTask extends AsyncTask<String, String, ModifyResult> {
 
@@ -65,7 +66,7 @@ public class ModifyinformationTask extends AsyncTask<String, String, ModifyResul
 
 
             // 서버 결과 값 확인
-            Log.d("http", "str > " + str);
+            D.log("HttpRequest", "str > " + str);
 
             Gson gson = new GsonBuilder().create();
             result = gson.fromJson(str, ModifyResult.class);
