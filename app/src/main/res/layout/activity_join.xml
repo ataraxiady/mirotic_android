@@ -40,7 +40,7 @@
                     android:id="@+id/center_image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/buttonprofile" />
+                    android:src="@drawable/sub_img_picture" />
 
                 <ImageButton
                     android:id="@+id/imageAdd"
