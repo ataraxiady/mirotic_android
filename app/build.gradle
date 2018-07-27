@@ -7,13 +7,49 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+
+    signingConfigs {
+        debug {
+            storeFile file(keystore)
+            storePassword keystore_pass
+            keyAlias key_alias
+            keyPassword key_pass
+        }
+
         release {
+            storeFile file(keystore)
+            storePassword keystore_pass
+            keyAlias key_alias
+            keyPassword key_pass
+        }
+
+    }
+
+
+
+    buildTypes {
+
+        debug{
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all{ output ->
+                    outputFileName = "Milotic_google-${versionName}.apk"
+                }
+            }
         }
     }
 }
