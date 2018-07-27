@@ -1,7 +1,5 @@
 package com.prograpy.app2.appdev2.main;
 
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -47,8 +45,7 @@ public class InfoFragment extends Fragment {
         fgender = (TextView) view.findViewById(R.id.infoGender);
         farea = (TextView) view.findViewById(R.id.infoArea);
         fprofileImage = (ImageView) view.findViewById(R.id.infoPic);
-        fprofileImage.setBackground(new ShapeDrawable(new OvalShape()));
-        fprofileImage.setClipToOutline(true);
+
 
         if (getArguments() != null) {
             fname.setText(getArguments().getString(NAME));
