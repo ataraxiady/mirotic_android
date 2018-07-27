@@ -25,8 +25,8 @@
             <RelativeLayout
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="40dp"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageView"
@@ -41,10 +41,19 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/buttoncamera"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
+            <Button
+                android:id="@+id/edit"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/modifybtnn"
+                android:text=" "
+                android:visibility="visible" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -362,37 +371,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true">
 
+                <Button
+                    android:id="@+id/savebtn"
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/savebtn"
+                    android:visibility="gone" />
 
-                    <Button
-                        android:id="@+id/edit"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/modifybtn"
-                        android:text=" "
-                        android:visibility="visible" />
-
-                    <Button
-                        android:id="@+id/savebtn"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:layout_margin="20dp"
-                        android:background="@drawable/savebtn"
-                        android:visibility="gone" />
-
-                </FrameLayout>
 
                 <Button
                     android:id="@+id/exitbtn"
-                    android:layout_width="150dp"
+                    android:layout_width="170dp"
                     android:layout_height="40dp"
                     android:layout_margin="20dp"
                     android:background="@drawable/exitbtn"
