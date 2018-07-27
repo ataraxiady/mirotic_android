@@ -38,19 +38,21 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         String matchId = "";
         String matchImage ="";
         String matchName ="";
+        String msg ="";
 
         if (intent.getExtras() != null && intent.getExtras().size() > 0) {
             D.log(TAG, "Message data payload: " + intent.getExtras());
             matchId = intent.getStringExtra("matchId");
             matchImage = intent.getStringExtra("matchImage");
             matchName = intent.getStringExtra("matchName");
+            msg = intent.getStringExtra("sendMsg");
         }
 
 
-        if(matchId == null || matchImage == null || matchName == null)
+        if(matchId == null || matchImage == null || matchName == null || msg == null)
             return;
 
-        if(matchId.isEmpty() || matchImage.isEmpty() || matchName.isEmpty())
+        if(matchId.isEmpty() || matchImage.isEmpty() || matchName.isEmpty() || msg.isEmpty())
             return;
 
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
@@ -63,7 +65,7 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
 
             Intent intent2 = new Intent(this, ChatMainActivity.class);
             intent2.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent2.putExtra("msg", (String)intent.getExtras().get("gcm.notification.body"));
+            intent2.putExtra("msg", msg);
             intent2.putExtra("matchId", matchId);
             intent2.putExtra("matchImage", matchImage);
             intent2.putExtra("matchName", matchName);
@@ -72,8 +74,8 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
         }else{
 
             if (intent.getExtras() != null) {
-                D.log(TAG, "Message Notification Body: " + (String)intent.getExtras().get("gcm.notification.body"));
-                sendNotification((String)intent.getExtras().get("gcm.notification.body"), matchName, matchId, matchImage);
+                D.log(TAG, "Message Notification Body: " + msg);
+                sendNotification(msg, matchName, matchId, matchImage);
             }
 
         }
