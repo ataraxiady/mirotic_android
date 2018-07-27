@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -96,6 +97,8 @@ public class JoinActivity extends AppCompatActivity {
     private Spinner spinner_hobby_third1;
     private Spinner spinner_hobby_third2;
 
+    private ImageView imgBack;
+
     private ArrayList<HobbyData> bigHobbyList = new ArrayList<HobbyData>();
     private ArrayList<String> bigHobbyNameList = new ArrayList<String>();
 
@@ -132,6 +135,14 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
+
+        imgBack = (ImageView) findViewById(R.id.img_back);
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         center_image = (ImageView) findViewById(R.id.center_image);
         center_image.setOnClickListener(new Button.OnClickListener() {
