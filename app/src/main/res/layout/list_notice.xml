@@ -23,8 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="13dp"
         android:layout_marginTop="17dp"
-        android:layout_toEndOf="@+id/textView2"
-        app:srcCompat="@drawable/profile" />
+        android:layout_toEndOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/noticeTextView"
