@@ -45,6 +45,10 @@ public class FireBaseMessagingService extends FirebaseMessagingService {
             matchName = intent.getStringExtra("matchName");
         }
 
+
+        if(matchId == null || matchImage == null || matchName == null)
+            return;
+
         if(matchId.isEmpty() || matchImage.isEmpty() || matchName.isEmpty())
             return;
 
