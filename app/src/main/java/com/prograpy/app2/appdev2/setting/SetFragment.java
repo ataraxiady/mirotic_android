@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.prograpy.app2.appdev2.R;
-import com.prograpy.app2.appdev2.environment_setting.SendMail;
-import com.prograpy.app2.appdev2.environment_setting.SettingAppVersion;
 
 /**
  * Created by samsung on 2018-04-03.
@@ -24,16 +22,7 @@ public class SetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting,container, false);
 
-        TextView vs = (TextView) view.findViewById(R.id.version);
         TextView send = (TextView) view.findViewById(R.id.send);
-
-        vs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent version = new Intent(getContext(), SettingAppVersion.class);
-                startActivity(version);
-            }
-        });
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

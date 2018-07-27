@@ -1,4 +1,4 @@
-package com.prograpy.app2.appdev2.environment_setting;
+package com.prograpy.app2.appdev2.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
