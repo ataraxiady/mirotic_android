@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.prograpy.app2.appdev2.setting.SendMail">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="고객센터"
+        android:textColor="@color/Color_white"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="안녕하세요. 고객센터입니다.\n고객센터는 이메일 접수로 문의를 받고 있습니다.\n답변이 준비될 때까지 잠시만 기다려주세요.\n빠른 시일 내에 답변해드리겠습니다."
+        />
+
+    <EditText
+        android:id="@+id/subject2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/inputbg"
+        android:hint="제목을 입력해 주세요."
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/inputbg"
+        android:gravity="top"
+        android:hint="아래 내용을 함께 보내주시면 더욱 빨리 처리가 가능합니다.\n - 문의 내용 :\n - 문제발생일시"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/sender"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/Color_white"
+        android:text="보내기" />
+
+</LinearLayout>

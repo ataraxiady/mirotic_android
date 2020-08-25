@@ -19,3 +19,17 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+-keep class android.support.v4.** #support 라이브러리 난독화 방지
+-keep class android.support.v7.** #support 라이브러리 난독화 방지
+-keep class oauth.signpost.** {*;}
+-keep class ch.boye.** {*;}
+-keep class opcxml.** {*;}
+-keep class org.json.** {*;}
+-keep class com.google.** {*;}
+
+-keepattributes EnclosingMethod
+-keepattributes InnerClasses
+
+-dontwarn org.apache.**

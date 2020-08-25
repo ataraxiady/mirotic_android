@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "575036975466",
+    "firebase_url": "https://meyou-6725d.firebaseio.com",
+    "project_id": "meyou-6725d",
+    "storage_bucket": "meyou-6725d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575036975466:android:f0af56b26b2a5f67",
+        "android_client_info": {
+          "package_name": "com.prograpy.app2.appdev2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575036975466-9cloafmtrt2mo0l1m3htc4ir63dcjakc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiw3UFz969cgbAOz41iWYLzRd4Oex803c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
